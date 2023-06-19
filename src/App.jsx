@@ -2,6 +2,7 @@ import "./App.css";
 import testDb from "./utils/testDb";
 import getAllItems from "./utils/getAllItems";
 import { useState } from "react";
+import convertDate from "./utils/convertDate";
 
 function App() {
   const [data, setData] = useState();
@@ -10,6 +11,7 @@ function App() {
     const results = await getAllItems();
     setData(results);
     console.log(results);
+    console.log(convertDate(results[0].timeCreated.seconds));
   };
 
   return (
