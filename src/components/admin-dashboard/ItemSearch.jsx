@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import getAllItems from "../../utils/getAllItems";
 import ItemModal from "./ItemModal";
-import { set } from "firebase/database";
+import AddItemModal from "./AddItemModal";
 
 const ItemSearch = () => {
   const [items, setItems] = useState([]);
@@ -10,6 +10,7 @@ const ItemSearch = () => {
   const [noResults, setNoResults] = useState(false);
   const [modalItem, setModalItem] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
+  const [addModalOpen, setAddModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,6 +35,9 @@ const ItemSearch = () => {
   const handleChange = (event) => {
     event.preventDefault();
     console.log('Search query:', search);
+    if (noResults) {
+      setAddModalOpen(true);
+    }
   };
 
   const handleItemClick = (item) => {
@@ -44,7 +48,9 @@ const ItemSearch = () => {
 
   const handleModalClose = () => {
     setModalItem(null);
+    setSearch("");
     setModalOpen(false);
+    setAddModalOpen(false);
     console.log("Modal closed.");
   };
 
@@ -86,6 +92,9 @@ const ItemSearch = () => {
       </div>
       {modalItem && modalOpen && (
         <ItemModal item={modalItem} onClose={handleModalClose} />
+      )}
+      {noResults && addModalOpen && (
+        <AddItemModal item={search} onClose={handleModalClose} />
       )}
     </div>
   );
