@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Modal, Button } from "@mui/material";
 import createNewItem from "../../utils/createNewItem";
 

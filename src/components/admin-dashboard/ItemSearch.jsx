@@ -32,6 +32,22 @@ const ItemSearch = () => {
     setNoResults(filteredItems.length === 0);
   }, [items, search]);
 
+  useEffect(() => {
+    if (!addModalOpen) {
+      // Fetch data again after modal is closed
+      fetchData();
+    }
+  }, [addModalOpen]);
+
+  const fetchData = async () => {
+    try {
+      const data = await getAllItems();
+      setItems(data);
+    } catch (error) {
+      console.log("Error retrieving items:", error);
+    }
+  };
+
   const handleChange = (event) => {
     event.preventDefault();
     console.log('Search query:', search);
