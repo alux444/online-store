@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { Modal, Button } from "@mui/material";
 
 const ItemModal = ({ item, onClose }) => {
+  const [edit, setEdit] = useState('');
+
+  const handleChange = (event) => {
+    event.preventDefault();
+    
+    console.log('Changing to:', edit);
+  };
+
   return (
     <Modal open={true} onClose={onClose}>
       <div className="fixed inset-0 flex items-center justify-center">
@@ -10,7 +18,16 @@ const ItemModal = ({ item, onClose }) => {
             X
           </Button>
           <h2 className="text-xl font-bold mb-2">{item && item.name}</h2>
-          <p>{item && item.description}</p>
+          <form onSubmit={handleChange} >
+            <input
+              type="text"
+              placeholder={item && item.description}
+              value={edit}
+              onChange={(event) => setEdit(event.target.value)}
+              className="px-4 py-2 rounded-l border-none w-full text-gray-600"
+
+            />
+          </form>
           <p>${item && item.price}</p>
         </div>
       </div>
