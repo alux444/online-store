@@ -41,11 +41,20 @@ const ItemSearch = () => {
         />
         <button type="submit">Search</button>
       </form>
-      <ul>
-        {searchResults.map((item) => {
-          <li key={item.id}>{item.name}</li>
-        })}
-      </ul>
+      {search && (
+        <div className="search-results">
+          <ul>
+            {searchResults.length > 0 ? (
+              searchResults.map((item) => (
+                <li key={item.id}>{item.name}</li>
+              ))
+            ) : (
+              <li>No results found.</li>
+            )}
+          </ul>
+        </div>
+      )}
+      
     </div>
   );
 };
