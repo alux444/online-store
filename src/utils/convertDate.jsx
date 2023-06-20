@@ -1,5 +1,3 @@
-import React from "react";
-
 const convertDate = (seconds) => {
   const newDate = new Date(seconds * 1000);
 
