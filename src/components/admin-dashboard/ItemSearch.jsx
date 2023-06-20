@@ -7,6 +7,7 @@ const ItemSearch = () => {
   const [items, setItems] = useState([]);
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [noResults, setNoResults] = useState(false);
   const [modalItem, setModalItem] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -27,6 +28,7 @@ const ItemSearch = () => {
       return item.name.toLowerCase().includes(search.toLowerCase());
     });
     setSearchResults(filteredItems);
+    setNoResults(filteredItems.length === 0);
   }, [items, search]);
 
   const handleChange = (event) => {
@@ -46,6 +48,7 @@ const ItemSearch = () => {
     console.log("Modal closed.");
   };
 
+  const searchButtonText = noResults ? "Add" : "Search";
   return (
     <div className="flex h-screen justify-center">
       <div className="relative">
@@ -59,7 +62,7 @@ const ItemSearch = () => {
 
           />
           <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-r">
-            Search
+            {searchButtonText}
           </button>
           
         </form>
