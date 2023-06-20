@@ -20,6 +20,7 @@ function App() {
   return (
     <AdminContext.Provider value={{ admin, setAdmin }}>
       <button onClick={getResults}>Test get items</button>
+      <Test />
       <br />
       <button onClick={() => setAdmin(!admin)}>Set Admin (for testing)</button>
       <p className="text-red-500">Red Font</p>
