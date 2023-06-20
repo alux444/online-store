@@ -4,6 +4,7 @@ import convertDate from "./utils/convertDate";
 import { createContext, useState } from "react";
 import AdminDashboard from "./components/admin-dashboard/AdminDashboard";
 import StoreDisplay from "./components/store-display/StoreDisplay";
+import Test from "./components/Test";
 
 const AdminContext = createContext();
 
@@ -21,6 +22,7 @@ function App() {
       <button onClick={getResults}>Test get items</button>
       <br />
       <button onClick={() => setAdmin(!admin)}>Set Admin (for testing)</button>
+      <Test />
       <p className="text-red-500">Red Font</p>
       {admin ? <AdminDashboard /> : <StoreDisplay />}
     </AdminContext.Provider>

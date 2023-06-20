@@ -8,10 +8,11 @@ import addImage from "./addImage";
 const createNewItem = async ({ formInfo, imageFile }) => {
   const itemRef = collection(db, "item");
   const id = uuid();
+  const time = serverTimestamp();
   let url = "";
 
   if (imageFile) {
-    url = addImage(imageFile, id);
+    url = await addImage({ imageFile: imageFile, id: id });
   }
 
   try {
@@ -24,7 +25,7 @@ const createNewItem = async ({ formInfo, imageFile }) => {
       onSale: formInfo.onSale,
       clearance: formInfo.clearance,
       id: id,
-      timeCreated: serverTimestamp(),
+      timeCreated: time,
     });
     return true;
   } catch (error) {

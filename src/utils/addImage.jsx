@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  ref,
-  getStorage,
-  uploadBytes,
-  getDownloadURL,
-} from "firebase/database";
+import { ref, getStorage, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const addImage = async ({ imageFile, id }) => {
   const storage = getStorage();
@@ -15,7 +10,7 @@ const addImage = async ({ imageFile, id }) => {
     await uploadBytes(storageRef, imageFile);
     url = await getDownloadURL(storageRef);
   } catch (error) {
-    console.log("error uploading");
+    console.log("Error uploading image:", error);
   }
 
   return url;
