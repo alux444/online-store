@@ -30,6 +30,10 @@ const ItemSearch = () => {
     console.log('Search query:', search);
   };
 
+  const handleItemClick = (item) => {
+    console.log("Search query:", item);
+  };
+
   return (
     <div className="flex h-screen justify-center">
       <div className="relative">
@@ -52,7 +56,9 @@ const ItemSearch = () => {
               <ul className="py-1">
                 {searchResults.length > 0 ? (
                   searchResults.map((item) => (
-                    <li key={item.id} className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                    <li key={item.id} 
+                      onClick={() => handleItemClick(item.name)}
+                      className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
                       {item.name}
                     </li>
                   ))
