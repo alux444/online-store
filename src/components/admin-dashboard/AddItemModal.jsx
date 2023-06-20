@@ -3,8 +3,14 @@ import { Modal, Button } from "@mui/material";
 import createNewItem from "../../utils/createNewItem";
 
 const AddItemModal = ({ item, onClose }) => {
+  const toTitleCase = (str) => {
+    return str.replace(/\w\S*/g, (txt) => {
+      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    });
+  };
+  
   const [form, setForm] = useState({
-    name: item,
+    name: toTitleCase(item),
     description: "",
     price: "",
     discount: "",
@@ -49,7 +55,7 @@ const AddItemModal = ({ item, onClose }) => {
           <Button onClick={onClose} className="absolute top-2 right-2">
             X
           </Button>
-          <h2 className="text-xl font-bold mb-2">{item}</h2>
+          <h2 className="text-xl font-bold mb-2">{toTitleCase(item)}</h2>
           <div>
             <form onSubmit={onSubmit}>
               <input
