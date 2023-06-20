@@ -22,7 +22,6 @@ function App() {
       <button onClick={getResults}>Test get items</button>
       <br />
       <button onClick={() => setAdmin(!admin)}>Set Admin (for testing)</button>
-      <Test />
       <p className="text-red-500">Red Font</p>
       {admin ? <AdminDashboard /> : <StoreDisplay />}
     </AdminContext.Provider>

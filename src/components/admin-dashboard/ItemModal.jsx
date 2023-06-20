@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Modal, Button } from "@mui/material";
+import deleteItem from "../../utils/deleteItem";
 
 const ItemModal = ({ item, onClose }) => {
   const [edit, setEdit] = useState('');
@@ -8,6 +9,24 @@ const ItemModal = ({ item, onClose }) => {
     event.preventDefault();
     
     console.log('Changing to:', edit);
+  };
+
+  const handleDelete = async (event) => {
+    event.preventDefault();
+    console.log("Deleting:", item.name);
+  
+    try {
+      const isDeleted = await deleteItem({ itemId: item.id });
+      if (isDeleted) {
+        console.log("Item deleted successfully");
+      } else {
+        console.log("Item not found or could not be deleted");
+      }
+    } catch (error) {
+      console.log("Error deleting item:", error);
+    }
+  
+    onClose();
   };
 
   return (
@@ -29,6 +48,12 @@ const ItemModal = ({ item, onClose }) => {
             />
           </form>
           <p>${item && item.price}</p>
+          <Button
+            onClick={handleDelete}
+            className="bg-red-500 text-white px-4 py-2 rounded-r"
+          >
+            Delete {item && item.name}
+          </Button>
         </div>
       </div>
     </Modal>
