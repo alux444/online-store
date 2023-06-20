@@ -8,7 +8,7 @@ const AddItemModal = ({ item, onClose }) => {
       return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
     });
   };
-  
+
   const [form, setForm] = useState({
     name: toTitleCase(item),
     description: "",
@@ -44,7 +44,7 @@ const AddItemModal = ({ item, onClose }) => {
   const onSubmit = async (e) => {
     e.preventDefault();
     console.log(form, file);
-    console.log(await createNewItem({ formInfo: form, imageFile: file }));
+    console.log(await createNewItem(form, file));
     onClose();
   };
 
@@ -76,7 +76,12 @@ const AddItemModal = ({ item, onClose }) => {
                 value={form.discount}
                 onChange={handleDiscountChange}
               />
-              <input type="file" className="w-full" onChange={onChangeImage} accept=".jpg,.jpeg,.png" />
+              <input
+                type="file"
+                className="w-full"
+                onChange={onChangeImage}
+                accept=".jpg,.jpeg,.png"
+              />
               <button type="submit">Submit</button>
             </form>
           </div>

@@ -1,18 +1,17 @@
-import React from "react";
 import { db } from "../../firebaseConfig";
 import { collection, addDoc } from "firebase/firestore";
 import { serverTimestamp } from "firebase/database";
 import { v4 as uuid } from "uuid";
 import addImage from "./addImage";
 
-const createNewItem = async ({ formInfo, imageFile }) => {
+const createNewItem = async (formInfo, imageFile) => {
   const itemRef = collection(db, "item");
   const id = uuid();
   const time = serverTimestamp();
   let url = "";
 
   if (imageFile) {
-    url = await addImage({ imageFile: imageFile, id: id });
+    url = await addImage(imageFile, id);
   }
 
   try {

@@ -3,20 +3,20 @@ import { Modal, Button } from "@mui/material";
 import deleteItem from "../../utils/deleteItem";
 
 const ItemModal = ({ item, onClose }) => {
-  const [edit, setEdit] = useState('');
+  const [edit, setEdit] = useState("");
 
   const handleChange = (event) => {
     event.preventDefault();
-    
-    console.log('Changing to:', edit);
+
+    console.log("Changing to:", edit);
   };
 
   const handleDelete = async (event) => {
     event.preventDefault();
     console.log("Deleting:", item.name);
-  
+
     try {
-      const isDeleted = await deleteItem({ itemId: item.id });
+      const isDeleted = await deleteItem(item.id);
       if (isDeleted) {
         console.log("Item deleted successfully");
       } else {
@@ -25,7 +25,7 @@ const ItemModal = ({ item, onClose }) => {
     } catch (error) {
       console.log("Error deleting item:", error);
     }
-  
+
     onClose();
   };
 
@@ -37,14 +37,13 @@ const ItemModal = ({ item, onClose }) => {
             X
           </Button>
           <h2 className="text-xl font-bold mb-2">{item && item.name}</h2>
-          <form onSubmit={handleChange} >
+          <form onSubmit={handleChange}>
             <input
               type="text"
               placeholder={item && item.description}
               value={edit}
               onChange={(event) => setEdit(event.target.value)}
               className="px-4 py-2 rounded-l border-none w-full text-gray-600"
-
             />
           </form>
           <p>${item && item.price}</p>
