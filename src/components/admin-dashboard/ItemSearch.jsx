@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
 import getAllItems from "../../utils/getAllItems";
+import ItemModal from "./ItemModal";
+import { set } from "firebase/database";
 
 const ItemSearch = () => {
   const [items, setItems] = useState([]);
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [modalItem, setModalItem] = useState(null);
+  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,7 +35,15 @@ const ItemSearch = () => {
   };
 
   const handleItemClick = (item) => {
-    console.log("Search query:", item);
+    setModalItem(item);
+    setModalOpen(true);
+    console.log("Search query:", item.name);
+  };
+
+  const handleModalClose = () => {
+    setModalItem(null);
+    setModalOpen(false);
+    console.log("Modal closed.");
   };
 
   return (
@@ -57,7 +69,7 @@ const ItemSearch = () => {
                 {searchResults.length > 0 ? (
                   searchResults.map((item) => (
                     <li key={item.id} 
-                      onClick={() => handleItemClick(item.name)}
+                      onClick={() => handleItemClick(item)}
                       className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
                       {item.name}
                     </li>
@@ -69,6 +81,9 @@ const ItemSearch = () => {
             </div>
           )}
       </div>
+      {modalItem && modalOpen && (
+        <ItemModal item={modalItem} onClose={handleModalClose} />
+      )}
     </div>
   );
 };
