@@ -143,7 +143,7 @@ const ItemModal = ({ item, onClose }) => {
                   className="w-1/5 mx-5"
                   onChange={handlePriceChange}
                 />
-                <span>Discount (%)</span>
+                <span>Discount (-$)</span>
                 <input
                   type="number"
                   placeholder="Discount"
@@ -154,19 +154,19 @@ const ItemModal = ({ item, onClose }) => {
               </div>
               <br/>
               <div>
-              <span>On sale?</span>
+                <span>On sale?</span>
                 <input
                   type="checkbox"
-                  value={form.onSale}
-                  className="w-1/4 mx-5"
-                  onChange={handleDiscountChange}
+                  checked={form.onSale}
+                  className="w-1/4 mx-5 bg-white"
+                  onChange={(e) => setForm((prevForm) => ({ ...prevForm, onSale: e.target.checked }))}
                 />
                 <span>On clearance?</span>
                 <input
                   type="checkbox"
-                  value={form.clearance}
+                  checked={form.clearance}
                   className="w-1/4 mx-5"
-                  onChange={handleDiscountChange}
+                  onChange={(e) => setForm((prevForm) => ({ ...prevForm, clearance: e.target.checked }))}
                 />
               </div>
               
