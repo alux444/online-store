@@ -1,7 +1,7 @@
 import React from "react";
 import { ref, getStorage, uploadBytes, getDownloadURL } from "firebase/storage";
 
-const addImage = async ({ imageFile, id }) => {
+const addImage = async (imageFile, id) => {
   const storage = getStorage();
   const storageRef = ref(storage, "images/" + id);
   let url = "";

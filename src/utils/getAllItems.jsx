@@ -1,4 +1,3 @@
-import React from "react";
 import { db } from "../../firebaseConfig";
 import { collection, getDocs, query } from "firebase/firestore";
 
