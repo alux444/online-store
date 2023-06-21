@@ -1,5 +1,5 @@
-const convertDate = (seconds) => {
-  const newDate = new Date(seconds * 1000);
+const convertDate = (time) => {
+  const newDate = new Date(time.seconds * 1000);
 
   return newDate.toLocaleDateString();
 };

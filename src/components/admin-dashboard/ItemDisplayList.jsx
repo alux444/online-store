@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ItemDisplayModal from "../store-display/ItemDisplayModal";
+import convertDate from "../../utils/convertDate";
 
 const ItemDisplayList = ({ item }) => {
   const [showPreview, setShowPreview] = useState(false);
@@ -7,6 +8,8 @@ const ItemDisplayList = ({ item }) => {
   const closePreview = () => {
     setShowPreview(false);
   };
+
+  const date = convertDate(item.timeCreated);
 
   return (
     <div className="flex border-[1px] justify-center align-center">
@@ -25,6 +28,8 @@ const ItemDisplayList = ({ item }) => {
         </small>
         <br />
         <small>Description: {item.description}</small>
+        <br />
+        <small>Added on: {date}</small>
       </div>
       <button>Edit this Item</button>
       <button onClick={() => setShowPreview(true)}>Preview this Item</button>

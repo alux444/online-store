@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import ItemDisplayModal from "./store-display/ItemDisplayModal";
 import getAllItems from "../utils/getAllItems";
 import ItemDisplayStore from "./store-display/ItemDisplayStore";
+import convertDate from "../utils/convertDate";
 
 const Test = () => {
   const [open, setOpen] = useState(false);
@@ -18,7 +19,7 @@ const Test = () => {
 
   const test = () => {
     setOpen(false);
-    console.log(data);
+    console.log(convertDate(data[0].timeCreated));
   };
 
   const itemMap = data.map((item) => {
