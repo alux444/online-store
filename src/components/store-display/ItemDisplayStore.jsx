@@ -1,24 +1,21 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import ItemDisplayModal from "./ItemDisplayModal";
-import { CartContext } from "../../App";
+import useAddToCart from "../../utils/useAddToCart";
 
 const ItemDisplayStore = ({ item }) => {
   const [open, setOpen] = useState(false);
-  const { cart, setCart } = useContext(CartContext);
 
   const randomNumber = Math.floor(Math.random() * 3);
   const otherHeaders = ["Great Deal!", "What a Bargain!", "While Stocks Last!"];
   const realPrice = item.onSale ? item.price - item.discount : item.price;
+  const addToCart = useAddToCart();
+
+  const addOneToCart = () => {
+    addToCart(item, 1);
+  };
 
   const closeModal = () => {
     setOpen(false);
-  };
-
-  const addOneToCart = () => {
-    setCart((prevCart) => [
-      ...prevCart,
-      { name: item.name, amount: 1, price: realPrice },
-    ]);
   };
 
   return (
