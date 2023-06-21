@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import createNewItem from "../utils/createNewItem";
-import deleteItem from "../utils/deleteItem";
 import updateItem from "../utils/updateItem";
 
 const Test = () => {

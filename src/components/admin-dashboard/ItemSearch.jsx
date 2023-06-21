@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import getAllItems from "../../utils/getAllItems";
 import ItemModal from "./ItemModal";
 import AddItemModal from "./AddItemModal";
+import ItemDisplayList from "./ItemDisplayList";
 
 const ItemSearch = () => {
   const [items, setItems] = useState([]);
@@ -21,6 +22,7 @@ const ItemSearch = () => {
         console.log("Error retrieving items:", error);
       }
     };
+
     fetchData();
   }, []);
 
@@ -28,7 +30,9 @@ const ItemSearch = () => {
     const filteredItems = items.filter((item) => {
       return item.name.toLowerCase().includes(search.toLowerCase());
     });
+
     setSearchResults(filteredItems);
+
     setNoResults(filteredItems.length === 0);
   }, [items, search]);
 
@@ -50,7 +54,7 @@ const ItemSearch = () => {
 
   const handleChange = (event) => {
     event.preventDefault();
-    console.log('Search query:', search);
+    console.log("Search query:", search);
     if (noResults) {
       setAddModalOpen(true);
     }
@@ -70,32 +74,40 @@ const ItemSearch = () => {
     console.log("Modal closed.");
   };
 
+  const listDisplay = items.map((item) => {
+    return <ItemDisplayList item={item} key={item.id} />;
+  });
+
   const searchButtonText = noResults ? "Add" : "Search";
   return (
-    <div className="flex h-screen justify-center">
-      <div className="relative">
-        <form onSubmit={handleChange} className="flex items-center">
-          <input
-            type="text"
-            placeholder="Search for an item..."
-            value={search}
-            onChange={(event) => setSearch(event.target.value)}
-            className="px-4 py-2 rounded-l "
-
-          />
-          <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-r">
-            {searchButtonText}
-          </button>
-          
-        </form>
-        {search && (
+    <div>
+      <div className="flex justify-center">
+        <div className="relative">
+          <form onSubmit={handleChange} className="flex items-center">
+            <input
+              type="text"
+              placeholder="Search for an item..."
+              value={search}
+              onChange={(event) => setSearch(event.target.value)}
+              className="px-4 py-2 rounded-l "
+            />
+            <button
+              type="submit"
+              className="bg-blue-500 text-white px-4 py-2 rounded-r"
+            >
+              {searchButtonText}
+            </button>
+          </form>
+          {search && (
             <div className="text-left mt-2 absolute z-10 w-full bg-white border border-gray-300 shadow-md">
               <ul className="py-1">
                 {searchResults.length > 0 ? (
                   searchResults.map((item) => (
-                    <li key={item.id} 
+                    <li
+                      key={item.id}
                       onClick={() => handleItemClick(item)}
-                      className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                      className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                    >
                       {item.name}
                     </li>
                   ))
@@ -105,13 +117,17 @@ const ItemSearch = () => {
               </ul>
             </div>
           )}
+        </div>
+        {modalItem && modalOpen && (
+          <ItemModal item={modalItem} onClose={handleModalClose} />
+        )}
+        {noResults && addModalOpen && (
+          <AddItemModal item={search} onClose={handleModalClose} />
+        )}
+        <br />
+        <p>test</p>
       </div>
-      {modalItem && modalOpen && (
-        <ItemModal item={modalItem} onClose={handleModalClose} />
-      )}
-      {noResults && addModalOpen && (
-        <AddItemModal item={search} onClose={handleModalClose} />
-      )}
+      <div className="mt-5 w-[70vw]">{listDisplay}</div>
     </div>
   );
 };
