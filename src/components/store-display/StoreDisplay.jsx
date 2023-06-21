@@ -14,6 +14,8 @@ const StoreDisplay = () => {
   return (
     <div>
       <p>Store display.</p>
+      <Cart />
+
       <div>
         <p>Filter by:</p>
         <select

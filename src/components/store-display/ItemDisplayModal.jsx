@@ -1,12 +1,12 @@
 import { useRef, useState } from "react";
 import { Modal } from "@mui/material";
 import useOutsideClick from "../../utils/useOutsideClose";
-import useAddToCart from "../../utils/useEditCart";
+import useEditCart from "../../utils/useEditCart";
 
 const ItemDisplayModal = ({ open, close, item }) => {
   const modalRef = useRef(null);
   useOutsideClick(modalRef, close);
-  const addToCart = useAddToCart();
+  const { addToCart } = useEditCart();
 
   const [count, setCount] = useState(1);
 
