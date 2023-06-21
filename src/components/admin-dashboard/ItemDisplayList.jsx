@@ -1,17 +1,34 @@
 import React, { useState, useEffect } from "react";
 import ItemModal from "../admin-dashboard/ItemModal";
 import convertDate from "../../utils/convertDate";
+import getAllItems from "../../utils/getAllItems";
 
 const ItemDisplayList = ({ item }) => {
   const [showPreview, setShowPreview] = useState(false);
   const [modalItem, setModalItem] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
+  const [items, setItems] = useState([]);
 
   const closePreview = () => {
     setShowPreview(false);
   };
 
   const date = convertDate(item.timeCreated);
+
+  useEffect(() => {
+    if (!modalOpen) {
+      fetchData();
+    }
+  }, [modalOpen]);
+
+  const fetchData = async () => {
+    try {
+      const data = await getAllItems();
+      setItems(data);
+    } catch (error) {
+      console.log("Error retrieving items:", error);
+    }
+  };
 
   const handleItemClick = (item) => {
     setModalItem(item);
@@ -34,7 +51,7 @@ const ItemDisplayList = ({ item }) => {
       </div>
       <div className="text-left">
         <p>
-        {item.onSale ? `SALE: $${item.price - item.discount}` : item.clearance ? `CLEARANCE: $${item.price - item.discount}` : "No Sale."}{" "}
+        {item.clearance ? `CLEARANCE: $${item.price - item.discount}` : item.onSale ? `SALE: $${item.price - item.discount}` : "No Sale."}{" "}
           <br />
           Original price: ${item.price}
           <br />
