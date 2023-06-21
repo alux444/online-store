@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Modal } from "@mui/material";
 import useOutsideClick from "../../utils/useOutsideClose";
 

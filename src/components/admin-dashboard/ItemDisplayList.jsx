@@ -1,6 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
+import ItemDisplayModal from "../store-display/ItemDisplayModal";
 
 const ItemDisplayList = ({ item }) => {
+  const [showPreview, setShowPreview] = useState(false);
+
+  const closePreview = () => {
+    setShowPreview(false);
+  };
+
   return (
     <div className="flex border-[1px] justify-center align-center">
       <div className="flex justify-center align-center">
@@ -20,7 +27,8 @@ const ItemDisplayList = ({ item }) => {
         <small>Description: {item.description}</small>
       </div>
       <button>Edit this Item</button>
-      <button>Preview this Item</button>
+      <button onClick={() => setShowPreview(true)}>Preview this Item</button>
+      <ItemDisplayModal open={showPreview} close={closePreview} item={item} />
     </div>
   );
 };
