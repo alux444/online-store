@@ -17,6 +17,8 @@ const ItemModal = ({ item, onClose }) => {
     discount: item.discount,
     onSale: item.onSale,
     clearance: item.clearance,
+    stock: item.stock,
+    category: item.category,
   });
 
   const [file, setFile] = useState(null);
@@ -35,6 +37,14 @@ const ItemModal = ({ item, onClose }) => {
 
   const handleDiscountChange = (e) => {
     setForm((prevForm) => ({ ...prevForm, discount: e.target.value }));
+  };
+
+  const handleCategoryChange = (e) => {
+    setForm((prevForm) => ({ ...prevForm, category: e.target.value }));
+  };
+
+  const handleStockChange = (e) => {
+    setForm((prevForm) => ({ ...prevForm, stock: e.target.value }));
   };
 
   const onChangeImage = (e) => {
@@ -87,27 +97,79 @@ const ItemModal = ({ item, onClose }) => {
             </Button>
             <h2 className="text-xl font-bold mb-2">{item && item.name}</h2>
             <form onSubmit={onSubmit}>
-              <p>Description</p>
-              <input
-                type="text"
-                placeholder="Description"
-                value={form.description}
-                onChange={handleDescriptionChange}
-              />
-              <p>Price ($) </p>
-              <input
-                type="number"
-                placeholder="Price"
-                value={form.price}
-                onChange={handlePriceChange}
-              />
-              <p>Discount (%)</p>
-              <input
-                type="number"
-                placeholder="Discount"
-                value={form.discount}
-                onChange={handleDiscountChange}
-              />
+              <div>
+                <span className="mr-2">Category:</span>
+                <select
+                  value={form.category}
+                  onChange={handleCategoryChange}
+                  className="px-4 py-2 border mx-5 w-1/4 bg-white border-gray-300 rounded"
+                >
+                  <option value="produce">Produce</option>
+                  <option value="seafood">Seafood</option>
+                  <option value="bakery">Bakery</option>
+                  <option value="liquor">Liquor</option>
+                  <option value="chilled">Chilled</option>
+                  <option value="frozen">Frozen</option>
+                  <option value="deli">Deli</option>
+                  <option value="grocery">Grocery</option>
+                </select>
+                <span>Stock on Hand:</span>
+                <input
+                  type="number"
+                  placeholder="0"
+                  value={form.stock}
+                  className="w-1/4 mx-5"
+                  onChange={handleStockChange}
+                />
+              </div>
+              <br/>
+              <div>
+                <p>Description</p>
+                <input
+                  type="text"
+                  placeholder="Description"
+                  value={form.description}
+                  className="w-full"
+                  onChange={handleDescriptionChange}
+                />
+              </div>
+              <br/>
+              <div> 
+                <span>Normal Price ($) </span>
+                <input
+                  type="number"
+                  placeholder="Price"
+                  value={form.price}
+                  className="w-1/5 mx-5"
+                  onChange={handlePriceChange}
+                />
+                <span>Discount (%)</span>
+                <input
+                  type="number"
+                  placeholder="Discount"
+                  value={form.discount}
+                  className="w-1/4 mx-5"
+                  onChange={handleDiscountChange}
+                />
+              </div>
+              <br/>
+              <div>
+              <span>On sale?</span>
+                <input
+                  type="checkbox"
+                  value={form.onSale}
+                  className="w-1/4 mx-5"
+                  onChange={handleDiscountChange}
+                />
+                <span>On clearance?</span>
+                <input
+                  type="checkbox"
+                  value={form.clearance}
+                  className="w-1/4 mx-5"
+                  onChange={handleDiscountChange}
+                />
+              </div>
+              
               <p>Image</p>
               <input
                 type="file"

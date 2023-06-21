@@ -12,6 +12,9 @@ const ItemSearch = () => {
   const [modalItem, setModalItem] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [addModalOpen, setAddModalOpen] = useState(false);
+  const [categoryFilter, setCategoryFilter] = useState("");
+  const [saleFilter, setSaleFilter] = useState(false);
+  const [clearanceFilter, setClearanceFilter] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,13 +31,16 @@ const ItemSearch = () => {
 
   useEffect(() => {
     const filteredItems = items.filter((item) => {
-      return item.name.toLowerCase().includes(search.toLowerCase());
+      const nameMatch = item.name.toLowerCase().includes(search.toLowerCase());
+      const categoryMatch = categoryFilter === "" || item.category === categoryFilter;
+      const saleMatch = !saleFilter || item.onSale;
+      const clearanceMatch = !clearanceFilter || item.clearance;
+      return nameMatch && categoryMatch && saleMatch && clearanceMatch;
     });
 
     setSearchResults(filteredItems);
-
     setNoResults(filteredItems.length === 0);
-  }, [items, search]);
+  }, [items, search, categoryFilter, saleFilter, clearanceFilter]);
 
   useEffect(() => {
     if (!addModalOpen || !modalOpen) {
@@ -73,11 +79,24 @@ const ItemSearch = () => {
     console.log("Modal closed.");
   };
 
-  const listDisplay = items.map((item) => {
+  const handleCategoryFilter = (category) => {
+    setCategoryFilter(category);
+  };
+
+  const handleSaleFilter = () => {
+    setSaleFilter((prevValue) => !prevValue);
+  };
+
+  const handleClearanceFilter = () => {
+    setClearanceFilter((prevValue) => !prevValue);
+  };
+
+  const listDisplay = searchResults.map((item) => {
     return <ItemDisplayList item={item} key={item.id} />;
   });
 
   const searchButtonText = noResults ? "Add" : "Search";
+
   return (
     <div>
       <div className="flex justify-center">
@@ -88,7 +107,7 @@ const ItemSearch = () => {
               placeholder="Search for an item..."
               value={search}
               onChange={(event) => setSearch(event.target.value)}
-              className="px-4 py-2 rounded-l "
+              className="px-4 py-2 rounded-l"
             />
             <button
               type="submit"
@@ -124,6 +143,44 @@ const ItemSearch = () => {
           <AddItemModal item={search} onClose={handleModalClose} />
         )}
         <br />
+      </div>
+      <div className="mt-5 items-center">
+        <p>Filter:</p>
+        <div className="flex items-center mt-2">
+          <input
+            type="checkbox"
+            checked={saleFilter}
+            onChange={handleSaleFilter}
+            className="mr-1 bg-white"
+          />
+          <label htmlFor="saleFilter" className="mr-4">
+            On Sale
+          </label>
+          <input
+            type="checkbox"
+            checked={clearanceFilter}
+            onChange={handleClearanceFilter}
+            className="mr-1"
+          />
+          <label htmlFor="clearanceFilter" className="mr-4">
+            On Clearance
+          </label>
+          <select
+            value={categoryFilter}
+            className="bg-white border border-gray-300 rounded px-3 py-1"
+            onChange={(event) => handleCategoryFilter(event.target.value)}
+          >
+            <option value="">All Departments</option>
+            <option value="bakery">Bakery</option>
+            <option value="chilled">Chilled</option>
+            <option value="deli">Deli</option>
+            <option value="frozen">Frozen</option>
+            <option value="grocery">Grocery</option>
+            <option value="liquor">Liquor</option>
+            <option value="produce">Produce</option>
+            <option value="seafood">Seafood</option>
+          </select>
+        </div>
       </div>
       <div className="mt-5 w-[70vw]">{listDisplay}</div>
     </div>
