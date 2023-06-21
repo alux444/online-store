@@ -146,7 +146,7 @@ const ItemSearch = () => {
       </div>
       <div className="mt-5 items-center">
         <p>Filter:</p>
-        <div className="flex items-center mt-2">
+        <div className="flex justify-center items-center mt-2">
           <input
             type="checkbox"
             checked={saleFilter}
@@ -167,7 +167,7 @@ const ItemSearch = () => {
           </label>
           <select
             value={categoryFilter}
-            className="bg-white border border-gray-300 rounded px-3 py-1"
+            className="bg-white border w-41 border-gray-300 rounded px-3 py-1"
             onChange={(event) => handleCategoryFilter(event.target.value)}
           >
             <option value="">All Departments</option>
@@ -180,8 +180,12 @@ const ItemSearch = () => {
             <option value="produce">Produce</option>
             <option value="seafood">Seafood</option>
           </select>
+          <div className="ml-5">
+            <span>Results: {searchResults.length}</span>
+          </div>
         </div>
       </div>
+
       <div className="mt-5 w-[70vw]">{listDisplay}</div>
     </div>
   );
