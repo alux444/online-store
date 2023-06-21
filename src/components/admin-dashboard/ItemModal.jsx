@@ -1,15 +1,56 @@
 import React, { useState } from "react";
 import { Modal, Button } from "@mui/material";
 import deleteItem from "../../utils/deleteItem";
+import updateItem from "../../utils/updateItem";
 
 const ItemModal = ({ item, onClose }) => {
-  const [edit, setEdit] = useState("");
   const [checkDelete, setCheckDelete] = useState(false);
+  const [form, setForm] = useState({
+    name: item.name,
+    description: item.description,
+    price: item.price,
+    discount: item.discount,
+    onSale: item.onSale,
+    clearance: item.clearance,
+  });
 
-  const handleChange = (event) => {
-    event.preventDefault();
+  const [file, setFile] = useState(null);
 
-    console.log("Changing to:", edit);
+  /* const handleNameChange = (e) => {
+    setForm((prevForm) => ({ ...prevForm, name: e.target.value }));
+  }; */
+
+  const handleDescriptionChange = (e) => {
+    setForm((prevForm) => ({ ...prevForm, description: e.target.value }));
+  };
+
+  const handlePriceChange = (e) => {
+    setForm((prevForm) => ({ ...prevForm, price: e.target.value }));
+  };
+
+  const handleDiscountChange = (e) => {
+    setForm((prevForm) => ({ ...prevForm, discount: e.target.value }));
+  };
+
+  const onChangeImage = (e) => {
+    const image = e.target.files[0];
+    setFile(image);
+  };
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    console.log(form, file);
+    try {
+      const isUpdated = await updateItem(item.id, form);
+      if (isUpdated) {
+        console.log(`${item.name} updated successfully`);
+      } else {
+        console.log("Item not found or could not be updated");
+      }
+    } catch (error) {
+      console.log("Error updating item:", error);
+    }
+    onClose();
   };
 
   const handleDelete = async (event) => {
@@ -39,16 +80,33 @@ const ItemModal = ({ item, onClose }) => {
               X
             </Button>
             <h2 className="text-xl font-bold mb-2">{item && item.name}</h2>
-            <form onSubmit={handleChange}>
+            <form onSubmit={onSubmit}>
               <input
                 type="text"
-                placeholder={item && item.description}
-                value={edit}
-                onChange={(event) => setEdit(event.target.value)}
-                className="px-4 py-2 rounded-l border-none w-full text-gray-600"
+                placeholder="Description"
+                value={form.description}
+                onChange={handleDescriptionChange}
               />
+              <input
+                type="number"
+                placeholder="Price"
+                value={form.price}
+                onChange={handlePriceChange}
+              />
+              <input
+                type="number"
+                placeholder="Discount"
+                value={form.discount}
+                onChange={handleDiscountChange}
+              />
+              <input
+                type="file"
+                className="w-full"
+                onChange={onChangeImage}
+                accept=".jpg,.jpeg,.png"
+              />
+              <button type="submit">Confirm changes</button>
             </form>
-            <p>${item && item.price}</p>
             <Button
               onClick={() => setCheckDelete(true)}
               className="bg-red-500 text-white px-4 py-2 rounded-r"
