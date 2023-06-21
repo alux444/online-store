@@ -22,6 +22,8 @@ const createNewItem = async (formInfo, imageFile) => {
       imageUrl: url,
       onSale: formInfo.onSale,
       clearance: formInfo.clearance,
+      stock: formInfo.stock,
+      category: formInfo.category,
       id: id,
       timeCreated: time,
     });

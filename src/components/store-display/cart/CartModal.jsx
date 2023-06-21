@@ -3,6 +3,7 @@ import React, { useRef, useContext } from "react";
 import useOutsideClick from "../../../utils/useOutsideClose";
 import { CartContext } from "../../../App";
 import CartItemDisplay from "./CartItemDisplay";
+import Checkout from "../checkout/Checkout";
 
 const CartModal = ({ open, close }) => {
   const { cart, setCart } = useContext(CartContext);
@@ -29,6 +30,7 @@ const CartModal = ({ open, close }) => {
           <br />
           <p>Total Cost: ${total}</p>
           <button onClick={() => console.log(cart)}>log</button>
+          <Checkout />
         </div>
       </div>
     </Modal>

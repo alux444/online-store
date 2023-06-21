@@ -81,24 +81,28 @@ const ItemModal = ({ item, onClose }) => {
             </Button>
             <h2 className="text-xl font-bold mb-2">{item && item.name}</h2>
             <form onSubmit={onSubmit}>
+              <p>Description</p>
               <input
                 type="text"
                 placeholder="Description"
                 value={form.description}
                 onChange={handleDescriptionChange}
               />
+              <p>Price ($) </p>
               <input
                 type="number"
                 placeholder="Price"
                 value={form.price}
                 onChange={handlePriceChange}
               />
+              <p>Discount (%)</p>
               <input
                 type="number"
                 placeholder="Discount"
                 value={form.discount}
                 onChange={handleDiscountChange}
               />
+              <p>Image</p>
               <input
                 type="file"
                 className="w-full"
