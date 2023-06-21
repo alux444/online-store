@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import ItemDisplayModal from "../store-display/ItemDisplayModal";
+import ItemModal from "../admin-dashboard/ItemModal";
 import convertDate from "../../utils/convertDate";
 
 const ItemDisplayList = ({ item }) => {
   const [showPreview, setShowPreview] = useState(false);
+  const [modalItem, setModalItem] = useState(null);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const closePreview = () => {
     setShowPreview(false);
@@ -11,8 +13,22 @@ const ItemDisplayList = ({ item }) => {
 
   const date = convertDate(item.timeCreated);
 
+  const handleItemClick = (item) => {
+    setModalItem(item);
+    setModalOpen(true);
+    console.log("Search query:", item.name);
+  };
+
+  const handleModalClose = () => {
+    setModalItem(null);
+    setModalOpen(false);
+    console.log("Modal closed.");
+  };
+
   return (
-    <div className="flex border-[1px] items-center">
+    <div className="flex border-[1px] items-center px-4 py-2 hover:bg-gray-100 cursor-pointer"
+          onClick={() => handleItemClick(item)}
+      >
       <div className="mr-4 text-left w-2/3">
         <p>{item.name}</p>
       </div>
@@ -25,8 +41,10 @@ const ItemDisplayList = ({ item }) => {
           Stock on hand: {item.stock}
         </p>
       </div>
+      {modalItem && modalOpen && (
+      <ItemModal item={modalItem} onClose={handleModalClose} />
+       )}
     </div>
-
   );
 };
 
