@@ -8,8 +8,6 @@ const StoreDisplay = () => {
 
   const handleSorting = (option) => {
     setSortingOption(option);
-
-    console.log(`sorting by ${option}`);
   };
 
   const handleChange = () => {
