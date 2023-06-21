@@ -41,7 +41,7 @@ const Items = ({ sortingOption, checked }) => {
   return (
     <div>
       <div className="flex flex-wrap justify-center align-center items-center gap-2">
-        {checked ? itemMap : clearanceItemMap}
+        {checked ? clearanceItemMap : itemMap}
       </div>
     </div>
   );
