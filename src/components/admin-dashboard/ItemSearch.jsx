@@ -124,7 +124,6 @@ const ItemSearch = () => {
           <AddItemModal item={search} onClose={handleModalClose} />
         )}
         <br />
-        <p>test</p>
       </div>
       <div className="mt-5 w-[70vw]">{listDisplay}</div>
     </div>
