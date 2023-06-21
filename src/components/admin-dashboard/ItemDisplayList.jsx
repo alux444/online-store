@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ItemModal from "../admin-dashboard/ItemModal";
 import convertDate from "../../utils/convertDate";
 
@@ -34,7 +34,7 @@ const ItemDisplayList = ({ item }) => {
       </div>
       <div className="text-left">
         <p>
-          Current price: ${item.onSale ? item.price - item.discount : item.price}
+        {item.onSale ? `SALE: $${item.price - item.discount}` : item.clearance ? `CLEARANCE: $${item.price - item.discount}` : "No Sale."}{" "}
           <br />
           Original price: ${item.price}
           <br />
