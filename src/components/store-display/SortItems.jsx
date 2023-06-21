@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const SortItems = ({handleSorting, handleChange, sortingOption, checked}) => {
+const SortItems = ({handleSorting, handleChange, sortingOption, checked, category, handleCategory}) => {
   return (
     <div className="flex justify-center align-center">
       <div>
@@ -17,6 +17,21 @@ const SortItems = ({handleSorting, handleChange, sortingOption, checked}) => {
           <option value="price-high">Price (High)</option>
         </select>
       </div>
+      <select
+        value={category}
+        className="bg-white border w-41 border-gray-300 rounded px-3 py-1"
+        onChange={(e) => handleCategory(e.target.value)}
+      >
+        <option value="">All Departments</option>
+        <option value="bakery">Bakery</option>
+        <option value="chilled">Chilled</option>
+        <option value="deli">Deli</option>
+        <option value="frozen">Frozen</option>
+        <option value="grocery">Grocery</option>
+        <option value="liquor">Liquor</option>
+        <option value="produce">Produce</option>
+        <option value="seafood">Seafood</option>
+      </select>
       <div>
         <label>
           <input

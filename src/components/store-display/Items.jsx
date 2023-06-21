@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import getAllItems from "../../utils/getAllItems";
 import ItemDisplayStore from "./ItemDisplayStore";
 
-const Items = ({ sortingOption, checked }) => {
+const Items = ({ sortingOption, checked, category }) => {
   const [allItems, setAllItems] = useState([]);
 
   const getItems = async () => {
@@ -15,6 +15,28 @@ const Items = ({ sortingOption, checked }) => {
   }, []);
 
   let sortedItems = allItems;
+  
+  // Add proper category matching once store items are back
+  if (category === "bakery") {
+    sortedItems = allItems.filter((item) => item.category);
+  } else if (category === "bakery") {
+    sortedItems = allItems.filter((item) => item.category);
+  } else if (category === "chilled") {
+    sortedItems = allItems.filter((item) => item.category);
+  } else if (category === "deli") {
+    sortedItems = allItems.filter((item) => item.category);
+  } else if (category === "frozen") {
+    sortedItems = allItems.filter((item) => item.category);
+  } else if (category === "grocery") {
+    sortedItems = allItems.filter((item) => item.category);
+  } else if (category === "liquor") {
+    sortedItems = allItems.filter((item) => item.category);
+  } else if (category === "produce") {
+    sortedItems = allItems.filter((item) => item.category);
+  } else if (category === "seafood") {
+    sortedItems = allItems.filter((item) => item.category);
+  }
+
 
   if (sortingOption === "date-old") {
     sortedItems = allItems.sort((a, b) => a.timeCreated - b.timeCreated);
