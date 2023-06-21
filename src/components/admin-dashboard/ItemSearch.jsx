@@ -37,11 +37,10 @@ const ItemSearch = () => {
   }, [items, search]);
 
   useEffect(() => {
-    if (!addModalOpen) {
-      // Fetch data again after modal is closed
+    if (!addModalOpen || !modalOpen) {
       fetchData();
     }
-  }, [addModalOpen]);
+  }, [addModalOpen, modalOpen]);
 
   const fetchData = async () => {
     try {
@@ -125,7 +124,6 @@ const ItemSearch = () => {
           <AddItemModal item={search} onClose={handleModalClose} />
         )}
         <br />
-        <p>test</p>
       </div>
       <div className="mt-5 w-[70vw]">{listDisplay}</div>
     </div>
