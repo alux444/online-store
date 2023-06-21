@@ -1,9 +1,13 @@
-import React, { useState } from "react";
-import ItemDisplayModal from "../store-display/ItemDisplayModal";
+import React, { useState, useEffect } from "react";
+import ItemModal from "../admin-dashboard/ItemModal";
 import convertDate from "../../utils/convertDate";
+import getAllItems from "../../utils/getAllItems";
 
 const ItemDisplayList = ({ item }) => {
   const [showPreview, setShowPreview] = useState(false);
+  const [modalItem, setModalItem] = useState(null);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [items, setItems] = useState([]);
 
   const closePreview = () => {
     setShowPreview(false);
@@ -11,7 +15,58 @@ const ItemDisplayList = ({ item }) => {
 
   const date = convertDate(item.timeCreated);
 
+  useEffect(() => {
+    if (!modalOpen) {
+      fetchData();
+    }
+  }, [modalOpen]);
+
+  const fetchData = async () => {
+    try {
+      const data = await getAllItems();
+      setItems(data);
+    } catch (error) {
+      console.log("Error retrieving items:", error);
+    }
+  };
+
+  const handleItemClick = (item) => {
+    setModalItem(item);
+    setModalOpen(true);
+    console.log("Search query:", item.name);
+  };
+
+  const handleModalClose = () => {
+    setModalItem(null);
+    setModalOpen(false);
+    console.log("Modal closed.");
+  };
+
   return (
+    <div className="flex border-[1px] items-center px-4 py-2 hover:bg-gray-100 cursor-pointer"
+          onClick={() => handleItemClick(item)}
+      >
+      <div className="mr-4 text-left w-2/3">
+        <p>{item.name}</p>
+      </div>
+      <div className="text-left">
+        <p>
+        {item.clearance ? `CLEARANCE: $${item.price - item.discount}` : item.onSale ? `SALE: $${item.price - item.discount}` : "No Sale."}{" "}
+          <br />
+          Original price: ${item.price}
+          <br />
+          Stock on hand: {item.stock}
+        </p>
+      </div>
+      {modalItem && modalOpen && (
+      <ItemModal item={modalItem} onClose={handleModalClose} />
+       )}
+    </div>
+  );
+};
+
+/*
+return (
     <div className="flex border-[1px] justify-center align-center">
       <div className="flex justify-center align-center">
         <img src={item.imageUrl} className="max-w-[20vw] max-h-10vh" />
@@ -36,6 +91,5 @@ const ItemDisplayList = ({ item }) => {
       <ItemDisplayModal open={showPreview} close={closePreview} item={item} />
     </div>
   );
-};
-
+*/
 export default ItemDisplayList;
