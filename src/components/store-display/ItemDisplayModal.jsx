@@ -19,7 +19,6 @@ const ItemDisplayModal = ({ open, close, item }) => {
   };
 
   const salePrice = item.price - item.discount;
-
   const overallCost = count * (item.onSale ? salePrice : item.price);
 
   return (

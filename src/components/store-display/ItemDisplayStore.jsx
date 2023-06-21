@@ -9,7 +9,8 @@ const ItemDisplayStore = ({ item }) => {
   };
 
   return (
-    <div className="flex border-[1px] justify-center align-center">
+    <div className="block w-[25vw] border-[1px] justify-center align-center">
+      {item.onSale && <h3>On Special! Save {item.discount}</h3>}
       <div className="flex justify-center align-center">
         <img src={item.imageUrl} className="max-w-[20vw] max-h-10vh" />
       </div>

@@ -15,8 +15,9 @@ function App() {
     <AdminContext.Provider value={{ admin, setAdmin }}>
       <Test />
       <br />
-      <button onClick={() => setAdmin(!admin)}>Set Admin (for testing)</button>
-      <p className="text-red-500">Red Font</p>
+      <button onClick={() => setAdmin(!admin)}>
+        {admin ? "remove admin" : "set admin"}
+      </button>
       {admin ? <AdminDashboard /> : <StoreDisplay />}
     </AdminContext.Provider>
   );

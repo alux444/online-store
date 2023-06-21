@@ -1,7 +1,13 @@
 import React from "react";
+import Items from "./Items";
 
 const StoreDisplay = () => {
-  return <p>Store display.</p>;
+  return (
+    <div>
+      <p>Store display.</p>
+      <Items />
+    </div>
+  );
 };
 
 export default StoreDisplay;
