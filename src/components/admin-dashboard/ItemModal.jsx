@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Modal, Button } from "@mui/material";
 import deleteItem from "../../utils/deleteItem";
 import updateItem from "../../utils/updateItem";
+import useOutsideClick from "../../utils/useOutsideClose";
+
 
 const ItemModal = ({ item, onClose }) => {
   const [checkDelete, setCheckDelete] = useState(false);
+  const modalRef = useRef(null);
+  useOutsideClick(modalRef, onClose);
+
   const [form, setForm] = useState({
     name: item.name,
     description: item.description,
@@ -75,7 +80,8 @@ const ItemModal = ({ item, onClose }) => {
     <Modal open={true} onClose={onClose}>
       {!checkDelete ? (
         <div className="fixed inset-0 flex items-center justify-center">
-          <div className="bg-white rounded-lg p-6 w-1/2 relative">
+          <div className="bg-white rounded-lg p-6 w-1/2 relative"
+            ref={modalRef}>
             <Button onClick={onClose} className="absolute top-2 right-2">
               X
             </Button>

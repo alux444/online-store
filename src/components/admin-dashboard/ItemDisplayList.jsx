@@ -12,6 +12,26 @@ const ItemDisplayList = ({ item }) => {
   const date = convertDate(item.timeCreated);
 
   return (
+    <div className="flex border-[1px] items-center">
+      <div className="mr-4 text-left w-2/3">
+        <p>{item.name}</p>
+      </div>
+      <div className="text-left">
+        <p>
+          Current price: ${item.onSale ? item.price - item.discount : item.price}
+          <br />
+          Original price: ${item.price}
+          <br />
+          Stock on hand: {item.stock}
+        </p>
+      </div>
+    </div>
+
+  );
+};
+
+/*
+return (
     <div className="flex border-[1px] justify-center align-center">
       <div className="flex justify-center align-center">
         <img src={item.imageUrl} className="max-w-[20vw] max-h-10vh" />
@@ -36,6 +56,5 @@ const ItemDisplayList = ({ item }) => {
       <ItemDisplayModal open={showPreview} close={closePreview} item={item} />
     </div>
   );
-};
-
+*/
 export default ItemDisplayList;
