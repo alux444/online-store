@@ -9,12 +9,9 @@ import {
 } from "firebase/firestore";
 
 const deleteItem = async (itemId) => {
-  console.log(itemId);
   const itemRef = collection(db, "item");
 
   const currentItem = await getDocs(query(itemRef, where("id", "==", itemId)));
-
-  console.log(currentItem.docs[0].id);
 
   if (!currentItem.empty) {
     const itemDbId = currentItem.docs[0].id;

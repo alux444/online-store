@@ -1,6 +1,5 @@
 import { db } from "../../firebaseConfig";
-import { collection, addDoc } from "firebase/firestore";
-import { serverTimestamp } from "firebase/database";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { v4 as uuid } from "uuid";
 import addImage from "./addImage";
 
