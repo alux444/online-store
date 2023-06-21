@@ -19,7 +19,7 @@ const ItemModal = ({ item, onClose }) => {
     try {
       const isDeleted = await deleteItem(item.id);
       if (isDeleted) {
-        console.log("Item deleted successfully");
+        console.log(`${item.name} deleted successfully`);
       } else {
         console.log("Item not found or could not be deleted");
       }

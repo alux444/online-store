@@ -37,11 +37,10 @@ const ItemSearch = () => {
   }, [items, search]);
 
   useEffect(() => {
-    if (!addModalOpen) {
-      // Fetch data again after modal is closed
+    if (!addModalOpen || !modalOpen) {
       fetchData();
     }
-  }, [addModalOpen]);
+  }, [addModalOpen, modalOpen]);
 
   const fetchData = async () => {
     try {
