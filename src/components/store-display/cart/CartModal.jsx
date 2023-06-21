@@ -5,7 +5,7 @@ import { CartContext } from "../../../App";
 import CartItemDisplay from "./CartItemDisplay";
 
 const CartModal = ({ open, close }) => {
-  const { cart } = useContext(CartContext);
+  const { cart, setCart } = useContext(CartContext);
 
   const modalRef = useRef(null);
 
@@ -23,6 +23,8 @@ const CartModal = ({ open, close }) => {
     <Modal open={open}>
       <div className="h-screen w-screen flex align-center items-center justify-center">
         <div className="border-2 border-white bg-white p-5" ref={modalRef}>
+          <button onClick={() => setCart([])}>Clear Cart?</button>
+          <br />
           {items}
           <br />
           <p>Total Cost: ${total}</p>

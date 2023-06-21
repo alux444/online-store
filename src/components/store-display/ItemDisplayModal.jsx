@@ -1,10 +1,12 @@
 import { useRef, useState } from "react";
 import { Modal } from "@mui/material";
 import useOutsideClick from "../../utils/useOutsideClose";
+import useAddToCart from "../../utils/useEditCart";
 
 const ItemDisplayModal = ({ open, close, item }) => {
   const modalRef = useRef(null);
   useOutsideClick(modalRef, close);
+  const addToCart = useAddToCart();
 
   const [count, setCount] = useState(1);
 
@@ -16,6 +18,10 @@ const ItemDisplayModal = ({ open, close, item }) => {
     if (count > 1) {
       setCount(count - 1);
     }
+  };
+
+  const addCountToCart = () => {
+    addToCart(item, count);
   };
 
   const salePrice = item.price - item.discount;
@@ -37,6 +43,8 @@ const ItemDisplayModal = ({ open, close, item }) => {
           <button onClick={decrementCount}>-</button>
           <br />
           <small>This will cost : ${overallCost}</small>
+          <br />
+          <button onClick={addCountToCart}>Add to Cart!</button>
         </div>
       </div>
     </Modal>
