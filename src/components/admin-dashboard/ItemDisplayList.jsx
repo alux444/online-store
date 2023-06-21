@@ -8,7 +8,9 @@ const ItemDisplayList = ({ item }) => {
       </div>
       <div className="block border-2 border-red">
         <p>
-          {item.name}, ${item.price}, discount: {item.discount}
+          {item.name}, ${item.onSale ? item.price - item.discount : item.price}
+          <br />
+          original price: {item.price}, discount: {item.discount}
         </p>
         <small>
           {item.onSale ? "On Sale" : "Not on Sale"},{" "}
@@ -18,6 +20,7 @@ const ItemDisplayList = ({ item }) => {
         <small>Description: {item.description}</small>
       </div>
       <button>Edit this Item</button>
+      <button>Preview this Item</button>
     </div>
   );
 };

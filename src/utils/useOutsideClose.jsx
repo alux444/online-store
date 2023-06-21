@@ -11,7 +11,6 @@ const useOutsideClick = (ref, closeFunction) => {
     document.addEventListener("mousedown", handleClick);
 
     return () => {
-      console.log("removeed");
       document.removeEventListener("mousedown", handleClick);
     };
   }, [ref, closeFunction]);

@@ -11,15 +11,8 @@ const AdminContext = createContext();
 function App() {
   const [admin, setAdmin] = useState(false);
 
-  const getResults = async () => {
-    const results = await getAllItems();
-    console.log(results);
-    console.log(convertDate(results[0].timeCreated.seconds));
-  };
-
   return (
     <AdminContext.Provider value={{ admin, setAdmin }}>
-      <button onClick={getResults}>Test get items</button>
       <Test />
       <br />
       <button onClick={() => setAdmin(!admin)}>Set Admin (for testing)</button>
