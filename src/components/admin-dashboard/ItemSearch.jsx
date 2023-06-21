@@ -98,10 +98,10 @@ const ItemSearch = () => {
             </button>
           </form>
           {search && (
-            <div className="text-left mt-2 absolute z-10 w-full bg-white border border-gray-300 shadow-md">
+            <div className="text-left mt-2 absolute z-10 w-full bg-white border border-gray-300 shadow-md max-h-56 overflow-y-auto">
               <ul className="py-1">
                 {searchResults.length > 0 ? (
-                  searchResults.map((item) => (
+                  searchResults.slice(0, 10).map((item) => (
                     <li
                       key={item.id}
                       onClick={() => handleItemClick(item)}
