@@ -30,11 +30,12 @@ const ItemDisplayModal = ({ open, close, item }) => {
         >
           <h2>{item.name}</h2>
           <img src={item.imageUrl} className="max-w-[50vw] max-h[50vh]" />
-          <h2>{item.onSale ? salePrice : item.price} each.</h2>
+          <h2>${item.onSale ? salePrice : item.price}/ea</h2>
           <p>{item.description}</p>
           <p>Add: {count} to Cart</p>
           <button onClick={incrementCount}>+</button>
           <button onClick={decrementCount}>-</button>
+          <br />
           <small>This will cost : ${overallCost}</small>
         </div>
       </div>
