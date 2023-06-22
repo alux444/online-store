@@ -3,7 +3,7 @@ import ItemModal from "./ItemModal";
 import AddItemModal from "./AddItemModal";
 import ItemDisplayList from "./ItemDisplayList";
 
-const ItemSearch = ({ items }) => {
+const ItemSearch = ({ items, updateItems }) => {
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [noResults, setNoResults] = useState(false);
@@ -26,7 +26,9 @@ const ItemSearch = ({ items }) => {
 
     setSearchResults(filteredItems);
     setNoResults(filteredItems.length === 0);
+    updateItems(filteredItems);
   }, [items, search, categoryFilter, saleFilter, clearanceFilter]);
+
 
   const handleChange = (event) => {
     event.preventDefault();
@@ -61,10 +63,6 @@ const ItemSearch = ({ items }) => {
   const handleClearanceFilter = () => {
     setClearanceFilter((prevValue) => !prevValue);
   };
-
-  const listDisplay = searchResults.map((item) => {
-    return <ItemDisplayList item={item} key={item.id} />;
-  });
 
   const searchButtonText = noResults ? "Add" : "Search";
 
@@ -156,8 +154,6 @@ const ItemSearch = ({ items }) => {
           </div>
         </div>
       </div>
-
-      <div className="mt-5 w-[70vw]">{listDisplay}</div>
     </div>
   );
 };

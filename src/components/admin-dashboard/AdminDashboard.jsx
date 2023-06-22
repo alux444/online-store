@@ -5,22 +5,24 @@ import getAllItems from "../../utils/getAllItems";
 
 const AdminDashboard = () => {
   const [items, setItems] = useState([]);
+  const [filteredItems, setFilteredItems] = useState([]);
 
   useEffect(() => {
-  const fetchData = async () => {
-    try {
-      const data = await getAllItems();
-      setItems(data);
-    } catch (error) {
-      console.log("Error retrieving items:", error);
-    }
-  };
+    const fetchData = async () => {
+      try {
+        const data = await getAllItems();
+        setItems(data);
+        setFilteredItems(data); 
+      } catch (error) {
+        console.log("Error retrieving items:", error);
+      }
+    };
 
-  fetchData();
-}, []);
+    fetchData();
+  }, []);
 
   const updateItems = (updatedItems) => {
-    setItems(updatedItems);
+    setFilteredItems(updatedItems); 
   };
 
   return (
@@ -30,7 +32,7 @@ const AdminDashboard = () => {
       <ItemSearch items={items} updateItems={updateItems} />
 
       <div className="mt-5 w-[70vw]">
-        {items.map((item) => (
+        {filteredItems.map((item) => (
           <ItemDisplayList item={item} key={item.id} />
         ))}
       </div>
