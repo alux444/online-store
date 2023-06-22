@@ -3,19 +3,14 @@ import getAllItems from "../../utils/getAllItems";
 import ItemDisplayStore from "./ItemDisplayStore";
 import Pagination from "../misc-components/Pagination";
 
-const Items = ({ sortingOption, checked, category }) => {
-  const [allItems, setAllItems] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-
-  const getItems = async () => {
-    const results = await getAllItems();
-    setAllItems(results);
-  };
-
-  useEffect(() => {
-    getItems();
-  }, []);
-
+const Items = ({
+  sortingOption,
+  checked,
+  category,
+  allItems,
+  currentPage,
+  changePage,
+}) => {
   let sortedItems = allItems;
 
   // Add proper category matching once store items are back
@@ -63,10 +58,6 @@ const Items = ({ sortingOption, checked, category }) => {
     indexOfFirstItem,
     indexOfLastItem
   );
-
-  const changePage = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
 
   const itemMap = currentItems.map((item) => (
     <ItemDisplayStore item={item} key={item.id} />
