@@ -5,16 +5,12 @@ import { CartContext } from "../../../App";
 import CartItemDisplay from "./CartItemDisplay";
 import Checkout from "../checkout/Checkout";
 
-const CartModal = ({ open, close }) => {
+const CartModal = ({ open, close, total }) => {
   const { cart, setCart } = useContext(CartContext);
 
   const modalRef = useRef(null);
 
   useOutsideClick(modalRef, close);
-
-  const total = cart.reduce((total, item) => {
-    return total + item.amount * item.price;
-  }, 0);
 
   const items = cart.map((item) => {
     return <CartItemDisplay key={item.name} item={item} />;

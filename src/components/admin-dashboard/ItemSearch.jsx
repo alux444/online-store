@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
-import getAllItems from "../../utils/getAllItems";
 import ItemModal from "./ItemModal";
 import AddItemModal from "./AddItemModal";
 import ItemDisplayList from "./ItemDisplayList";
 
-const ItemSearch = () => {
-  const [items, setItems] = useState([]);
+const ItemSearch = ({ items, updateItems, onOpenModal }) => {
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [noResults, setNoResults] = useState(false);
@@ -17,22 +15,10 @@ const ItemSearch = () => {
   const [clearanceFilter, setClearanceFilter] = useState(false);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getAllItems();
-        setItems(data);
-      } catch (error) {
-        console.log("Error retrieving items:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  useEffect(() => {
     const filteredItems = items.filter((item) => {
       const nameMatch = item.name.toLowerCase().includes(search.toLowerCase());
-      const categoryMatch = categoryFilter === "" || item.category === categoryFilter;
+      const categoryMatch =
+        categoryFilter === "" || item.category === categoryFilter;
       const saleMatch = !saleFilter || item.onSale;
       const clearanceMatch = !clearanceFilter || item.clearance;
       return nameMatch && categoryMatch && saleMatch && clearanceMatch;
@@ -40,22 +26,9 @@ const ItemSearch = () => {
 
     setSearchResults(filteredItems);
     setNoResults(filteredItems.length === 0);
+    updateItems(filteredItems);
   }, [items, search, categoryFilter, saleFilter, clearanceFilter]);
 
-  useEffect(() => {
-    if (!addModalOpen || !modalOpen) {
-      fetchData();
-    }
-  }, [addModalOpen, modalOpen]);
-
-  const fetchData = async () => {
-    try {
-      const data = await getAllItems();
-      setItems(data);
-    } catch (error) {
-      console.log("Error retrieving items:", error);
-    }
-  };
 
   const handleChange = (event) => {
     event.preventDefault();
@@ -67,13 +40,12 @@ const ItemSearch = () => {
 
   const handleItemClick = (item) => {
     setModalItem(item);
-    setModalOpen(true);
+    onOpenModal();
     console.log("Search query:", item.name);
   };
 
   const handleModalClose = () => {
     setModalItem(null);
-    setSearch("");
     setModalOpen(false);
     setAddModalOpen(false);
     console.log("Modal closed.");
@@ -90,10 +62,6 @@ const ItemSearch = () => {
   const handleClearanceFilter = () => {
     setClearanceFilter((prevValue) => !prevValue);
   };
-
-  const listDisplay = searchResults.map((item) => {
-    return <ItemDisplayList item={item} key={item.id} />;
-  });
 
   const searchButtonText = noResults ? "Add" : "Search";
 
@@ -116,29 +84,8 @@ const ItemSearch = () => {
               {searchButtonText}
             </button>
           </form>
-          {search && (
-            <div className="text-left mt-2 absolute z-10 w-full bg-white border border-gray-300 shadow-md max-h-56 overflow-y-auto">
-              <ul className="py-1">
-                {searchResults.length > 0 ? (
-                  searchResults.slice(0, 10).map((item) => (
-                    <li
-                      key={item.id}
-                      onClick={() => handleItemClick(item)}
-                      className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                    >
-                      {item.name}
-                    </li>
-                  ))
-                ) : (
-                  <li className="px-4 py-2">No results found.</li>
-                )}
-              </ul>
-            </div>
-          )}
+          
         </div>
-        {modalItem && modalOpen && (
-          <ItemModal item={modalItem} onClose={handleModalClose} />
-        )}
         {noResults && addModalOpen && (
           <AddItemModal item={search} onClose={handleModalClose} />
         )}
@@ -185,8 +132,6 @@ const ItemSearch = () => {
           </div>
         </div>
       </div>
-
-      <div className="mt-5 w-[70vw]">{listDisplay}</div>
     </div>
   );
 };

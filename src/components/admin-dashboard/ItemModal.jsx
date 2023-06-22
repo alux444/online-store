@@ -5,7 +5,7 @@ import updateItem from "../../utils/updateItem";
 import useOutsideClick from "../../utils/useOutsideClose";
 
 
-const ItemModal = ({ item, onClose }) => {
+const ItemModal = ({ item, onClose, updateItem }) => {
   const [checkDelete, setCheckDelete] = useState(false);
   const modalRef = useRef(null);
   useOutsideClick(modalRef, onClose);

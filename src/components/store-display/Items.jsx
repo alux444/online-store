@@ -13,42 +13,25 @@ const Items = ({
 }) => {
   let sortedItems = allItems;
 
-  // Add proper category matching once store items are back
-  if (category === "bakery") {
-    sortedItems = allItems.filter((item) => item.category);
-  } else if (category === "bakery") {
-    sortedItems = allItems.filter((item) => item.category);
-  } else if (category === "chilled") {
-    sortedItems = allItems.filter((item) => item.category);
-  } else if (category === "deli") {
-    sortedItems = allItems.filter((item) => item.category);
-  } else if (category === "frozen") {
-    sortedItems = allItems.filter((item) => item.category);
-  } else if (category === "grocery") {
-    sortedItems = allItems.filter((item) => item.category);
-  } else if (category === "liquor") {
-    sortedItems = allItems.filter((item) => item.category);
-  } else if (category === "produce") {
-    sortedItems = allItems.filter((item) => item.category);
-  } else if (category === "seafood") {
-    sortedItems = allItems.filter((item) => item.category);
+  if (category != "") {
+    sortedItems = sortedItems.filter((item) => item.category === category);
   }
 
   if (sortingOption === "date-old") {
-    sortedItems = allItems.sort((a, b) => a.timeCreated - b.timeCreated);
+    sortedItems = sortedItems.sort((a, b) => a.timeCreated - b.timeCreated);
   } else if (sortingOption === "date-new") {
-    sortedItems = allItems.sort((a, b) => b.timeCreated - a.timeCreated);
+    sortedItems = sortedItems.sort((a, b) => b.timeCreated - a.timeCreated);
   } else if (sortingOption === "price-low") {
-    sortedItems = allItems.sort(
+    sortedItems = sortedItems.sort(
       (a, b) => a.price - a.discount - (b.price - b.discount)
     );
   } else if (sortingOption === "price-high") {
-    sortedItems = allItems.sort(
+    sortedItems = sortedItems.sort(
       (a, b) => b.price - b.discount - (a.price - a.discount)
     );
   }
 
-  const clearanceItems = allItems.filter((item) => item.clearance);
+  const clearanceItems = sortedItems.filter((item) => item.clearance);
 
   const displaysPerPage = 12;
   const indexOfLastItem = currentPage * displaysPerPage;

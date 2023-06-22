@@ -1,45 +1,9 @@
-import React, { useState, useEffect } from "react";
-import ItemModal from "../admin-dashboard/ItemModal";
-import convertDate from "../../utils/convertDate";
-import getAllItems from "../../utils/getAllItems";
+import React from "react";
 
-const ItemDisplayList = ({ item }) => {
-  const [showPreview, setShowPreview] = useState(false);
-  const [modalItem, setModalItem] = useState(null);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [items, setItems] = useState([]);
-
-  const closePreview = () => {
-    setShowPreview(false);
-  };
-
-  const date = convertDate(item.timeCreated);
-
-  useEffect(() => {
-    if (!modalOpen) {
-      fetchData();
-    }
-  }, [modalOpen]);
-
-  const fetchData = async () => {
-    try {
-      const data = await getAllItems();
-      setItems(data);
-    } catch (error) {
-      console.log("Error retrieving items:", error);
-    }
-  };
-
+const ItemDisplayList = ({ item, onOpenModal }) => {
   const handleItemClick = (item) => {
-    setModalItem(item);
-    setModalOpen(true);
+    onOpenModal();
     console.log("Search query:", item.name);
-  };
-
-  const handleModalClose = () => {
-    setModalItem(null);
-    setModalOpen(false);
-    console.log("Modal closed.");
   };
 
   return (
@@ -58,38 +22,8 @@ const ItemDisplayList = ({ item }) => {
           Stock on hand: {item.stock}
         </p>
       </div>
-      {modalItem && modalOpen && (
-      <ItemModal item={modalItem} onClose={handleModalClose} />
-       )}
     </div>
   );
 };
 
-/*
-return (
-    <div className="flex border-[1px] justify-center align-center">
-      <div className="flex justify-center align-center">
-        <img src={item.imageUrl} className="max-w-[20vw] max-h-10vh" />
-      </div>
-      <div className="block border-2 border-red">
-        <p>
-          {item.name}, ${item.onSale ? item.price - item.discount : item.price}
-          <br />
-          original price: {item.price}, discount: {item.discount}
-        </p>
-        <small>
-          {item.onSale ? "On Sale" : "Not on Sale"},{" "}
-          {item.clearance ? "In Clearance Section" : "Not on Clearance."}
-        </small>
-        <br />
-        <small>Description: {item.description}</small>
-        <br />
-        <small>Added on: {date}</small>
-      </div>
-      <button>Edit this Item</button>
-      <button onClick={() => setShowPreview(true)}>Preview this Item</button>
-      <ItemDisplayModal open={showPreview} close={closePreview} item={item} />
-    </div>
-  );
-*/
 export default ItemDisplayList;
