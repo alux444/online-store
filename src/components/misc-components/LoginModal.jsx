@@ -22,7 +22,7 @@ const LoginModal = ({ open, close }) => {
             {loginForUser ? (
               <div>
                 <p>User Login</p>
-                <LoginForm userLogin={loginForUser} />
+                <LoginForm userLogin={loginForUser} close={close} />
                 <button>Sign Up</button>
                 <button onClick={() => setLoginForUser(false)}>
                   Admin Login
@@ -31,7 +31,7 @@ const LoginModal = ({ open, close }) => {
             ) : (
               <div>
                 <p>Admin Login</p>
-                <LoginForm userLogin={loginForUser} />
+                <LoginForm userLogin={loginForUser} close={close} />
                 <button onClick={() => setLoginForUser(true)}>
                   User Login
                 </button>

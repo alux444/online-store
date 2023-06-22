@@ -20,7 +20,7 @@ const Header = () => {
         <h1>Shop Name Here</h1>
         <h4>Logo here</h4>
       </div>
-      <div className="flex items-center gap-1">
+      <div className="flex items-center justify-end gap-1">
         <button onClick={() => setOpenAbout(true)}>About</button>
         <button onClick={() => setOpenLogin(true)}>Login</button>
       </div>
