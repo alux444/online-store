@@ -1,10 +1,16 @@
 import React, { useState } from "react";
+import LoginModal from "./LoginModal";
 
 const Header = () => {
   const [openAbout, setOpenAbout] = useState(false);
+  const [openLogin, setOpenLogin] = useState(false);
 
   const closeAbout = () => {
     setOpenAbout(false);
+  };
+
+  const closeLogin = () => {
+    setOpenLogin(false);
   };
 
   return (
@@ -15,8 +21,9 @@ const Header = () => {
       </div>
       <div className="flex items-center gap-1">
         <button onClick={() => setOpenAbout(true)}>About</button>
-        <button>Login</button>
+        <button onClick={() => setOpenLogin(true)}>Login</button>
       </div>
+      <LoginModal open={openLogin} close={closeLogin} />
     </div>
   );
 };

@@ -3,8 +3,8 @@ import { createContext, useState } from "react";
 import AdminDashboard from "./components/admin-dashboard/AdminDashboard";
 import StoreDisplay from "./components/store-display/StoreDisplay";
 import Test from "./components/Test";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import Header from "./components/misc-components/Header";
+import Footer from "./components/misc-components/Footer";
 
 export const AdminContext = createContext();
 export const CartContext = createContext();
