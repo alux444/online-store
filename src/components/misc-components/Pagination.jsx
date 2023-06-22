@@ -1,22 +1,3 @@
-// const [currentPage, setCurrentPage] = useState(1);
-
-// const dpp = 12
-// const indexOfLastExercise = currentPage * dpp;
-// const indexOfFirstExercise = indexOfLastExercise - dpp;
-// const currentExercises = filteredExercises.slice(
-//   indexOfFirstExercise,
-//   indexOfLastExercise
-// );
-// const paginate = (pageNumber) => {
-//   setCurrentPage(pageNumber);
-// };
-// <Pagination
-// totalDisplay={filteredExercises.length}
-// displaysPerPage={dpp}
-// paginate={paginate}
-// currentPage={currentPage}
-// />
-
 const Pagination = ({
   displaysPerPage,
   totalDisplay,
@@ -30,8 +11,8 @@ const Pagination = ({
   }
 
   return (
-    <div>
-      <ul>
+    <div className="mt-3">
+      <ul className="flex align-center justify-center items-center">
         {pageNumbers.map((number) => (
           <li key={number}>
             <button
@@ -49,3 +30,5 @@ const Pagination = ({
     </div>
   );
 };
+
+export default Pagination;

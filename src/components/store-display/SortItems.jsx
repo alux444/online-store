@@ -1,8 +1,15 @@
 import React, { useState } from "react";
 
-const SortItems = ({handleSorting, handleChange, sortingOption, checked, category, handleCategory}) => {
+const SortItems = ({
+  handleSorting,
+  handleChange,
+  sortingOption,
+  checked,
+  category,
+  handleCategory,
+}) => {
   return (
-    <div className="flex justify-center align-center items-center">
+    <div className="flex justify-center align-center items-center mb-3">
       <div>
         <p>Filter by: </p>
       </div>
