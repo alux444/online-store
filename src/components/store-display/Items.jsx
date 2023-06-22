@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import getAllItems from "../../utils/getAllItems";
 import ItemDisplayStore from "./ItemDisplayStore";
+import Pagination from "../misc-components/Pagination";
 
 const Items = ({ sortingOption, checked, category }) => {
   const [allItems, setAllItems] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const getItems = async () => {
     const results = await getAllItems();
@@ -15,7 +17,7 @@ const Items = ({ sortingOption, checked, category }) => {
   }, []);
 
   let sortedItems = allItems;
-  
+
   // Add proper category matching once store items are back
   if (category === "bakery") {
     sortedItems = allItems.filter((item) => item.category);
@@ -37,34 +39,54 @@ const Items = ({ sortingOption, checked, category }) => {
     sortedItems = allItems.filter((item) => item.category);
   }
 
-
   if (sortingOption === "date-old") {
     sortedItems = allItems.sort((a, b) => a.timeCreated - b.timeCreated);
   } else if (sortingOption === "date-new") {
     sortedItems = allItems.sort((a, b) => b.timeCreated - a.timeCreated);
   } else if (sortingOption === "price-low") {
     sortedItems = allItems.sort(
-      (a, b) => (a.price - a.discount) - (b.price - b.discount)
+      (a, b) => a.price - a.discount - (b.price - b.discount)
     );
   } else if (sortingOption === "price-high") {
     sortedItems = allItems.sort(
-      (a, b) => (b.price - b.discount) - (a.price - a.discount)
+      (a, b) => b.price - b.discount - (a.price - a.discount)
     );
   }
 
-  const itemMap = sortedItems.map((item) => (
+  const clearanceItems = allItems.filter((item) => item.clearance);
+
+  const displaysPerPage = 12;
+  const indexOfLastItem = currentPage * displaysPerPage;
+  const indexOfFirstItem = indexOfLastItem - displaysPerPage;
+  const currentItems = sortedItems.slice(indexOfFirstItem, indexOfLastItem);
+  const currentClearance = clearanceItems.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
+
+  const changePage = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const itemMap = currentItems.map((item) => (
     <ItemDisplayStore item={item} key={item.id} />
   ));
 
-  const clearanceItemMap = allItems
-    .filter((item) => item.clearance)
-    .map((item) => <ItemDisplayStore item={item} key={item.id} />);
+  const clearanceMap = currentClearance.map((item) => (
+    <ItemDisplayStore item={item} key={item.id} />
+  ));
 
   return (
     <div>
       <div className="flex flex-wrap justify-center align-center items-center gap-2">
-        {checked ? clearanceItemMap : itemMap}
+        {checked ? clearanceMap : itemMap}
       </div>
+      <Pagination
+        totalDisplay={checked ? clearanceItems.length : sortedItems.length}
+        displaysPerPage={displaysPerPage}
+        paginate={changePage}
+        currentPage={currentPage}
+      />
     </div>
   );
 };
