@@ -26,7 +26,7 @@ const LoginModal = ({ open, close }) => {
               openSignUp ? (
                 <div>
                   <p>Sign Up</p>
-                  <SignUpForm />
+                  <SignUpForm close={close} />
                   <button onClick={() => setOpenSignUp(false)}>
                     Return to Login
                   </button>
