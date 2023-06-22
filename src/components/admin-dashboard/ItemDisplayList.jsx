@@ -13,21 +13,18 @@ const ItemDisplayList = ({ item }) => {
     setShowPreview(false);
   };
 
-  const date = convertDate(item.timeCreated);
+ // const date = convertDate(item.timeCreated);
 
-  useEffect(() => {
-    if (!modalOpen) {
-      fetchData();
-    }
-  }, [modalOpen]);
-
-  const fetchData = async () => {
-    try {
-      const data = await getAllItems();
-      setItems(data);
-    } catch (error) {
-      console.log("Error retrieving items:", error);
-    }
+  const handleItemUpdate = (updatedItem) => {
+    setItems((prevItems) => {
+      const updatedItems = prevItems.map((item) => {
+        if (item.id === updatedItem.id) {
+          return { ...item, ...updatedItem };
+        }
+        return item;
+      });
+      return updatedItems;
+    });
   };
 
   const handleItemClick = (item) => {
@@ -59,7 +56,7 @@ const ItemDisplayList = ({ item }) => {
         </p>
       </div>
       {modalItem && modalOpen && (
-      <ItemModal item={modalItem} onClose={handleModalClose} />
+      <ItemModal item={modalItem} onClose={handleModalClose} onUpdate={handleItemUpdate}/>
        )}
     </div>
   );

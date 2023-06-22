@@ -5,7 +5,8 @@ import updateItem from "../../utils/updateItem";
 import useOutsideClick from "../../utils/useOutsideClose";
 
 
-const ItemModal = ({ item, onClose }) => {
+
+const ItemModal = ({ item, onClose, onUpdate }) => {
   const [checkDelete, setCheckDelete] = useState(false);
   const modalRef = useRef(null);
   useOutsideClick(modalRef, onClose);
@@ -56,16 +57,15 @@ const ItemModal = ({ item, onClose }) => {
     e.preventDefault();
     console.log(form, file);
     try {
-      const isUpdated = await updateItem(item.id, form);
-      if (isUpdated) {
+      const updatedItem = await updateItem(item.id, form);
+      updateItem(updatedItem).then(() => {
+        onUpdate(updatedItem); // Call the callback to update item in ItemDisplayList
+        onClose(); // Close the modal
+      });
         console.log(`${item.name} updated successfully`);
-      } else {
-        console.log("Item not found or could not be updated");
-      }
     } catch (error) {
       console.log("Error updating item:", error);
     }
-    onClose();
   };
 
   const handleDelete = async (event) => {
