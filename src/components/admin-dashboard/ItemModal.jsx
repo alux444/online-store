@@ -1,11 +1,12 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { Modal, Button } from "@mui/material";
 import deleteItem from "../../utils/deleteItem";
 import updateItem from "../../utils/updateItem";
 import useOutsideClick from "../../utils/useOutsideClose";
+import convertDate from "../../utils/convertDate";
 
 
-const ItemModal = ({ item, onClose, updateItem }) => {
+const ItemModal = ({ item, onClose, itemUpdate }) => {
   const [checkDelete, setCheckDelete] = useState(false);
   const modalRef = useRef(null);
   useOutsideClick(modalRef, onClose);
@@ -21,7 +22,21 @@ const ItemModal = ({ item, onClose, updateItem }) => {
     category: item.category,
   });
 
+  useEffect(() => {
+    setForm({
+      name: item.name,
+      description: item.description,
+      price: item.price,
+      discount: item.discount,
+      onSale: item.onSale,
+      clearance: item.clearance,
+      stock: item.stock,
+      category: item.category,
+    });
+  }, [item]);
+
   const [file, setFile] = useState(null);
+  const date = convertDate(item.timeCreated);
 
   /* const handleNameChange = (e) => {
     setForm((prevForm) => ({ ...prevForm, name: e.target.value }));
@@ -58,6 +73,8 @@ const ItemModal = ({ item, onClose, updateItem }) => {
     try {
       const isUpdated = await updateItem(item.id, form);
       if (isUpdated) {
+        const updatedItem = { ...item, ...form };
+        itemUpdate(updatedItem);
         console.log(`${item.name} updated successfully`);
       } else {
         console.log("Item not found or could not be updated");
