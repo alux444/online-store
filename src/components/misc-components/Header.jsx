@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import LoginModal from "./LoginModal";
+import AboutModal from "./AboutModal";
 
 const Header = () => {
   const [openAbout, setOpenAbout] = useState(false);
@@ -24,6 +25,7 @@ const Header = () => {
         <button onClick={() => setOpenLogin(true)}>Login</button>
       </div>
       <LoginModal open={openLogin} close={closeLogin} />
+      <AboutModal open={openAbout} close={closeAbout} />
     </div>
   );
 };
