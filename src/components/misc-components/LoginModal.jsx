@@ -3,10 +3,13 @@ import React, { useContext, useRef, useState } from "react";
 import { AdminContext } from "../../App";
 import useOutsideClick from "../../utils/useOutsideClose";
 import LoginForm from "./LoginForm";
+import SignUpModal from "./SignUpForm";
+import SignUpForm from "./SignUpForm";
 
 const LoginModal = ({ open, close }) => {
   const { setAdmin } = useContext(AdminContext);
   const [loginForUser, setLoginForUser] = useState(true);
+  const [openSignUp, setOpenSignUp] = useState(false);
 
   const modalRef = useRef(null);
   useOutsideClick(modalRef, close);
@@ -20,14 +23,24 @@ const LoginModal = ({ open, close }) => {
             ref={modalRef}
           >
             {loginForUser ? (
-              <div>
-                <p>User Login</p>
-                <LoginForm userLogin={loginForUser} close={close} />
-                <button>Sign Up</button>
-                <button onClick={() => setLoginForUser(false)}>
-                  Admin Login
-                </button>
-              </div>
+              openSignUp ? (
+                <div>
+                  <p>Sign Up</p>
+                  <SignUpForm />
+                  <button onClick={() => setOpenSignUp(false)}>
+                    Return to Login
+                  </button>
+                </div>
+              ) : (
+                <div>
+                  <p>User Login</p>
+                  <LoginForm userLogin={loginForUser} close={close} />
+                  <button onClick={() => setOpenSignUp(true)}>Sign Up</button>
+                  <button onClick={() => setLoginForUser(false)}>
+                    Admin Login
+                  </button>
+                </div>
+              )
             ) : (
               <div>
                 <p>Admin Login</p>
