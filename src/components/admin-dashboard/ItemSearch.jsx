@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
-import getAllItems from "../../utils/getAllItems";
 import ItemModal from "./ItemModal";
 import AddItemModal from "./AddItemModal";
 import ItemDisplayList from "./ItemDisplayList";
 
-const ItemSearch = () => {
-  const [items, setItems] = useState([]);
+const ItemSearch = ({ items }) => {
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [noResults, setNoResults] = useState(false);
@@ -17,22 +15,10 @@ const ItemSearch = () => {
   const [clearanceFilter, setClearanceFilter] = useState(false);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getAllItems();
-        setItems(data);
-      } catch (error) {
-        console.log("Error retrieving items:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  useEffect(() => {
     const filteredItems = items.filter((item) => {
       const nameMatch = item.name.toLowerCase().includes(search.toLowerCase());
-      const categoryMatch = categoryFilter === "" || item.category === categoryFilter;
+      const categoryMatch =
+        categoryFilter === "" || item.category === categoryFilter;
       const saleMatch = !saleFilter || item.onSale;
       const clearanceMatch = !clearanceFilter || item.clearance;
       return nameMatch && categoryMatch && saleMatch && clearanceMatch;
@@ -41,21 +27,6 @@ const ItemSearch = () => {
     setSearchResults(filteredItems);
     setNoResults(filteredItems.length === 0);
   }, [items, search, categoryFilter, saleFilter, clearanceFilter]);
-
-  useEffect(() => {
-    if (!addModalOpen || !modalOpen) {
-      fetchData();
-    }
-  }, [addModalOpen, modalOpen]);
-
-  const fetchData = async () => {
-    try {
-      const data = await getAllItems();
-      setItems(data);
-    } catch (error) {
-      console.log("Error retrieving items:", error);
-    }
-  };
 
   const handleChange = (event) => {
     event.preventDefault();
