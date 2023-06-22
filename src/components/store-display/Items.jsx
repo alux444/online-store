@@ -13,25 +13,8 @@ const Items = ({
 }) => {
   let sortedItems = allItems;
 
-  // Add proper category matching once store items are back
-  if (category === "bakery") {
-    sortedItems = allItems.filter((item) => item.category);
-  } else if (category === "bakery") {
-    sortedItems = allItems.filter((item) => item.category);
-  } else if (category === "chilled") {
-    sortedItems = allItems.filter((item) => item.category);
-  } else if (category === "deli") {
-    sortedItems = allItems.filter((item) => item.category);
-  } else if (category === "frozen") {
-    sortedItems = allItems.filter((item) => item.category);
-  } else if (category === "grocery") {
-    sortedItems = allItems.filter((item) => item.category);
-  } else if (category === "liquor") {
-    sortedItems = allItems.filter((item) => item.category);
-  } else if (category === "produce") {
-    sortedItems = allItems.filter((item) => item.category);
-  } else if (category === "seafood") {
-    sortedItems = allItems.filter((item) => item.category);
+  if (category != "") {
+    sortedItems = allItems.filter((item) => item.category === category);
   }
 
   if (sortingOption === "date-old") {
