@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useAttemptLogin } from "../../utils/useAttemptLogin";
+import { AdminContext, UserContext } from "../../App";
 
 const LoginForm = ({ userLogin, close }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+  const { setAdmin } = useContext(AdminContext);
+  const { setUser } = useContext(UserContext);
 
   const { userAttempt, adminAttempt } = useAttemptLogin();
 
@@ -16,19 +19,25 @@ const LoginForm = ({ userLogin, close }) => {
     setPassword(e.target.value);
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
+
     setMessage("");
+
     if (userLogin) {
-      const success = userAttempt();
+      const form = { email: username, password: password };
+      const success = await userAttempt(form);
       if (success) {
+        setUser({ loggedIn: true, email: form.email });
         close();
       } else {
         setMessage("Invalid Login Details.");
       }
     } else {
-      const success = adminAttempt();
+      const form = { username: username, password: password };
+      const success = await adminAttempt(form);
       if (success) {
+        setAdmin(true);
         close();
       } else {
         setMessage("Invalid Login Details.");
@@ -41,7 +50,7 @@ const LoginForm = ({ userLogin, close }) => {
       <form onSubmit={onSubmit}>
         <input
           type="text"
-          placeholder="Username"
+          placeholder={userLogin ? "Email" : "Username"}
           value={username}
           onChange={handleUsernameChange}
         />
