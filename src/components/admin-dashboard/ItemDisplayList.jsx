@@ -1,37 +1,7 @@
-import React, { useState, useEffect } from "react";
-import ItemModal from "../admin-dashboard/ItemModal";
-import convertDate from "../../utils/convertDate";
-import getAllItems from "../../utils/getAllItems";
+import React from "react";
 
 const ItemDisplayList = ({ item, onOpenModal }) => {
-  const [showPreview, setShowPreview] = useState(false);
-  const [modalItem, setModalItem] = useState(null);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [items, setItems] = useState([]);
-
-  const closePreview = () => {
-    setShowPreview(false);
-  };
-
-  const date = convertDate(item.timeCreated);
-
-  useEffect(() => {
-    if (!modalOpen) {
-      fetchData();
-    }
-  }, [modalOpen]);
-
-  const fetchData = async () => {
-    try {
-      const data = await getAllItems();
-      setItems(data);
-    } catch (error) {
-      console.log("Error retrieving items:", error);
-    }
-  };
-
   const handleItemClick = (item) => {
-    setModalItem(item);
     onOpenModal();
     console.log("Search query:", item.name);
   };
