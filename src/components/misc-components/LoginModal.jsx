@@ -3,7 +3,6 @@ import React, { useContext, useRef, useState } from "react";
 import { AdminContext } from "../../App";
 import useOutsideClick from "../../utils/useOutsideClose";
 import LoginForm from "./LoginForm";
-import SignUpModal from "./SignUpForm";
 import SignUpForm from "./SignUpForm";
 
 const LoginModal = ({ open, close }) => {
@@ -25,7 +24,7 @@ const LoginModal = ({ open, close }) => {
             {loginForUser ? (
               openSignUp ? (
                 <div>
-                  <p>Sign Up</p>
+                  <p className="text-blue">Sign Up</p>
                   <SignUpForm close={close} />
                   <button onClick={() => setOpenSignUp(false)}>
                     Return to Login
@@ -35,17 +34,25 @@ const LoginModal = ({ open, close }) => {
                 <div>
                   <p>User Login</p>
                   <LoginForm userLogin={loginForUser} close={close} />
-                  <button onClick={() => setOpenSignUp(true)}>Sign Up</button>
-                  <button onClick={() => setLoginForUser(false)}>
-                    Admin Login
-                  </button>
+                  <div className="flex flex-col gap-1 align-center items-center justify-center">
+                    <button onClick={() => setOpenSignUp(true)}>Sign Up</button>
+                    <button
+                      className="text-xs"
+                      onClick={() => setLoginForUser(false)}
+                    >
+                      Admin Login
+                    </button>
+                  </div>
                 </div>
               )
             ) : (
               <div>
                 <p>Admin Login</p>
                 <LoginForm userLogin={loginForUser} close={close} />
-                <button onClick={() => setLoginForUser(true)}>
+                <button
+                  onClick={() => setLoginForUser(true)}
+                  className="text-xs"
+                >
                   User Login
                 </button>
               </div>

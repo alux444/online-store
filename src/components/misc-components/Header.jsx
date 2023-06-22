@@ -17,8 +17,8 @@ const Header = () => {
   };
 
   return (
-    <div className="block p-3">
-      <div className="flex align-center items-center justify-between text-center border-2 m-5 p-5 gap-1 w-[80vw]">
+    <div className="block">
+      <div className="flex align-center items-center justify-between text-center border-2 m-5 p-5 w-[80vw]">
         <div className="flex items-center">
           <h1>Shop Name Here</h1>
           <h4>Logo here</h4>
@@ -32,9 +32,9 @@ const Header = () => {
           ) : (
             <button onClick={() => setOpenLogin(true)}>Login</button>
           )}
+          <LoginModal open={openLogin} close={closeLogin} />
+          <AboutModal open={openAbout} close={closeAbout} />
         </div>
-        <LoginModal open={openLogin} close={closeLogin} />
-        <AboutModal open={openAbout} close={closeAbout} />
       </div>
       {user.loggedIn ? (
         <p>Welcome, {user.email}</p>

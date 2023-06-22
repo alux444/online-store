@@ -2,7 +2,6 @@ import "./App.css";
 import { createContext, useState } from "react";
 import AdminDashboard from "./components/admin-dashboard/AdminDashboard";
 import StoreDisplay from "./components/store-display/StoreDisplay";
-import Test from "./components/Test";
 import Header from "./components/misc-components/Header";
 import Footer from "./components/misc-components/Footer";
 
@@ -20,7 +19,6 @@ function App() {
       <CartContext.Provider value={{ cart, setCart }}>
         <UserContext.Provider value={{ user, setUser }}>
           <Header />
-          <Test />
           <br />
           <button onClick={() => setAdmin(!admin)}>
             {admin ? "remove admin" : "set admin"}

@@ -54,9 +54,11 @@ const SignUpForm = ({ close }) => {
   };
 
   return (
-    <div className="bg-white flex p-3">
-      <p>Sign up</p>
-      <form onSubmit={onSubmit}>
+    <div className="p-3 block">
+      <form
+        onSubmit={onSubmit}
+        className="p-3 flex align-center gap-2 flex-col"
+      >
         <input
           type="email"
           value={email}

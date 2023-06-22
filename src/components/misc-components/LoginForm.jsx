@@ -47,7 +47,10 @@ const LoginForm = ({ userLogin, close }) => {
 
   return (
     <div>
-      <form onSubmit={onSubmit}>
+      <form
+        onSubmit={onSubmit}
+        className="p-3 flex align-center gap-2 flex-col"
+      >
         <input
           type="text"
           placeholder={userLogin ? "Email" : "Username"}
