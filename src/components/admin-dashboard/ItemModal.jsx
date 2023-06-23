@@ -153,7 +153,7 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
       {!checkDelete ? (
         <div className="fixed inset-0 flex items-center justify-center">
           <div
-            className="bg-white rounded-lg p-6 w-1/2 xl:w-[80vw] max-h-[90vh] relative overflow-auto"
+            className="bg-white rounded-lg p-6 w-[40vw] xl:w-[60vw] md:w-[80vw] max-h-[90vh] relative overflow-auto"
             ref={modalRef}
           >
             <Button onClick={onClose} className="absolute top-2 right-2">
@@ -224,52 +224,63 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
                   />
                 </div>
                 <br />
-                <div className="md:flex justify-center items-center">
-                  <span>Normal Price ($) </span>
-                  <input
-                    type="number"
-                    placeholder="Price"
-                    value={form.price}
-                    className="w-1/5 mx-5"
-                    onChange={handlePriceChange}
-                  />
-                  <span>Discount (-$)</span>
-                  <input
-                    type="number"
-                    placeholder="Discount"
-                    value={form.discount}
-                    className="w-1/4 mx-5"
-                    onChange={handleDiscountChange}
-                  />
+                <div className="lg:flex justify-center gap-4 align-center items-center">
+                  <div className="flex justify-center items-center align-center">
+                    <span>Normal Price ($) </span>
+                    <input
+                      type="number"
+                      placeholder="Price"
+                      value={form.price}
+                      className="md:w-[15vw] lg:w-[10vw] w-[20%] ml-2"
+                      onChange={handlePriceChange}
+                    />
+                  </div>
+                  <div className="mt-1 lg:mt-0 flex justify-center items-center align-center">
+                    <span>Discount (-$)</span>
+                    <input
+                      type="number"
+                      placeholder="Discount"
+                      value={form.discount}
+                      className="md:w-[15vw] lg:w-[10vw] w-[20%] ml-2"
+                      onChange={handleDiscountChange}
+                    />
+                  </div>
                 </div>
                 <br />
-                <div className="md:flex items-center justify-center">
-                  <span>On sale?</span>
-                  <input
-                    type="checkbox"
-                    checked={form.onSale}
-                    className="w-1/4 md:w-[5vw] mx-5 bg-white"
-                    onChange={(e) =>
-                      setForm((prevForm) => ({
-                        ...prevForm,
-                        onSale: e.target.checked,
-                      }))
-                    }
-                  />
-                  <span>On clearance?</span>
-                  <input
-                    type="checkbox"
-                    checked={form.clearance}
-                    className="w-1/4 md:w-[5vw] mx-5"
-                    onChange={(e) =>
-                      setForm((prevForm) => ({
-                        ...prevForm,
-                        clearance: e.target.checked,
-                      }))
-                    }
-                  />
+                <div className="flex items-center justify-center gap-3 mb-3">
+                  <div>
+                    <span>On sale?</span>
+                    <input
+                      type="checkbox"
+                      checked={form.onSale}
+                      className="mx-5"
+                      onChange={(e) =>
+                        setForm((prevForm) => ({
+                          ...prevForm,
+                          onSale: e.target.checked,
+                        }))
+                      }
+                    />
+                  </div>
+
+                  <div>
+                    <span>On clearance?</span>
+                    <input
+                      type="checkbox"
+                      checked={form.clearance}
+                      className="mx-5"
+                      onChange={(e) =>
+                        setForm((prevForm) => ({
+                          ...prevForm,
+                          clearance: e.target.checked,
+                        }))
+                      }
+                    />
+                  </div>
                 </div>
-                <button type="submit">Confirm changes</button>
+                <div className="flex align-center justify-center">
+                  <button type="submit">Confirm changes</button>
+                </div>
               </form>
               <Button
                 onClick={() => setCheckDelete(true)}
@@ -281,22 +292,24 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
           </div>
         </div>
       ) : (
-        <div className="fixed inset-0 flex items-center justify-center">
-          <div className="bg-white rounded-lg p-6 w-1/2 relative">
+        <div className="fixed inset-0 flex items-center align-center justify-center">
+          <div className="bg-white rounded-lg p-6 w-min-content relative">
             <Button
               onClick={() => setCheckDelete(false)}
               className="absolute top-2 right-2"
             >
               X
             </Button>
-            <h2 className="text-xl font-bold mb-2">{item && item.name}</h2>
-            <p>Are you sure you want to delete {item && item.name}?</p>
-            <Button
-              onClick={handleDelete}
-              className="bg-red-500 text-white px-4 py-2 rounded-r"
-            >
-              Yes, delete {item && item.name}
-            </Button>
+            <div className="flex align-center justify-center items-center flex-col">
+              <h2 className="text-xl font-bold mb-2">{item && item.name}</h2>
+              <p>Are you sure you want to delete {item && item.name}?</p>
+              <Button
+                onClick={handleDelete}
+                className="bg-red-500 text-white px-4 py-2 rounded-r"
+              >
+                Yes, delete {item && item.name}
+              </Button>
+            </div>
           </div>
         </div>
       )}
