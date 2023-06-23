@@ -20,8 +20,7 @@ const Header = () => {
     <div className="block">
       <div className="flex sm:flex-col align-center items-center justify-between text-center m-5 p-5 w-[80vw]">
         <div className="flex items-center">
-          <h1 className="md:text-2xl lg:text-4xl">Shop Name Here</h1>
-          <h4>Logo here</h4>
+          <h1 className="md:text-2xl lg:text-4xl">KiwiMart</h1>
         </div>
         <div className="flex items-center justify-end gap-1">
           <button onClick={() => setOpenAbout(true)}>About</button>
@@ -39,7 +38,7 @@ const Header = () => {
       {user.loggedIn ? (
         <p>Welcome, {user.email}</p>
       ) : (
-        <p>Welcome to Storename!</p>
+        <p>Welcome to KiwiMart!</p>
       )}
     </div>
   );
