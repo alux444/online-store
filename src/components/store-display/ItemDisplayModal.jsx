@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { Modal } from "@mui/material";
 import useOutsideClick from "../../utils/useOutsideClose";
 import useEditCart from "../../utils/useEditCart";
+import image from "../../utils/noImage.svg";
 
 const ItemDisplayModal = ({ open, close, item }) => {
   const modalRef = useRef(null);
@@ -36,8 +37,15 @@ const ItemDisplayModal = ({ open, close, item }) => {
           ref={modalRef}
         >
           <h2>{item.name}</h2>
-          <img src={item.imageUrl} className="max-w-[50vw] max-h[50vh]" />
-          <h2>${item.onSale ? salePrice : item.price}/ea</h2>
+          <div className="align-center flex flex-col justify-center">
+            <img
+              src={item.imageUrl == "" ? image : item.imageUrl}
+              className="max-h-[50vh]"
+            />
+          </div>
+          <h2 className="text-lg">
+            ${item.onSale ? salePrice : item.price}/ea
+          </h2>
           <br />
           <p>{item.description}</p>
           <br />

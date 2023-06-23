@@ -16,13 +16,17 @@ const Cart = () => {
     return total + item.amount * item.price;
   }, 0);
 
+  const totalItems = cart.reduce((total, item) => {
+    return total + item.amount;
+  }, 0);
+
   return (
     <div className="flex justify-center items-center mb-2">
       <button
         className="flex items-center font-bold text-lg"
         onClick={() => setShowCart(true)}
       >
-        <img src={image} className="w-10 mr-3" />${total}
+        <img src={image} className="w-10 mr-3" />${total} ({totalItems})
       </button>
       <CartModal open={showCart} close={closeCart} total={total} />
     </div>

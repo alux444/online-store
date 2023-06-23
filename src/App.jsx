@@ -4,6 +4,7 @@ import AdminDashboard from "./components/admin-dashboard/AdminDashboard";
 import StoreDisplay from "./components/store-display/StoreDisplay";
 import Header from "./components/misc-components/Header";
 import Footer from "./components/misc-components/Footer";
+import Cart from "./components/store-display/cart/Cart";
 
 export const AdminContext = createContext();
 export const UserContext = createContext();

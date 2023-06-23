@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ItemDisplayModal from "./ItemDisplayModal";
 import useEditCart from "../../utils/useEditCart";
+import image from "../../utils/noImage.svg";
 
 const ItemDisplayStore = ({ item }) => {
   const [open, setOpen] = useState(false);
@@ -26,7 +27,10 @@ const ItemDisplayStore = ({ item }) => {
         <h3 className="font-bold">Great Deal!</h3>
       )}
       <div className="flex justify-center align-center">
-        <img src={item.imageUrl} className="max-w-[100%] max-h-10vh" />
+        <img
+          src={item.imageUrl == "" ? image : item.imageUrl}
+          className="max-w-[100%] max-h-10vh"
+        />
       </div>
       <div>
         <p>{item.name}</p>
