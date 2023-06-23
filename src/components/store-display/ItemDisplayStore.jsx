@@ -17,7 +17,7 @@ const ItemDisplayStore = ({ item }) => {
   };
 
   return (
-    <div className="block w-[25vw] md:w-[40vw] border-[1px] justify-center align-center">
+    <div className="block w-[25vw] lg:w-[40vw] sm:w-[80vw] border-[1px] justify-center align-center">
       {item.clearance ? (
         <h3>Clearance Item!</h3>
       ) : item.onSale ? (
@@ -26,7 +26,7 @@ const ItemDisplayStore = ({ item }) => {
         <h3>Great Deal!</h3>
       )}
       <div className="flex justify-center align-center">
-        <img src={item.imageUrl} className="max-w-[20vw] max-h-10vh" />
+        <img src={item.imageUrl} className="max-w-[100%] max-h-10vh" />
       </div>
       <div>
         <p>{item.name}</p>

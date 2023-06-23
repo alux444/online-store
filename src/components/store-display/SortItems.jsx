@@ -9,7 +9,7 @@ const SortItems = ({
   handleCategory,
 }) => {
   return (
-    <div className="flex justify-center align-center items-center mb-3 flex-wrap">
+    <div className="flex md:flex-col justify-center align-center items-center mb-3 gap-1 flex-wrap">
       <div>
         <p>Filter by: </p>
       </div>
