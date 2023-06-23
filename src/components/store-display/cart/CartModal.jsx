@@ -19,13 +19,15 @@ const CartModal = ({ open, close, total }) => {
   return (
     <Modal open={open}>
       <div className="h-screen w-screen flex align-center items-center justify-center">
-        <div className="border-2 border-white bg-white p-5" ref={modalRef}>
+        <div
+          className="border-2 border-white bg-white p-5 flex align-center justify-center items-center text-center flex-col gap-1 rounded-lg"
+          ref={modalRef}
+        >
           <button onClick={() => setCart([])}>Clear Cart?</button>
           <br />
           {items}
           <br />
           <p>Total Cost: ${total}</p>
-          <button onClick={() => console.log(cart)}>log</button>
           <Checkout />
         </div>
       </div>

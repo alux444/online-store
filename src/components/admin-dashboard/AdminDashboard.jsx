@@ -15,7 +15,7 @@ const AdminDashboard = () => {
       try {
         const data = await getAllItems();
         setItems(data);
-        setFilteredItems(data); 
+        setFilteredItems(data);
       } catch (error) {
         console.log("Error retrieving items:", error);
       }
@@ -25,7 +25,24 @@ const AdminDashboard = () => {
   }, []);
 
   const updateItems = (updatedItems) => {
-    setFilteredItems(updatedItems); 
+    setFilteredItems(updatedItems);
+  };
+
+  const itemUpdate = (updatedItem) => {
+    setItems((prevItems) => {
+      let updatedItems;
+      if (updatedItem === null) {
+        updatedItems = prevItems.filter((item) => item.id !== modalItem.id);
+      } else {
+        updatedItems = prevItems.map((item) =>
+          item.id === updatedItem.id ? updatedItem : item
+        );
+      }
+      setFilteredItems(updatedItems);
+      return updatedItems;
+    });
+    setModalItem(null);
+    setModalOpen(false);
   };
 
   const handleOpenModal = (item) => {
@@ -44,7 +61,7 @@ const AdminDashboard = () => {
     <div>
       <h1>Admin Dashboard</h1>
 
-      <ItemSearch items={items} updateItems={updateItems} onOpenModal={() => handleOpenModal()}/>
+      <ItemSearch items={items} updateItems={updateItems} />
 
       <div className="mt-5 w-[70vw]">
         {filteredItems.length === 0 && (
@@ -53,12 +70,20 @@ const AdminDashboard = () => {
           </div>
         )}
         {filteredItems.map((item) => (
-          <ItemDisplayList item={item} key={item.id} onOpenModal={() => handleOpenModal(item)} />
+          <ItemDisplayList
+            item={item}
+            key={`${item.id}-${Date.now()}`} // Generate a unique key using item ID and timestamp
+            onOpenModal={() => handleOpenModal(item)}
+          />
         ))}
       </div>
 
       {modalItem && modalOpen && (
-        <ItemModal item={modalItem} onClose={handleModalClose} />
+        <ItemModal
+          item={modalItem}
+          onClose={handleModalClose}
+          itemUpdate={itemUpdate}
+        />
       )}
     </div>
   );

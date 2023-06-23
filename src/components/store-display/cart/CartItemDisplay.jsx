@@ -22,14 +22,14 @@ const CartItemDisplay = ({ item }) => {
       </div>
       <div>
         <p>
-          {item.name} x {item.amount}
-          <button onClick={removeAll}>Remove All</button>
+          {item.name} x {item.amount} | ${item.price}/each = $
+          {item.price * item.amount}
+        </p>
+        <div className="flex gap-1 align-center justify-center">
+          <button onClick={removeAll}>x</button>
           <button onClick={addOneExtra}>+</button>
           <button onClick={removeOne}>-</button>
-        </p>
-        <p>
-          ${item.price}/each = ${item.price * item.amount}
-        </p>
+        </div>
       </div>
     </div>
   );

@@ -1,11 +1,14 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { Modal, Button } from "@mui/material";
 import deleteItem from "../../utils/deleteItem";
 import updateItem from "../../utils/updateItem";
 import useOutsideClick from "../../utils/useOutsideClose";
+import convertDate from "../../utils/convertDate";
+import noImage from "../../utils/noImage.svg";
+import addImage from "../../utils/addImage";
 
 
-const ItemModal = ({ item, onClose, updateItem }) => {
+const ItemModal = ({ item, onClose, itemUpdate }) => {
   const [checkDelete, setCheckDelete] = useState(false);
   const modalRef = useRef(null);
   useOutsideClick(modalRef, onClose);
@@ -21,7 +24,22 @@ const ItemModal = ({ item, onClose, updateItem }) => {
     category: item.category,
   });
 
+  useEffect(() => {
+    setForm({
+      name: item.name,
+      description: item.description,
+      price: item.price,
+      discount: item.discount,
+      onSale: item.onSale,
+      clearance: item.clearance,
+      stock: item.stock,
+      category: item.category,
+    });
+  }, [item]);
+
   const [file, setFile] = useState(null);
+  const [isImageFocused, setIsImageFocused] = useState(false);
+  const date = convertDate(item.timeCreated);
 
   /* const handleNameChange = (e) => {
     setForm((prevForm) => ({ ...prevForm, name: e.target.value }));
@@ -56,8 +74,20 @@ const ItemModal = ({ item, onClose, updateItem }) => {
     e.preventDefault();
     console.log(form, file);
     try {
-      const isUpdated = await updateItem(item.id, form);
+      let imageUrl = item.imageUrl; 
+
+      if (file) {
+        imageUrl = await addImage(file, item.id);
+      }
+
+      const updatedImage = {
+        ...form,
+        imageUrl: imageUrl, 
+      };
+      const isUpdated = await updateItem(item.id, updatedImage);
       if (isUpdated) {
+        const updatedItem = { ...item, ...updatedImage };
+        itemUpdate(updatedItem);
         console.log(`${item.name} updated successfully`);
       } else {
         console.log("Item not found or could not be updated");
@@ -75,6 +105,7 @@ const ItemModal = ({ item, onClose, updateItem }) => {
     try {
       const isDeleted = await deleteItem(item.id);
       if (isDeleted) {
+        itemUpdate(null);
         console.log(`${item.name} deleted successfully`);
       } else {
         console.log("Item not found or could not be deleted");
@@ -86,6 +117,27 @@ const ItemModal = ({ item, onClose, updateItem }) => {
     onClose();
   };
 
+  const getImage = () => {
+    let image = null;
+    if (item.imageUrl == "") {
+      console.log("ok");
+      image = noImage;
+    } else {
+      console.log("nk");
+      image = item.imageUrl;
+    }
+    return (
+    <Button className="relative mt-10"
+    onClick={setIsImageFocused}>
+      <div className="absolute inset-0 bg-black opacity-0 transition-opacity duration-300 hover:opacity-50 cursor-pointer"></div>
+      <img
+        src={image}
+        className={`max-w-[20vw] max-h-10vh border rounded-lg transition-opacity duration-300 hover:opacity-50 focus:opacity-50 focus:ring-2 focus:ring-opacity-50 focus:ring-blue-500`}
+      />
+    </Button>
+    );
+  }
+
   return (
     <Modal open={true} onClose={onClose}>
       {!checkDelete ? (
@@ -96,8 +148,25 @@ const ItemModal = ({ item, onClose, updateItem }) => {
               X
             </Button>
             <h2 className="text-xl font-bold mb-2">{item && item.name}</h2>
+            <p>Date created: {date}</p>
+            <br/>
             <form onSubmit={onSubmit}>
               <div>
+              <div className="flex justify-center align-center">
+                {getImage()}
+                <Modal open={isImageFocused} onClose={setIsImageFocused}>
+                  <div className="fixed inset-0 flex items-center justify-center">
+                      {isImageFocused && (
+                      <input
+                        type="file"
+                        className="w-full"
+                        onChange={onChangeImage}
+                        accept=".jpg,.jpeg,.png"
+                      />
+                    )}
+                  </div>
+                </Modal>
+              </div>
                 <span className="mr-2">Category:</span>
                 <select
                   value={form.category}
@@ -169,14 +238,6 @@ const ItemModal = ({ item, onClose, updateItem }) => {
                   onChange={(e) => setForm((prevForm) => ({ ...prevForm, clearance: e.target.checked }))}
                 />
               </div>
-              
-              <p>Image</p>
-              <input
-                type="file"
-                className="w-full"
-                onChange={onChangeImage}
-                accept=".jpg,.jpeg,.png"
-              />
               <button type="submit">Confirm changes</button>
             </form>
             <Button

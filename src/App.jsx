@@ -4,6 +4,7 @@ import AdminDashboard from "./components/admin-dashboard/AdminDashboard";
 import StoreDisplay from "./components/store-display/StoreDisplay";
 import Header from "./components/misc-components/Header";
 import Footer from "./components/misc-components/Footer";
+import Cart from "./components/store-display/cart/Cart";
 
 export const AdminContext = createContext();
 export const UserContext = createContext();
@@ -15,19 +16,21 @@ function App() {
   const [user, setUser] = useState({ loggedIn: false, email: "" });
 
   return (
-    <AdminContext.Provider value={{ admin, setAdmin }}>
-      <CartContext.Provider value={{ cart, setCart }}>
-        <UserContext.Provider value={{ user, setUser }}>
-          <Header />
-          <br />
-          <button onClick={() => setAdmin(!admin)}>
-            {admin ? "remove admin" : "set admin"}
-          </button>
-          {admin ? <AdminDashboard /> : <StoreDisplay />}
-          <Footer />
-        </UserContext.Provider>
-      </CartContext.Provider>
-    </AdminContext.Provider>
+    <div className="flex flex-col align-center items-center justify-center">
+      <AdminContext.Provider value={{ admin, setAdmin }}>
+        <CartContext.Provider value={{ cart, setCart }}>
+          <UserContext.Provider value={{ user, setUser }}>
+            <Header />
+            <br />
+            <button onClick={() => setAdmin(!admin)}>
+              {admin ? "remove admin" : "set admin"}
+            </button>
+            {admin ? <AdminDashboard /> : <StoreDisplay />}
+            <Footer />
+          </UserContext.Provider>
+        </CartContext.Provider>
+      </AdminContext.Provider>
+    </div>
   );
 }
 

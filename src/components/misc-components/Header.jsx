@@ -18,9 +18,9 @@ const Header = () => {
 
   return (
     <div className="block">
-      <div className="flex align-center items-center justify-between text-center border-2 m-5 p-5 w-[80vw]">
+      <div className="flex sm:flex-col align-center items-center justify-between text-center border-2 m-5 p-5 w-[80vw]">
         <div className="flex items-center">
-          <h1>Shop Name Here</h1>
+          <h1 className="md:text-2xl lg:text-4xl">Shop Name Here</h1>
           <h4>Logo here</h4>
         </div>
         <div className="flex items-center justify-end gap-1">

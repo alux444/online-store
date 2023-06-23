@@ -3,7 +3,7 @@ import ItemModal from "./ItemModal";
 import AddItemModal from "./AddItemModal";
 import ItemDisplayList from "./ItemDisplayList";
 
-const ItemSearch = ({ items, updateItems, onOpenModal }) => {
+const ItemSearch = ({ items, updateItems }) => {
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [noResults, setNoResults] = useState(false);
@@ -40,7 +40,6 @@ const ItemSearch = ({ items, updateItems, onOpenModal }) => {
 
   const handleItemClick = (item) => {
     setModalItem(item);
-    onOpenModal();
     console.log("Search query:", item.name);
   };
 
