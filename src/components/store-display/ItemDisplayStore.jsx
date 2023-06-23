@@ -18,7 +18,7 @@ const ItemDisplayStore = ({ item }) => {
   };
 
   return (
-    <div className="block w-[25vw] lg:w-[40vw] sm:w-[80vw] border-[1px] justify-center align-center p-3">
+    <div className="block w-[20vw] lg:w-[28vw] md:[44vw] sm:w-[70vw] border-[1px] justify-center align-center p-3">
       {item.clearance ? (
         <h3 className="font-bold">Clearance Item!</h3>
       ) : item.onSale ? (
@@ -29,7 +29,7 @@ const ItemDisplayStore = ({ item }) => {
       <div className="flex justify-center align-center">
         <img
           src={item.imageUrl == "" ? image : item.imageUrl}
-          className="max-w-[100%] max-h-10vh"
+          className="max-w-[90%] max-h-10vh"
         />
       </div>
       <div>
@@ -45,10 +45,12 @@ const ItemDisplayStore = ({ item }) => {
 
         <br />
       </div>
-      <button className="mr-2" onClick={() => addOneToCart()}>
+      <button className="mx-2" onClick={() => addOneToCart()}>
         Add to Cart
       </button>
-      <button onClick={() => setOpen(true)}>Show More</button>
+      <button className="mx-2" onClick={() => setOpen(true)}>
+        Show More
+      </button>
       <ItemDisplayModal open={open} close={closeModal} item={item} />
     </div>
   );
