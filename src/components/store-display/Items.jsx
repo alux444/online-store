@@ -22,12 +22,30 @@ const Items = ({
   } else if (sortingOption === "date-new") {
     sortedItems = sortedItems.sort((a, b) => b.timeCreated - a.timeCreated);
   } else if (sortingOption === "price-low") {
-    sortedItems = sortedItems.sort(
-      (a, b) => a.price - a.discount - (b.price - b.discount)
+    sortedItems = sortedItems.sort((a, b) => {
+      let aTotal = a.price;
+      let bTotal = b.price;
+      if (a.onSale) {
+        aTotal -= a.discount;
+      } 
+      if (b.onSale) {
+        bTotal -= b.discount;
+      }
+      return aTotal - bTotal;
+    }
     );
   } else if (sortingOption === "price-high") {
-    sortedItems = sortedItems.sort(
-      (a, b) => b.price - b.discount - (a.price - a.discount)
+    sortedItems = sortedItems.sort((a, b) => {
+      let aTotal = a.price;
+      let bTotal = b.price;
+      if (a.onSale) {
+        aTotal -= a.discount;
+      } 
+      if (b.onSale) {
+        bTotal -= b.discount;
+      }
+      return bTotal - aTotal;
+    }
     );
   }
 
