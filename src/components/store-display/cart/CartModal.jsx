@@ -17,10 +17,10 @@ const CartModal = ({ open, close, total }) => {
   });
 
   return (
-    <Modal open={open}>
+    <Modal open={open} className="flex align-center items-center justify-center">
       <div className="h-screen w-screen flex align-center items-center justify-center">
         <div
-          className="border-2 border-white bg-white p-5 flex align-center justify-center items-center text-center flex-col gap-1 rounded-lg"
+          className="border-2 border-white bg-white p-5 flex align-center justify-center items-center text-center flex-col gap-1 rounded-lg "
           ref={modalRef}
         >
           <button onClick={() => setCart([])}>Clear Cart?</button>

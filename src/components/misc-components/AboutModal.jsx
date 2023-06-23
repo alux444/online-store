@@ -24,6 +24,10 @@ const AboutModal = ({ open, close }) => {
             The project is built on React for Frontend, Firebase for Backend,
             and TailwindCSS for styling.
           </p>
+          <p>Note: Item data was randomly generated using mockaroo.</p>
+          <p>Admin Dashboard access:</p>
+          <small>Username: admin</small>
+          <small>Password: admin</small>
           <br />
           <hr />
           <h2>Contributors</h2>
