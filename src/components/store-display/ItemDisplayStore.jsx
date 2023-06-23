@@ -17,7 +17,7 @@ const ItemDisplayStore = ({ item }) => {
   };
 
   return (
-    <div className="block w-[25vw] border-[1px] justify-center align-center">
+    <div className="block w-[25vw] md:w-[40vw] border-[1px] justify-center align-center">
       {item.clearance ? (
         <h3>Clearance Item!</h3>
       ) : item.onSale ? (
