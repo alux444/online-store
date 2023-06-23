@@ -6,6 +6,7 @@ import useOutsideClick from "../../utils/useOutsideClose";
 import convertDate from "../../utils/convertDate";
 import noImage from "../../utils/noImage.svg";
 import addImage from "../../utils/addImage";
+import "./util.css";
 
 
 const ItemModal = ({ item, onClose, itemUpdate }) => {
@@ -117,26 +118,30 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
     onClose();
   };
 
+  const handleMouseEnter = () => {
+    setIsImageFocused(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsImageFocused(false);
+  };
+
   const getImage = () => {
-    let image = null;
-    if (item.imageUrl == "") {
-      console.log("ok");
-      image = noImage;
-    } else {
-      console.log("nk");
-      image = item.imageUrl;
-    }
+    let image = item.imageUrl === '' ? noImage : item.imageUrl;
     return (
-    <Button className="relative mt-10"
-    onClick={setIsImageFocused}>
-      <div className="absolute inset-0 bg-black opacity-0 transition-opacity duration-300 hover:opacity-50 cursor-pointer"></div>
-      <img
-        src={image}
-        className={`max-w-[20vw] max-h-10vh border rounded-lg transition-opacity duration-300 hover:opacity-50 focus:opacity-50 focus:ring-2 focus:ring-opacity-50 focus:ring-blue-500`}
-      />
-    </Button>
+      <div className="relative" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+        <img
+          src={image}
+          className={`max-w-[20vw] max-h-10vh border rounded-lg ${isImageFocused ? 'opacity-75 shadow-lg' : ''}`}
+        />
+        {isImageFocused && (
+          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white text-sm font-bold opacity-0 transition-opacity duration-300 pointer-events-none">
+            Edit image
+          </div>
+        )}
+      </div>
     );
-  }
+  };
 
   return (
     <Modal open={true} onClose={onClose}>
@@ -152,21 +157,20 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
             <br/>
             <form onSubmit={onSubmit}>
               <div>
-              <div className="flex justify-center align-center">
-                {getImage()}
-                <Modal open={isImageFocused} onClose={setIsImageFocused}>
-                  <div className="fixed inset-0 flex items-center justify-center">
-                      {isImageFocused && (
+                <div className="flex justify-center align-center">
+                  <label htmlFor="image-upload" className="relative">
+                    {getImage()}
+                    <div className="file-input-mask">
                       <input
+                        id="image-upload"
                         type="file"
-                        className="w-full"
+                        className="file-input"
                         onChange={onChangeImage}
                         accept=".jpg,.jpeg,.png"
                       />
-                    )}
-                  </div>
-                </Modal>
-              </div>
+                    </div>
+                  </label>
+                </div>
                 <span className="mr-2">Category:</span>
                 <select
                   value={form.category}
