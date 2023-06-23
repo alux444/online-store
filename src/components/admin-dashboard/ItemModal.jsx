@@ -38,6 +38,7 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
   }, [item]);
 
   const [file, setFile] = useState(null);
+  const [isImageFocused, setIsImageFocused] = useState(false);
   const date = convertDate(item.timeCreated);
 
   /* const handleNameChange = (e) => {
@@ -117,17 +118,24 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
   };
 
   const getImage = () => {
+    let image = null;
     if (item.imageUrl == "") {
       console.log("ok");
-      return (
-        <img src={noImage} className="mt-10 max-w-[20vw] max-h-10vh border rounded-lg" />
-      );
+      image = noImage;
     } else {
       console.log("nk");
-      return (
-        <img src={item.imageUrl} className="mt-10 max-w-[20vw] max-h-10vh border rounded-lg" />
-      );
+      image = item.imageUrl;
     }
+    return (
+    <Button className="relative mt-10"
+    onClick={setIsImageFocused}>
+      <div className="absolute inset-0 bg-black opacity-0 transition-opacity duration-300 hover:opacity-50 cursor-pointer"></div>
+      <img
+        src={image}
+        className={`max-w-[20vw] max-h-10vh border rounded-lg transition-opacity duration-300 hover:opacity-50 focus:opacity-50 focus:ring-2 focus:ring-opacity-50 focus:ring-blue-500`}
+      />
+    </Button>
+    );
   }
 
   return (
@@ -141,12 +149,24 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
             </Button>
             <h2 className="text-xl font-bold mb-2">{item && item.name}</h2>
             <p>Date created: {date}</p>
-            <div className="flex justify-center align-center">
-              {getImage()}
-            </div>
             <br/>
             <form onSubmit={onSubmit}>
               <div>
+              <div className="flex justify-center align-center">
+                {getImage()}
+                <Modal open={isImageFocused} onClose={setIsImageFocused}>
+                  <div className="fixed inset-0 flex items-center justify-center">
+                      {isImageFocused && (
+                      <input
+                        type="file"
+                        className="w-full"
+                        onChange={onChangeImage}
+                        accept=".jpg,.jpeg,.png"
+                      />
+                    )}
+                  </div>
+                </Modal>
+              </div>
                 <span className="mr-2">Category:</span>
                 <select
                   value={form.category}
@@ -218,14 +238,6 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
                   onChange={(e) => setForm((prevForm) => ({ ...prevForm, clearance: e.target.checked }))}
                 />
               </div>
-              
-              <p>Image</p>
-              <input
-                type="file"
-                className="w-full"
-                onChange={onChangeImage}
-                accept=".jpg,.jpeg,.png"
-              />
               <button type="submit">Confirm changes</button>
             </form>
             <Button
