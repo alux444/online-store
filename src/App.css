@@ -18,19 +18,17 @@
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
-@keyframes logo-spin {
+@keyframes cartAnimation {
   from {
-    transform: rotate(0deg);
+    transform: scale(1);
   }
   to {
-    transform: rotate(360deg);
+    transform: scale(1.04);
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.animate-cart {
+  animation: cartAnimation 0.5s;
 }
 
 .card {
