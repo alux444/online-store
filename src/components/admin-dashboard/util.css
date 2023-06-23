@@ -1,10 +1,7 @@
 .file-input-mask {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
+  position: relative;
+  width: 100%; /* Set the width to 100% to cover the image */
+  height: 100%; /* Set the height to 100% to cover the image */
 }
 
 .file-input {
@@ -16,7 +13,12 @@
   opacity: 0;
   cursor: pointer;
 }
-
 .file-input:hover {
   background-color: rgba(0, 0, 0, 0.7);
+}
+
+@media (min-width: 768px) {
+  .flex-row {
+    flex-direction: row;
+  }
 }

@@ -8,7 +8,6 @@ import noImage from "../../utils/noImage.svg";
 import addImage from "../../utils/addImage";
 import "./util.css";
 
-
 const ItemModal = ({ item, onClose, itemUpdate }) => {
   const [checkDelete, setCheckDelete] = useState(false);
   const modalRef = useRef(null);
@@ -75,7 +74,7 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
     e.preventDefault();
     console.log(form, file);
     try {
-      let imageUrl = item.imageUrl; 
+      let imageUrl = item.imageUrl;
 
       if (file) {
         imageUrl = await addImage(file, item.id);
@@ -83,7 +82,7 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
 
       const updatedImage = {
         ...form,
-        imageUrl: imageUrl, 
+        imageUrl: imageUrl,
       };
       const isUpdated = await updateItem(item.id, updatedImage);
       if (isUpdated) {
@@ -127,12 +126,18 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
   };
 
   const getImage = () => {
-    let image = item.imageUrl === '' ? noImage : item.imageUrl;
+    let image = item.imageUrl === "" ? noImage : item.imageUrl;
     return (
-      <div className="relative" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+      <div
+        className="relative"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
         <img
           src={image}
-          className={`max-w-[20vw] max-h-10vh border rounded-lg ${isImageFocused ? 'opacity-75 shadow-lg' : ''}`}
+          className={`max-w-[50vw] max-h-[40vh] border rounded-lg ${
+            isImageFocused ? "opacity-75 shadow-lg" : ""
+          }`}
         />
         {isImageFocused && (
           <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white text-sm font-bold opacity-0 transition-opacity duration-300 pointer-events-none">
@@ -147,125 +152,164 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
     <Modal open={true} onClose={onClose}>
       {!checkDelete ? (
         <div className="fixed inset-0 flex items-center justify-center">
-          <div className="bg-white rounded-lg p-6 w-1/2 relative"
-            ref={modalRef}>
+          <div
+            className="bg-white rounded-lg p-6 w-[40vw] xl:w-[60vw] md:w-[80vw] max-h-[90vh] relative overflow-auto"
+            ref={modalRef}
+          >
             <Button onClick={onClose} className="absolute top-2 right-2">
               X
             </Button>
-            <h2 className="text-xl font-bold mb-2">{item && item.name}</h2>
-            <p>Date created: {date}</p>
-            <br/>
-            <form onSubmit={onSubmit}>
-              <div>
-                <div className="flex justify-center align-center">
-                  <label htmlFor="image-upload" className="relative">
-                    {getImage()}
-                    <div className="file-input-mask">
+            <div className="flex align-center justify-center items-center flex-col">
+              <h2 className="text-xl font-bold mb-2">{item && item.name}</h2>
+              <p>Date created: {date}</p>
+              <br />
+              <form onSubmit={onSubmit}>
+                <div className="flex align-center items-center justify-center flex-col">
+                  <div className="flex align-center">
+                    <label htmlFor="image-upload" className="relative">
+                      <div className="file-input-mask">
+                        <div className="flex align-center items-center justify-center">
+                          <input
+                            id="image-upload"
+                            type="file"
+                            className="file-input"
+                            onChange={onChangeImage}
+                            accept=".jpg,.jpeg,.png"
+                          />
+                          {getImage()}
+                        </div>
+                      </div>
+                    </label>
+                  </div>
+
+                  <br />
+                  <div className="flex mt-3 align-center justify-center items-center gap-4">
+                    <div className="">
+                      <span className="mr-1">Category:</span>
+                      <select
+                        value={form.category}
+                        onChange={handleCategoryChange}
+                        className="px-4 py-2 border md:w-[30vw] bg-white border-gray-300 rounded"
+                      >
+                        <option value="produce">Produce</option>
+                        <option value="seafood">Seafood</option>
+                        <option value="bakery">Bakery</option>
+                        <option value="liquor">Liquor</option>
+                        <option value="chilled">Chilled</option>
+                        <option value="frozen">Frozen</option>
+                        <option value="deli">Deli</option>
+                        <option value="grocery">Grocery</option>
+                      </select>
+                    </div>
+                    <div className="">
+                      <span className="mr-1">Stock on Hand:</span>
                       <input
-                        id="image-upload"
-                        type="file"
-                        className="file-input"
-                        onChange={onChangeImage}
-                        accept=".jpg,.jpeg,.png"
+                        type="number"
+                        placeholder="0"
+                        value={form.stock}
+                        className=""
+                        onChange={handleStockChange}
                       />
                     </div>
-                  </label>
+                  </div>
                 </div>
-                <span className="mr-2">Category:</span>
-                <select
-                  value={form.category}
-                  onChange={handleCategoryChange}
-                  className="px-4 py-2 border mx-5 w-1/4 bg-white border-gray-300 rounded"
-                >
-                  <option value="produce">Produce</option>
-                  <option value="seafood">Seafood</option>
-                  <option value="bakery">Bakery</option>
-                  <option value="liquor">Liquor</option>
-                  <option value="chilled">Chilled</option>
-                  <option value="frozen">Frozen</option>
-                  <option value="deli">Deli</option>
-                  <option value="grocery">Grocery</option>
-                </select>
-                <span>Stock on Hand:</span>
-                <input
-                  type="number"
-                  placeholder="0"
-                  value={form.stock}
-                  className="w-1/4 mx-5"
-                  onChange={handleStockChange}
-                />
-              </div>
-              <br/>
-              <div>
-                <p>Description</p>
-                <input
-                  type="text"
-                  placeholder="Description"
-                  value={form.description}
-                  className="w-full"
-                  onChange={handleDescriptionChange}
-                />
-              </div>
-              <br/>
-              <div> 
-                <span>Normal Price ($) </span>
-                <input
-                  type="number"
-                  placeholder="Price"
-                  value={form.price}
-                  className="w-1/5 mx-5"
-                  onChange={handlePriceChange}
-                />
-                <span>Discount (-$)</span>
-                <input
-                  type="number"
-                  placeholder="Discount"
-                  value={form.discount}
-                  className="w-1/4 mx-5"
-                  onChange={handleDiscountChange}
-                />
-              </div>
-              <br/>
-              <div>
-                <span>On sale?</span>
-                <input
-                  type="checkbox"
-                  checked={form.onSale}
-                  className="w-1/4 mx-5 bg-white"
-                  onChange={(e) => setForm((prevForm) => ({ ...prevForm, onSale: e.target.checked }))}
-                />
-                <span>On clearance?</span>
-                <input
-                  type="checkbox"
-                  checked={form.clearance}
-                  className="w-1/4 mx-5"
-                  onChange={(e) => setForm((prevForm) => ({ ...prevForm, clearance: e.target.checked }))}
-                />
-              </div>
-              <button type="submit">Confirm changes</button>
-            </form>
-            <Button
-              onClick={() => setCheckDelete(true)}
-              className="bg-red-500 text-white px-4 py-2 rounded-r"
-            >
-              Delete {item && item.name}
-            </Button>
+                <br />
+                <div>
+                  <p>Description</p>
+                  <textarea
+                    placeholder="Description"
+                    value={form.description}
+                    className="w-full bg-white border border-gray-300 rounded px-3 py-1"
+                    onChange={handleDescriptionChange}
+                  />
+                </div>
+                <br />
+                <div className="lg:flex justify-center gap-4 align-center items-center">
+                  <div className="flex justify-center items-center align-center">
+                    <span>Normal Price ($) </span>
+                    <input
+                      type="number"
+                      placeholder="Price"
+                      value={form.price}
+                      className="md:w-[15vw] lg:w-[10vw] w-[20%] ml-2"
+                      onChange={handlePriceChange}
+                    />
+                  </div>
+                  <div className="mt-1 lg:mt-0 flex justify-center items-center align-center">
+                    <span>Discount (-$)</span>
+                    <input
+                      type="number"
+                      placeholder="Discount"
+                      value={form.discount}
+                      className="md:w-[15vw] lg:w-[10vw] w-[20%] ml-2"
+                      onChange={handleDiscountChange}
+                    />
+                  </div>
+                </div>
+                <br />
+                <div className="flex items-center justify-center gap-3 mb-3">
+                  <div>
+                    <span>On sale?</span>
+                    <input
+                      type="checkbox"
+                      checked={form.onSale}
+                      className="mx-5"
+                      onChange={(e) =>
+                        setForm((prevForm) => ({
+                          ...prevForm,
+                          onSale: e.target.checked,
+                        }))
+                      }
+                    />
+                  </div>
+
+                  <div>
+                    <span>On clearance?</span>
+                    <input
+                      type="checkbox"
+                      checked={form.clearance}
+                      className="mx-5"
+                      onChange={(e) =>
+                        setForm((prevForm) => ({
+                          ...prevForm,
+                          clearance: e.target.checked,
+                        }))
+                      }
+                    />
+                  </div>
+                </div>
+                <div className="flex align-center justify-center">
+                  <button type="submit">Confirm changes</button>
+                </div>
+              </form>
+              <Button
+                onClick={() => setCheckDelete(true)}
+                className="bg-red-500 text-white px-4 py-2 rounded-r"
+              >
+                Delete {item && item.name}
+              </Button>
+            </div>
           </div>
         </div>
       ) : (
-        <div className="fixed inset-0 flex items-center justify-center">
-          <div className="bg-white rounded-lg p-6 w-1/2 relative">
-            <Button onClick={() => setCheckDelete(false)} className="absolute top-2 right-2">
+        <div className="fixed inset-0 flex items-center align-center justify-center">
+          <div className="bg-white rounded-lg p-6 w-min-content relative">
+            <Button
+              onClick={() => setCheckDelete(false)}
+              className="absolute top-2 right-2"
+            >
               X
             </Button>
-            <h2 className="text-xl font-bold mb-2">{item && item.name}</h2>
-            <p>Are you sure you want to delete {item && item.name}?</p>
-            <Button
-              onClick={handleDelete}
-              className="bg-red-500 text-white px-4 py-2 rounded-r"
-            >
-              Yes, delete {item && item.name}
-            </Button>
+            <div className="flex align-center justify-center items-center flex-col">
+              <h2 className="text-xl font-bold mb-2">{item && item.name}</h2>
+              <p>Are you sure you want to delete {item && item.name}?</p>
+              <Button
+                onClick={handleDelete}
+                className="bg-red-500 text-white px-4 py-2 rounded-r"
+              >
+                Yes, delete {item && item.name}
+              </Button>
+            </div>
           </div>
         </div>
       )}

@@ -57,6 +57,14 @@ const AdminDashboard = () => {
     console.log("Modal closed.");
   };
 
+  const mappedItems = filteredItems.map((item) => (
+    <ItemDisplayList
+      item={item}
+      key={`${item.id}-${Date.now()}`} // Generate a unique key using item ID and timestamp
+      onOpenModal={() => handleOpenModal(item)}
+    />
+  ))
+
   return (
     <div className="flex align-center justify-center flex-col">
       <h1>Admin Dashboard</h1>
@@ -69,13 +77,7 @@ const AdminDashboard = () => {
             <p>No results found.</p>
           </div>
         )}
-        {filteredItems.map((item) => (
-          <ItemDisplayList
-            item={item}
-            key={`${item.id}-${Date.now()}`} // Generate a unique key using item ID and timestamp
-            onOpenModal={() => handleOpenModal(item)}
-          />
-        ))}
+        {mappedItems}
       </div>
 
       {modalItem && modalOpen && (
