@@ -8,7 +8,6 @@ import noImage from "../../utils/noImage.svg";
 import addImage from "../../utils/addImage";
 import "./util.css";
 
-
 const ItemModal = ({ item, onClose, itemUpdate }) => {
   const [checkDelete, setCheckDelete] = useState(false);
   const modalRef = useRef(null);
@@ -75,7 +74,7 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
     e.preventDefault();
     console.log(form, file);
     try {
-      let imageUrl = item.imageUrl; 
+      let imageUrl = item.imageUrl;
 
       if (file) {
         imageUrl = await addImage(file, item.id);
@@ -83,7 +82,7 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
 
       const updatedImage = {
         ...form,
-        imageUrl: imageUrl, 
+        imageUrl: imageUrl,
       };
       const isUpdated = await updateItem(item.id, updatedImage);
       if (isUpdated) {
@@ -127,12 +126,18 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
   };
 
   const getImage = () => {
-    let image = item.imageUrl === '' ? noImage : item.imageUrl;
+    let image = item.imageUrl === "" ? noImage : item.imageUrl;
     return (
-      <div className="relative" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+      <div
+        className="relative"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
         <img
           src={image}
-          className={`max-w-[20vw] max-h-10vh border rounded-lg ${isImageFocused ? 'opacity-75 shadow-lg' : ''}`}
+          className={`max-w-[20vw] max-h-10vh border rounded-lg ${
+            isImageFocused ? "opacity-75 shadow-lg" : ""
+          }`}
         />
         {isImageFocused && (
           <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white text-sm font-bold opacity-0 transition-opacity duration-300 pointer-events-none">
@@ -147,30 +152,32 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
     <Modal open={true} onClose={onClose}>
       {!checkDelete ? (
         <div className="fixed inset-0 flex items-center justify-center">
-          <div className="bg-white rounded-lg p-6 w-1/2 relative"
-            ref={modalRef}>
+          <div
+            className="bg-white rounded-lg p-6 w-1/2 lg:w-[80vw] relative"
+            ref={modalRef}
+          >
             <Button onClick={onClose} className="absolute top-2 right-2">
               X
             </Button>
             <h2 className="text-xl font-bold mb-2">{item && item.name}</h2>
             <p>Date created: {date}</p>
-            <br/>
+            <br />
             <form onSubmit={onSubmit}>
-              <div>
-                <div className="flex justify-center align-center">
-                  <label htmlFor="image-upload" className="relative">
-                    {getImage()}
-                    <div className="file-input-mask">
-                      <input
-                        id="image-upload"
-                        type="file"
-                        className="file-input"
-                        onChange={onChangeImage}
-                        accept=".jpg,.jpeg,.png"
-                      />
-                    </div>
-                  </label>
-                </div>
+              <div className="flex justify-center align-center">
+                <label htmlFor="image-upload" className="relative">
+                  {getImage()}
+                  <div className="file-input-mask">
+                    <input
+                      id="image-upload"
+                      type="file"
+                      className="file-input"
+                      onChange={onChangeImage}
+                      accept=".jpg,.jpeg,.png"
+                    />
+                  </div>
+                </label>
+              </div>
+              <div className="md:flex mjustify-center align-center items-center">
                 <span className="mr-2">Category:</span>
                 <select
                   value={form.category}
@@ -195,7 +202,7 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
                   onChange={handleStockChange}
                 />
               </div>
-              <br/>
+              <br />
               <div>
                 <p>Description</p>
                 <input
@@ -206,8 +213,8 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
                   onChange={handleDescriptionChange}
                 />
               </div>
-              <br/>
-              <div> 
+              <br />
+              <div className="md:flex justify-center items-center">
                 <span>Normal Price ($) </span>
                 <input
                   type="number"
@@ -225,21 +232,31 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
                   onChange={handleDiscountChange}
                 />
               </div>
-              <br/>
-              <div>
+              <br />
+              <div className="md:flex items-center justify-center">
                 <span>On sale?</span>
                 <input
                   type="checkbox"
                   checked={form.onSale}
-                  className="w-1/4 mx-5 bg-white"
-                  onChange={(e) => setForm((prevForm) => ({ ...prevForm, onSale: e.target.checked }))}
+                  className="w-1/4 md:w-[5vw] mx-5 bg-white"
+                  onChange={(e) =>
+                    setForm((prevForm) => ({
+                      ...prevForm,
+                      onSale: e.target.checked,
+                    }))
+                  }
                 />
                 <span>On clearance?</span>
                 <input
                   type="checkbox"
                   checked={form.clearance}
-                  className="w-1/4 mx-5"
-                  onChange={(e) => setForm((prevForm) => ({ ...prevForm, clearance: e.target.checked }))}
+                  className="w-1/4 md:w-[5vw] mx-5"
+                  onChange={(e) =>
+                    setForm((prevForm) => ({
+                      ...prevForm,
+                      clearance: e.target.checked,
+                    }))
+                  }
                 />
               </div>
               <button type="submit">Confirm changes</button>
@@ -255,7 +272,10 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
       ) : (
         <div className="fixed inset-0 flex items-center justify-center">
           <div className="bg-white rounded-lg p-6 w-1/2 relative">
-            <Button onClick={() => setCheckDelete(false)} className="absolute top-2 right-2">
+            <Button
+              onClick={() => setCheckDelete(false)}
+              className="absolute top-2 right-2"
+            >
               X
             </Button>
             <h2 className="text-xl font-bold mb-2">{item && item.name}</h2>

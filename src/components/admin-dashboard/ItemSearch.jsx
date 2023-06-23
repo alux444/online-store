@@ -128,7 +128,7 @@ const ItemSearch = ({ items, updateItems }) => {
               <option value="seafood">Seafood</option>
             </select>
           </div>
-          <span>Results: {searchResults.length}</span>
+          <span className="ml-2 lg:ml-0">Results: {searchResults.length}</span>
         </div>
       </div>
     </div>
