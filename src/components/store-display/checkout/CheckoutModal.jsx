@@ -29,7 +29,7 @@ const CheckoutModal = ({ open, close }) => {
   useOutsideClick(modalRef, close);
 
   return (
-    <Modal open={open}>
+    <Modal open={open} className="flex align-center items-center justify-center">
       <div className="h-screen w-screen flex align-center items-center justify-center">
         <div className="border-2 border-white bg-white p-5" ref={modalRef}>
           <h1 className="text-2xl font-bold">Payment</h1>
