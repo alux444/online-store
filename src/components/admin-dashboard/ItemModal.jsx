@@ -4,6 +4,7 @@ import deleteItem from "../../utils/deleteItem";
 import updateItem from "../../utils/updateItem";
 import useOutsideClick from "../../utils/useOutsideClose";
 import convertDate from "../../utils/convertDate";
+import noImage from "../../utils/noImage.svg";
 
 
 const ItemModal = ({ item, onClose, itemUpdate }) => {
@@ -104,6 +105,20 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
     onClose();
   };
 
+  const getImage = () => {
+    if (item.imageUrl == "") {
+      console.log("ok");
+      return (
+        <img src={noImage} className="max-w-[20vw] max-h-10vh" />
+      );
+    } else {
+      console.log("nk");
+      return (
+        <img src={item.imageUrl} className="max-w-[20vw] max-h-10vh" />
+      );
+    }
+  }
+
   return (
     <Modal open={true} onClose={onClose}>
       {!checkDelete ? (
@@ -114,6 +129,11 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
               X
             </Button>
             <h2 className="text-xl font-bold mb-2">{item && item.name}</h2>
+            <p>Date created: {date}</p>
+            <div className="flex justify-center align-center">
+              {getImage()}
+            </div>
+            <br/>
             <form onSubmit={onSubmit}>
               <div>
                 <span className="mr-2">Category:</span>
