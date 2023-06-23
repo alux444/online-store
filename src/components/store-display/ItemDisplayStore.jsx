@@ -17,13 +17,13 @@ const ItemDisplayStore = ({ item }) => {
   };
 
   return (
-    <div className="block w-[25vw] lg:w-[40vw] sm:w-[80vw] border-[1px] justify-center align-center">
+    <div className="block w-[25vw] lg:w-[40vw] sm:w-[80vw] border-[1px] justify-center align-center p-3">
       {item.clearance ? (
-        <h3>Clearance Item!</h3>
+        <h3 className="font-bold">Clearance Item!</h3>
       ) : item.onSale ? (
-        <h3>On Special! Save ${item.discount}</h3>
+        <h3 className="font-bold">On Special! Save ${item.discount}</h3>
       ) : (
-        <h3>Great Deal!</h3>
+        <h3 className="font-bold">Great Deal!</h3>
       )}
       <div className="flex justify-center align-center">
         <img src={item.imageUrl} className="max-w-[100%] max-h-10vh" />
@@ -33,7 +33,7 @@ const ItemDisplayStore = ({ item }) => {
         <br />
         {item.onSale ? (
           <p>
-            ${realPrice} <s>${item.price}</s>
+            <span className="font-bold">${realPrice}</span> <s>${item.price}</s>
           </p>
         ) : (
           <p>${item.price}</p>
@@ -41,7 +41,9 @@ const ItemDisplayStore = ({ item }) => {
 
         <br />
       </div>
-      <button onClick={() => addOneToCart()}>Add to Cart</button>
+      <button className="mr-2" onClick={() => addOneToCart()}>
+        Add to Cart
+      </button>
       <button onClick={() => setOpen(true)}>Show More</button>
       <ItemDisplayModal open={open} close={closeModal} item={item} />
     </div>
