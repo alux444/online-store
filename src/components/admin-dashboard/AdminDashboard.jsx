@@ -30,15 +30,19 @@ const AdminDashboard = () => {
 
   const itemUpdate = (updatedItem) => {
     setItems((prevItems) => {
-      const updatedItems = prevItems.map((item) =>
-        item.id === updatedItem.id ? updatedItem : item
-      );
+      let updatedItems;
+      if (updatedItem === null) {
+        updatedItems = prevItems.filter((item) => item.id !== modalItem.id);
+      } else {
+        updatedItems = prevItems.map((item) =>
+          item.id === updatedItem.id ? updatedItem : item
+        );
+      }
       setFilteredItems(updatedItems);
       return updatedItems;
     });
     setModalItem(null);
     setModalOpen(false);
-    console.log("Item updated:", updatedItem);
   };
 
   const handleOpenModal = (item) => {
