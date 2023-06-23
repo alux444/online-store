@@ -5,6 +5,7 @@ import updateItem from "../../utils/updateItem";
 import useOutsideClick from "../../utils/useOutsideClose";
 import convertDate from "../../utils/convertDate";
 import noImage from "../../utils/noImage.svg";
+import addImage from "../../utils/addImage";
 
 
 const ItemModal = ({ item, onClose, itemUpdate }) => {
@@ -72,9 +73,19 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
     e.preventDefault();
     console.log(form, file);
     try {
-      const isUpdated = await updateItem(item.id, form);
+      let imageUrl = item.imageUrl; 
+
+      if (file) {
+        imageUrl = await addImage(file, item.id);
+      }
+
+      const updatedImage = {
+        ...form,
+        imageUrl: imageUrl, 
+      };
+      const isUpdated = await updateItem(item.id, updatedImage);
       if (isUpdated) {
-        const updatedItem = { ...item, ...form };
+        const updatedItem = { ...item, ...updatedImage };
         itemUpdate(updatedItem);
         console.log(`${item.name} updated successfully`);
       } else {
@@ -109,12 +120,12 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
     if (item.imageUrl == "") {
       console.log("ok");
       return (
-        <img src={noImage} className="max-w-[20vw] max-h-10vh" />
+        <img src={noImage} className="mt-10 max-w-[20vw] max-h-10vh border rounded-lg" />
       );
     } else {
       console.log("nk");
       return (
-        <img src={item.imageUrl} className="max-w-[20vw] max-h-10vh" />
+        <img src={item.imageUrl} className="mt-10 max-w-[20vw] max-h-10vh border rounded-lg" />
       );
     }
   }
