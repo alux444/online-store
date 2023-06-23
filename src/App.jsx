@@ -22,9 +22,6 @@ function App() {
           <UserContext.Provider value={{ user, setUser }}>
             <Header />
             <br />
-            <button onClick={() => setAdmin(!admin)}>
-              {admin ? "remove admin" : "set admin"}
-            </button>
             {admin ? <AdminDashboard /> : <StoreDisplay />}
             <Footer />
           </UserContext.Provider>

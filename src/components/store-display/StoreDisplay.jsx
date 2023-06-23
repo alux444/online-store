@@ -44,7 +44,7 @@ const StoreDisplay = () => {
   };
 
   return (
-    <div>
+    <div className="w-[90vw]">
       <Cart />
       <SortItems
         handleSorting={handleSorting}

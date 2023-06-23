@@ -13,9 +13,9 @@ const AboutModal = ({ open, close }) => {
           className="border-2 bg-white flex flex-col text-center p-4 rounded-lg max-w-[80vw]"
           ref={modalRef}
         >
-          <h2>About ShopNameHere</h2>
+          <h2>About KiwiMart</h2>
           <br />
-          <p>Shopnamehere is a project built by a team of 3.</p>
+          <p>KiwiMart is a project built by a team of 3.</p>
           <p>
             It is an online shopping site which includes an admin dashboard for
             CRUD operations on the store.
@@ -29,17 +29,38 @@ const AboutModal = ({ open, close }) => {
           <small>Username: admin</small>
           <small>Password: admin</small>
           <br />
+          <a
+            href="https://github.com/alux444/online-store"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Repository Link
+          </a>
           <hr />
           <h2>Contributors</h2>
-          <a href="https://github.com/alux444" target="_blank" rel="noreferrer">
-            alux444
-          </a>{" "}
-          <a href="https://github.com/ckim349" target="_blank" rel="noreferrer">
-            ckim349
-          </a>{" "}
-          <a href="https://github.com/eejl773" target="_blank" rel="noreferrer">
-            eejl773
-          </a>
+          <div className="flex align-center justify-center items-center gap-1">
+            <a
+              href="https://github.com/alux444"
+              target="_blank"
+              rel="noreferrer"
+            >
+              alux444
+            </a>{" "}
+            <a
+              href="https://github.com/ckim349"
+              target="_blank"
+              rel="noreferrer"
+            >
+              ckim349
+            </a>{" "}
+            <a
+              href="https://github.com/eejl773"
+              target="_blank"
+              rel="noreferrer"
+            >
+              eejl773
+            </a>
+          </div>
         </div>
       </div>
     </Modal>

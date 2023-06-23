@@ -40,6 +40,8 @@ const Header = () => {
       ) : (
         <p>Welcome to KiwiMart!</p>
       )}
+      <img src="" />
+      {/* HEADER BANNER HERE. */}
     </div>
   );
 };
