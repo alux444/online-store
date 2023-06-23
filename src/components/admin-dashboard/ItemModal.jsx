@@ -153,7 +153,7 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
       {!checkDelete ? (
         <div className="fixed inset-0 flex items-center justify-center">
           <div
-            className="bg-white rounded-lg p-6 w-[40vw] xl:w-[60vw] md:w-[80vw] max-h-[90vh] relative overflow-auto"
+            className="bg-white rounded-lg p-6 w-[40vw] xl:w-[60vw] md:w-[80vw] sm:w-[95vw] max-h-[90vh] relative overflow-auto"
             ref={modalRef}
           >
             <Button onClick={onClose} className="absolute top-2 right-2">
@@ -183,7 +183,7 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
                   </div>
 
                   <br />
-                  <div className="flex mt-3 align-center justify-center items-center gap-4">
+                  <div className="flex mt-3 align-center justify-center items-center gap-4 flex-wrap">
                     <div className="">
                       <span className="mr-1">Category:</span>
                       <select
@@ -224,14 +224,14 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
                   />
                 </div>
                 <br />
-                <div className="lg:flex justify-center gap-4 align-center items-center">
+                <div className="lg:flex flex-wrap justify-center gap-4 align-center items-center">
                   <div className="flex justify-center items-center align-center">
                     <span>Normal Price ($) </span>
                     <input
                       type="number"
                       placeholder="Price"
                       value={form.price}
-                      className="md:w-[15vw] lg:w-[10vw] w-[20%] ml-2"
+                      className="md:w-[17vw] lg:w-[10vw] w-[20%] ml-2"
                       onChange={handlePriceChange}
                     />
                   </div>
