@@ -163,26 +163,27 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
             <p>Date created: {date}</p>
             <br />
             <form onSubmit={onSubmit}>
-              <div className="flex justify-center align-center">
-                <label htmlFor="image-upload" className="relative">
-                  {getImage()}
-                  <div className="file-input-mask">
-                    <input
-                      id="image-upload"
-                      type="file"
-                      className="file-input"
-                      onChange={onChangeImage}
-                      accept=".jpg,.jpeg,.png"
-                    />
-                  </div>
-                </label>
-              </div>
-              <div className="md:flex mjustify-center align-center items-center">
+              <div>
+                <div className="flex justify-center align-center">
+                  <label htmlFor="image-upload" className="relative">
+                    {getImage()}
+                    <div className="file-input-mask">
+                      <input
+                        id="image-upload"
+                        type="file"
+                        className="file-input"
+                        onChange={onChangeImage}
+                        accept=".jpg,.jpeg,.png"
+                      />
+                    </div>
+                  </label>
+                </div>
+                <br />
                 <span className="mr-2">Category:</span>
                 <select
                   value={form.category}
                   onChange={handleCategoryChange}
-                  className="px-4 py-2 border mx-5 w-1/4 bg-white border-gray-300 rounded"
+                  className="px-4 py-2 border mx-5 lg:w-1/4 bg-white border-gray-300 rounded"
                 >
                   <option value="produce">Produce</option>
                   <option value="seafood">Seafood</option>
@@ -205,11 +206,10 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
               <br />
               <div>
                 <p>Description</p>
-                <input
-                  type="text"
+                <textarea
                   placeholder="Description"
                   value={form.description}
-                  className="w-full"
+                  className="w-full bg-white border border-gray-300 rounded px-3 py-1"
                   onChange={handleDescriptionChange}
                 />
               </div>
