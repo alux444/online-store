@@ -58,12 +58,12 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div>
+    <div className="flex align-center justify-center flex-col">
       <h1>Admin Dashboard</h1>
 
       <ItemSearch items={items} updateItems={updateItems} />
 
-      <div className="mt-5 w-[70vw]">
+      <div className="mt-5 w-[70vw] md:w-[90vw]">
         {filteredItems.length === 0 && (
           <div className="flex border-[1px] items-center px-4 py-2">
             <p>No results found.</p>

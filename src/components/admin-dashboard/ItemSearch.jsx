@@ -29,7 +29,6 @@ const ItemSearch = ({ items, updateItems }) => {
     updateItems(filteredItems);
   }, [items, search, categoryFilter, saleFilter, clearanceFilter]);
 
-
   const handleChange = (event) => {
     event.preventDefault();
     console.log("Search query:", search);
@@ -66,7 +65,7 @@ const ItemSearch = ({ items, updateItems }) => {
 
   return (
     <div>
-      <div className="flex justify-center">
+      <div className="flex justify-center flex-wrap">
         <div className="relative">
           <form onSubmit={handleChange} className="flex items-center">
             <input
@@ -83,7 +82,6 @@ const ItemSearch = ({ items, updateItems }) => {
               {searchButtonText}
             </button>
           </form>
-          
         </div>
         {noResults && addModalOpen && (
           <AddItemModal item={search} onClose={handleModalClose} />
@@ -92,43 +90,45 @@ const ItemSearch = ({ items, updateItems }) => {
       </div>
       <div className="mt-5 items-center">
         <p>Filter:</p>
-        <div className="flex justify-center items-center mt-2">
-          <input
-            type="checkbox"
-            checked={saleFilter}
-            onChange={handleSaleFilter}
-            className="mr-1 bg-white"
-          />
-          <label htmlFor="saleFilter" className="mr-4">
-            On Sale
-          </label>
-          <input
-            type="checkbox"
-            checked={clearanceFilter}
-            onChange={handleClearanceFilter}
-            className="mr-1"
-          />
-          <label htmlFor="clearanceFilter" className="mr-4">
-            On Clearance
-          </label>
-          <select
-            value={categoryFilter}
-            className="bg-white border w-41 border-gray-300 rounded px-3 py-1"
-            onChange={(event) => handleCategoryFilter(event.target.value)}
-          >
-            <option value="">All Departments</option>
-            <option value="bakery">Bakery</option>
-            <option value="chilled">Chilled</option>
-            <option value="deli">Deli</option>
-            <option value="frozen">Frozen</option>
-            <option value="grocery">Grocery</option>
-            <option value="liquor">Liquor</option>
-            <option value="produce">Produce</option>
-            <option value="seafood">Seafood</option>
-          </select>
-          <div className="ml-5">
-            <span>Results: {searchResults.length}</span>
+        <div className="flex justify-center items-center align-center mt-2 md:flex-col">
+          <div>
+            <input
+              type="checkbox"
+              checked={saleFilter}
+              onChange={handleSaleFilter}
+              className="mr-1 bg-white"
+            />
+            <label htmlFor="saleFilter" className="mr-4">
+              On Sale
+            </label>
+            <input
+              type="checkbox"
+              checked={clearanceFilter}
+              onChange={handleClearanceFilter}
+              className="mr-1"
+            />
+            <label htmlFor="clearanceFilter" className="mr-4">
+              On Clearance
+            </label>
           </div>
+          <div className="flex gap-2 justify-center">
+            <select
+              value={categoryFilter}
+              className="bg-white border w-41 border-gray-300 rounded px-3 py-1"
+              onChange={(event) => handleCategoryFilter(event.target.value)}
+            >
+              <option value="">All Departments</option>
+              <option value="bakery">Bakery</option>
+              <option value="chilled">Chilled</option>
+              <option value="deli">Deli</option>
+              <option value="frozen">Frozen</option>
+              <option value="grocery">Grocery</option>
+              <option value="liquor">Liquor</option>
+              <option value="produce">Produce</option>
+              <option value="seafood">Seafood</option>
+            </select>
+          </div>
+          <span>Results: {searchResults.length}</span>
         </div>
       </div>
     </div>
