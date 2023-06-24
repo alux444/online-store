@@ -36,17 +36,16 @@ const AdminDashboard = () => {
       let updatedItems;
       if (updatedItem === null) {
         updatedItems = prevItems.filter((item) => item.id !== modalItem.id);
-      } else if (prevItems.some((item) => item.id === updatedItem.id)) {
+      } else {
         updatedItems = prevItems.map((item) =>
           item.id === updatedItem.id ? updatedItem : item
         );
-      } else {
-        updatedItems = [...prevItems, updatedItem];
       }
-      setItems(updatedItems);
       setFilteredItems(updatedItems);
-      return updatedItems.map((item) => ({ ...item }));
+      return updatedItems;
     });
+    setModalItem(null);
+    setModalOpen(false);
   };
 
   const handleOpenModal = (item) => {
@@ -58,7 +57,6 @@ const AdminDashboard = () => {
   const handleModalClose = () => {
     setModalItem(null);
     setModalOpen(false);
-    setAddModalOpen(false);
     console.log("Modal closed.");
   };
 
@@ -68,17 +66,17 @@ const AdminDashboard = () => {
       key={`${item.id}-${Date.now()}`} // Generate a unique key using item ID and timestamp
       onOpenModal={() => handleOpenModal(item)}
     />
-  ))
+  ));
 
   return (
     <div className="flex align-center justify-center flex-col">
       <h1>Admin Dashboard</h1>
 
-      <ItemSearch 
-        items={items} 
-        updateItems={updateItems} 
-        setAddModalOpen={setAddModalOpen} 
-        setItem={setSearch} 
+      <ItemSearch
+        items={items}
+        updateItems={updateItems}
+        setAddModalOpen={setAddModalOpen}
+        setItem={setSearch}
       />
 
       <div className="mt-5 w-[70vw] md:w-[90vw]">
@@ -98,10 +96,7 @@ const AdminDashboard = () => {
         />
       )}
       {addModalOpen && (
-        <AddItemModal 
-          item={search} 
-          onClose={handleModalClose} 
-        />
+        <AddItemModal item={search} onClose={handleModalClose} />
       )}
     </div>
   );

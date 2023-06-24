@@ -128,7 +128,11 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
   const getImage = () => {
     let image = item.imageUrl === "" ? noImage : item.imageUrl;
     return (
-      <div className="" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+      <div
+        className="relative"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
         <img
           src={image}
           className={`max-w-[50vw] max-h-[40vh] border rounded-lg ${
@@ -136,7 +140,7 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
           }`}
         />
         {isImageFocused && (
-          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white text-sm font-bold opacity-0 transition-opacity duration-300 cursor-pointer">
+          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white text-sm font-bold opacity-0 transition-opacity duration-300 pointer-events-none">
             Edit image
           </div>
         )}
@@ -148,8 +152,10 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
     <Modal open={true} onClose={onClose}>
       {!checkDelete ? (
         <div className="fixed inset-0 flex items-center justify-center">
-          <div className="bg-white rounded-lg p-6 sm:max-w-[80vw] lg:w-1/2 relative"
-            ref={modalRef}>
+          <div
+            className="bg-white rounded-lg p-6 w-[40vw] xl:w-[60vw] md:w-[80vw] sm:w-[95vw] max-h-[90vh] relative overflow-auto"
+            ref={modalRef}
+          >
             <Button onClick={onClose} className="absolute top-2 right-2">
               X
             </Button>
