@@ -3,6 +3,7 @@ import LoginModal from "./LoginModal";
 import AboutModal from "./AboutModal";
 import { UserContext } from "../../App";
 import logo from "../../images/kiwimartlogo.png";
+import banner from "../../images/banner.png";
 
 const Header = () => {
   const [openAbout, setOpenAbout] = useState(false);
@@ -44,13 +45,6 @@ const Header = () => {
           <AboutModal open={openAbout} close={closeAbout} />
         </div>
       </div>
-      {user.loggedIn ? (
-        <p>Welcome, {user.email}</p>
-      ) : (
-        <p>Welcome to KiwiMart!</p>
-      )}
-      <img src="" />
-      {/* HEADER BANNER HERE. */}
     </div>
   );
 };

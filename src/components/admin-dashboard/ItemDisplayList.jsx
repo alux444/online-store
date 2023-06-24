@@ -13,13 +13,14 @@ const ItemDisplayList = ({ item, onOpenModal }) => {
   };
 
   if (!item) {
-    return null; 
+    return null;
   }
 
   return (
-    <div className="flex border-[1px] items-center px-4 py-2 hover:bg-gray-100 cursor-pointer"
-          onClick={() => handleItemClick(item)}
-      >
+    <div
+      className="flex border-[1px] bg-white items-center px-4 py-2 hover:bg-gray-100 cursor-pointer"
+      onClick={() => handleItemClick(item)}
+    >
       <div className="mr-4 text-left w-1/2">
         <p>{item.name}</p>
       </div>
@@ -31,7 +32,11 @@ const ItemDisplayList = ({ item, onOpenModal }) => {
       </div>
       <div className="text-left w-1/5">
         <p>
-        {item.clearance ? `CLEARANCE: $${item.price - item.discount}` : item.onSale ? `SALE: $${item.price - item.discount}` : "No Sale."}{" "}
+          {item.clearance
+            ? `CLEARANCE: $${item.price - item.discount}`
+            : item.onSale
+            ? `SALE: $${item.price - item.discount}`
+            : "No Sale."}{" "}
           <br />
           Original price: ${item.price}
         </p>

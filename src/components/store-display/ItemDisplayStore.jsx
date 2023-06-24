@@ -49,7 +49,7 @@ const ItemDisplayStore = ({ item }) => {
 
         <br />
       </div>
-      <button className="mx-2 altbutton" onClick={() => addOneToCart()}>
+      <button className="mx-2 altbutton text-sm" onClick={() => addOneToCart()}>
         Add to Cart
       </button>
       <button className="mx-2 altbutton" onClick={() => setOpen(true)}>
