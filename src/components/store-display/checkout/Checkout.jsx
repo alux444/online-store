@@ -68,7 +68,7 @@ const Checkout = ({ setShowCheckout }) => {
           </div>
           <button>Submit</button>
         </form>
-        <button onClick={() => setShowCheckout(false)}>Return to cart</button>
+        <button className="mt-2" onClick={() => setShowCheckout(false)}>Return to cart</button>
       </div>
     </div>
   );
