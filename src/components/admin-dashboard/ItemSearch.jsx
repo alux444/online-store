@@ -1,22 +1,17 @@
 import React, { useState, useEffect } from "react";
-import ItemModal from "./ItemModal";
-import AddItemModal from "./AddItemModal";
-import ItemDisplayList from "./ItemDisplayList";
 
-const ItemSearch = ({ items, updateItems }) => {
+const ItemSearch = ({ items, updateItems, setAddModalOpen, setItem }) => {
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [noResults, setNoResults] = useState(false);
-  const [modalItem, setModalItem] = useState(null);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [addModalOpen, setAddModalOpen] = useState(false);
   const [categoryFilter, setCategoryFilter] = useState("");
   const [saleFilter, setSaleFilter] = useState(false);
   const [clearanceFilter, setClearanceFilter] = useState(false);
 
   useEffect(() => {
     const filteredItems = items.filter((item) => {
-      const nameMatch = item.name.toLowerCase().includes(search.toLowerCase());
+      const nameMatch =
+        item.name && item.name.toLowerCase().includes(search.toLowerCase());
       const categoryMatch =
         categoryFilter === "" || item.category === categoryFilter;
       const saleMatch = !saleFilter || item.onSale;
@@ -34,19 +29,8 @@ const ItemSearch = ({ items, updateItems }) => {
     console.log("Search query:", search);
     if (noResults) {
       setAddModalOpen(true);
+      setItem(search);
     }
-  };
-
-  const handleItemClick = (item) => {
-    setModalItem(item);
-    console.log("Search query:", item.name);
-  };
-
-  const handleModalClose = () => {
-    setModalItem(null);
-    setModalOpen(false);
-    setAddModalOpen(false);
-    console.log("Modal closed.");
   };
 
   const handleCategoryFilter = (category) => {
@@ -83,9 +67,6 @@ const ItemSearch = ({ items, updateItems }) => {
             </button>
           </form>
         </div>
-        {noResults && addModalOpen && (
-          <AddItemModal item={search} onClose={handleModalClose} />
-        )}
         <br />
       </div>
       <div className="mt-5 items-center">

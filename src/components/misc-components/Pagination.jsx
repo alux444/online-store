@@ -18,7 +18,7 @@ const Pagination = ({
             <button
               onClick={() => paginate(number)}
               style={{
-                borderColor: currentPage === number ? "red" : "",
+                borderColor: currentPage === number ? "blue" : "",
                 width: "60px",
               }}
             >
