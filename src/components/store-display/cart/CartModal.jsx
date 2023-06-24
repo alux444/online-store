@@ -52,7 +52,7 @@ const CartModal = ({ open, close, total }) => {
                 <form className="flex flex-col items-center space-y-4 mt-3">
                   <label>
                     <input
-                      className="w-96 rounded-lg"
+                      className="w-96 rounded-lg sm:w-80"
                       type="text"
                       value={cardNumber}
                       onChange={handleCardNumber}
@@ -61,7 +61,7 @@ const CartModal = ({ open, close, total }) => {
                   </label>
                   <label>
                     <input
-                      className="w-96 rounded-lg"
+                      className="w-96 rounded-lg sm:w-80"
                       type="text"
                       value={name}
                       onChange={handleName}
@@ -71,7 +71,7 @@ const CartModal = ({ open, close, total }) => {
                   <div>
                     <label>
                       <input
-                        className="w-58 rounded-lg mr-2"
+                        className="w-58 rounded-lg mr-2 sm:w-48"
                         type="text"
                         value={expirationDate}
                         onChange={handleExpirationDate}
@@ -80,7 +80,7 @@ const CartModal = ({ open, close, total }) => {
                     </label>
                     <label>
                       <input
-                        className="w-36 rounded-lg ml-1"
+                        className="w-36 rounded-lg ml-1 sm:w-28"
                         type="text"
                         value={securityCode}
                         onChange={handleSecurityCode}
