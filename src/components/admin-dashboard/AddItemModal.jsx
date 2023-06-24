@@ -4,7 +4,7 @@ import createNewItem from "../../utils/createNewItem";
 import useOutsideClick from "../../utils/useOutsideClose";
 
 
-const AddItemModal = ({ item, onClose }) => {
+const AddItemModal = ({ item, onClose, itemUpdate }) => {
   const modalRef = useRef(null);
   useOutsideClick(modalRef, onClose);
 
@@ -16,6 +16,8 @@ const AddItemModal = ({ item, onClose }) => {
 
   const [form, setForm] = useState({
     name: toTitleCase(item),
+    category: "produce",
+    stock: 0,
     description: "",
     price: "",
     discount: "",
@@ -57,7 +59,8 @@ const AddItemModal = ({ item, onClose }) => {
   const onSubmit = async (e) => {
     e.preventDefault();
     console.log(form, file);
-    console.log(await createNewItem(form, file));
+    const newItem = await createNewItem(form, file, itemUpdate);
+    console.log(newItem);
     onClose();
   };
 
@@ -96,6 +99,7 @@ const AddItemModal = ({ item, onClose }) => {
                       <select
                         value={form.category}
                         onChange={handleCategoryChange}
+                        placeholder="Select..."
                         className="px-4 py-2 border md:w-[30vw] bg-white border-gray-300 rounded"
                       >
                         <option value="produce">Produce</option>

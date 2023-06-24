@@ -36,16 +36,17 @@ const AdminDashboard = () => {
       let updatedItems;
       if (updatedItem === null) {
         updatedItems = prevItems.filter((item) => item.id !== modalItem.id);
-      } else {
+      } else if (prevItems.some((item) => item.id === updatedItem.id)) {
         updatedItems = prevItems.map((item) =>
           item.id === updatedItem.id ? updatedItem : item
         );
+      } else {
+        updatedItems = [...prevItems, updatedItem];
       }
+      setItems(updatedItems);
       setFilteredItems(updatedItems);
-      return updatedItems;
+      return updatedItems.map((item) => ({ ...item }));
     });
-    setModalItem(null);
-    setModalOpen(false);
   };
 
   const handleOpenModal = (item) => {
@@ -57,6 +58,7 @@ const AdminDashboard = () => {
   const handleModalClose = () => {
     setModalItem(null);
     setModalOpen(false);
+    setAddModalOpen(false);
     console.log("Modal closed.");
   };
 
@@ -96,7 +98,10 @@ const AdminDashboard = () => {
         />
       )}
       {addModalOpen && (
-        <AddItemModal item={search} onClose={handleModalClose} />
+        <AddItemModal 
+          item={search} 
+          onClose={handleModalClose} 
+        />
       )}
     </div>
   );

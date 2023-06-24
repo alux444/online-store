@@ -10,7 +10,8 @@ const ItemSearch = ({ items, updateItems, setAddModalOpen, setItem }) => {
 
   useEffect(() => {
     const filteredItems = items.filter((item) => {
-      const nameMatch = item.name.toLowerCase().includes(search.toLowerCase());
+      const nameMatch =
+        item.name && item.name.toLowerCase().includes(search.toLowerCase());
       const categoryMatch =
         categoryFilter === "" || item.category === categoryFilter;
       const saleMatch = !saleFilter || item.onSale;

@@ -6,10 +6,15 @@ const ItemDisplayList = ({ item, onOpenModal }) => {
     console.log("Search query:", item.name);
   };
   const toTitleCase = (str) => {
+    if (!str) return "";
     return str.replace(/\w\S*/g, (txt) => {
       return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
     });
   };
+
+  if (!item) {
+    return null; 
+  }
 
   return (
     <div className="flex border-[1px] items-center px-4 py-2 hover:bg-gray-100 cursor-pointer"
