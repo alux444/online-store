@@ -20,9 +20,9 @@ const Header = () => {
   return (
     <div className="block">
       <div className="flex sm:flex-col align-center items-center justify-between text-center m-5 p-5 w-[80vw]">
-        <div className="flex">
-          <h1 className="md:text-2xl lg:text-4xl title">KiwiMart</h1>
-          <img src={logo} className="w-28 ml-5"></img>
+        <div className="flex align-center justify-center items-center">
+          <h1 className="title">KiwiMart</h1>
+          <img src={logo} className="w-[10vw] ml-5"></img>
         </div>
         <div className="flex items-center justify-end gap-1">
           <button className="altbutton" onClick={() => setOpenAbout(true)}>

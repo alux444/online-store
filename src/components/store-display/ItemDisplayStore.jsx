@@ -18,7 +18,7 @@ const ItemDisplayStore = ({ item }) => {
   };
 
   return (
-    <div className="block w-[20vw] lg:w-[28vw] md:[44vw] sm:w-[70vw] border-[1px] border-blue-500 justify-center align-center p-3 bg-white">
+    <div className="block w-[20vw] lg:w-[28vw] md:[44vw] sm:w-[70vw] border-[1px] border-blue-500 justify-center align-center p-3 bg-blue-100">
       {item.clearance ? (
         <h3 className="font-bold headerbutton">
           <span>Clearance Item!</span>
@@ -33,7 +33,7 @@ const ItemDisplayStore = ({ item }) => {
       <div className="flex justify-center align-center mt-3">
         <img
           src={item.imageUrl == "" ? image : item.imageUrl}
-          className="max-w-[90%] border-[1px] border-blue-600"
+          className="max-w-[90%] border-[1px] border-blue-600 bg-blue-50"
         />
       </div>
       <div className="flex gap-2 align-center flex-wrap justify-center items-center">
