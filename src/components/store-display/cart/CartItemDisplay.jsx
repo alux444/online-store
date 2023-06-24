@@ -26,9 +26,15 @@ const CartItemDisplay = ({ item }) => {
           {item.price * item.amount}
         </p>
         <div className="flex gap-1 align-center justify-center">
-          <button onClick={removeAll}>x</button>
-          <button onClick={addOneExtra}>+</button>
-          <button onClick={removeOne}>-</button>
+          <button className="altbutton" onClick={removeAll}>
+            x
+          </button>
+          <button className="altbutton" onClick={addOneExtra}>
+            +
+          </button>
+          <button className="altbutton" onClick={removeOne}>
+            -
+          </button>
         </div>
       </div>
     </div>

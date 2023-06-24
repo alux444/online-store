@@ -3,6 +3,8 @@ import { Modal } from "@mui/material";
 import useOutsideClick from "../../utils/useOutsideClose";
 import useEditCart from "../../utils/useEditCart";
 import image from "../../utils/noImage.svg";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
 
 const ItemDisplayModal = ({ open, close, item }) => {
   const modalRef = useRef(null);
@@ -33,29 +35,44 @@ const ItemDisplayModal = ({ open, close, item }) => {
     <Modal open={open}>
       <div className="w-screen h-screen flex align-center justify-center text-center items-center">
         <div
-          className="border-2 border-blue border-solid h-[min-content] bg-white p-5 rounded-lg max-w-[75vw]"
+          className="border-2 border-blue border-solid h-[min-content] bg-blue-50 p-5 rounded-[40px] max-w-[75vw] flex align-center justify-center text-center items-center flex-col"
           ref={modalRef}
         >
-          <h2>{item.name}</h2>
+          <h2 className="title">{item.name}</h2>
           <div className="align-center flex flex-col justify-center items-center">
             <img
               src={item.imageUrl == "" ? image : item.imageUrl}
               className="max-h-[50vh] max-w-[50vw]"
             />
           </div>
-          <h2 className="text-lg">
+          <h2 className="text-lg price mt-3">
             ${item.onSale ? salePrice : item.price}/ea
           </h2>
           <br />
-          <p>{item.description}</p>
+          <div className="w-[90%] flex flex-wrap justify-center align-center items-center">
+            <p>{item.description}</p>
+          </div>
           <br />
-          <p>Add: {count} to Cart</p>
-          <button onClick={incrementCount}>+</button>
-          <button onClick={decrementCount}>-</button>
+          <div className="flex gap-3 items-center justify-center">
+            <button
+              className="altbutton rounded-[50%]"
+              onClick={decrementCount}
+            >
+              <RemoveIcon />
+            </button>
+            <p className="price">{count}</p>
+            <button className="altbutton" onClick={incrementCount}>
+              <AddIcon />
+            </button>
+          </div>
           <br />
-          <small>This will cost : ${overallCost}</small>
+          <h4>
+            {count} {item.name} : ${overallCost}
+          </h4>
           <br />
-          <button onClick={addCountToCart}>Add to Cart!</button>
+          <button className="altbutton" onClick={addCountToCart}>
+            Add to Cart!
+          </button>
         </div>
       </div>
     </Modal>
