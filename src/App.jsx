@@ -4,7 +4,6 @@ import AdminDashboard from "./components/admin-dashboard/AdminDashboard";
 import StoreDisplay from "./components/store-display/StoreDisplay";
 import Header from "./components/misc-components/Header";
 import Footer from "./components/misc-components/Footer";
-import Cart from "./components/store-display/cart/Cart";
 
 export const AdminContext = createContext();
 export const UserContext = createContext();
@@ -16,7 +15,7 @@ function App() {
   const [user, setUser] = useState({ loggedIn: false, email: "" });
 
   return (
-    <div className="flex flex-col align-center items-center justify-center">
+    <div className="flex flex-col items-center justify-center">
       <AdminContext.Provider value={{ admin, setAdmin }}>
         <CartContext.Provider value={{ cart, setCart }}>
           <UserContext.Provider value={{ user, setUser }}>

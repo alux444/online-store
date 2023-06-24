@@ -68,3 +68,81 @@ input {
     font-size: small;
   }
 }
+
+.headerbutton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  position: relative;
+  padding: 0 20px;
+  font-size: 18px;
+  text-transform: uppercase;
+  color: white;
+  border: 0;
+  box-shadow: hsl(210deg 87% 36%) 0px 7px 0px 0px;
+  background-color: hsl(210deg 100% 44%);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: 31ms cubic-bezier(0.5, 0.7, 0.4, 1);
+}
+
+.salebutton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  position: relative;
+  padding: 0 20px;
+  font-size: 18px;
+  text-transform: uppercase;
+  color: white;
+  border: 0;
+  box-shadow: hsl(257, 39%, 37%) 0px 7px 0px 0px;
+  background-color: hsl(264, 100%, 44%);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: 31ms cubic-bezier(0.5, 0.7, 0.4, 1);
+}
+
+.dealbutton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  position: relative;
+  padding: 0 20px;
+  font-size: 18px;
+  text-transform: uppercase;
+  color: white;
+  border: 0;
+  box-shadow: hsl(210, 77%, 59%) 0px 7px 0px 0px;
+  background-color: hsl(208, 73%, 72%);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: 31ms cubic-bezier(0.5, 0.7, 0.4, 1);
+}
+
+.altbutton {
+  border: 1px solid #315cfd;
+  border-radius: 10px;
+  transition: all 0.3s;
+  cursor: pointer;
+  background: white;
+  font-size: 1rem;
+  font-family: "Montserrat", sans-serif;
+}
+
+.altbutton:hover {
+  background: #315cfd;
+  color: white;
+}
+
+.title {
+  font-size: 70px;
+  font-weight: 600;
+  background-image: linear-gradient(to left, #4816d2, #5382e1);
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+}

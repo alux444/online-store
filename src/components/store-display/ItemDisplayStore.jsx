@@ -18,18 +18,22 @@ const ItemDisplayStore = ({ item }) => {
   };
 
   return (
-    <div className="block w-[20vw] lg:w-[28vw] md:[44vw] sm:w-[70vw] border-[1px] justify-center align-center p-3">
+    <div className="block w-[20vw] lg:w-[28vw] md:[44vw] sm:w-[70vw] border-[1px] border-blue-500 justify-center align-center p-3 bg-white">
       {item.clearance ? (
-        <h3 className="font-bold">Clearance Item!</h3>
+        <h3 className="font-bold headerbutton">
+          <span>Clearance Item!</span>
+        </h3>
       ) : item.onSale ? (
-        <h3 className="font-bold">On Special! Save ${item.discount}</h3>
+        <h3 className="font-bold salebutton">
+          On Special! Save ${item.discount}
+        </h3>
       ) : (
-        <h3 className="font-bold">Great Deal!</h3>
+        <h3 className="font-bold dealbutton">Great Deal!</h3>
       )}
-      <div className="flex justify-center align-center">
+      <div className="flex justify-center align-center mt-3">
         <img
           src={item.imageUrl == "" ? image : item.imageUrl}
-          className="max-w-[90%] max-h-10vh"
+          className="max-w-[90%] border-[1px] border-blue-600"
         />
       </div>
       <div>
@@ -45,10 +49,10 @@ const ItemDisplayStore = ({ item }) => {
 
         <br />
       </div>
-      <button className="mx-2" onClick={() => addOneToCart()}>
+      <button className="mx-2 altbutton" onClick={() => addOneToCart()}>
         Add to Cart
       </button>
-      <button className="mx-2" onClick={() => setOpen(true)}>
+      <button className="mx-2 altbutton" onClick={() => setOpen(true)}>
         Show More
       </button>
       <ItemDisplayModal open={open} close={closeModal} item={item} />

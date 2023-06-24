@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import LoginModal from "./LoginModal";
 import AboutModal from "./AboutModal";
 import { UserContext } from "../../App";
-import logo from "../../images/kiwimartlogo.png"
+import logo from "../../images/kiwimartlogo.png";
 
 const Header = () => {
   const [openAbout, setOpenAbout] = useState(false);
@@ -21,17 +21,24 @@ const Header = () => {
     <div className="block">
       <div className="flex sm:flex-col align-center items-center justify-between text-center m-5 p-5 w-[80vw]">
         <div className="flex">
-          <h1 className="md:text-2xl lg:text-4xl">KiwiMart</h1>
+          <h1 className="md:text-2xl lg:text-4xl title">KiwiMart</h1>
           <img src={logo} className="w-28 ml-5"></img>
         </div>
         <div className="flex items-center justify-end gap-1">
-          <button onClick={() => setOpenAbout(true)}>About</button>
+          <button className="altbutton" onClick={() => setOpenAbout(true)}>
+            About
+          </button>
           {user.loggedIn ? (
-            <button onClick={() => setUser({ loggedIn: false, email: "" })}>
+            <button
+              className="altbutton"
+              onClick={() => setUser({ loggedIn: false, email: "" })}
+            >
               Sign Out
             </button>
           ) : (
-            <button onClick={() => setOpenLogin(true)}>Login</button>
+            <button className="altbutton" onClick={() => setOpenLogin(true)}>
+              Login
+            </button>
           )}
           <LoginModal open={openLogin} close={closeLogin} />
           <AboutModal open={openAbout} close={closeAbout} />

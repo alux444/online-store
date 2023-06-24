@@ -37,10 +37,10 @@ const ItemDisplayModal = ({ open, close, item }) => {
           ref={modalRef}
         >
           <h2>{item.name}</h2>
-          <div className="align-center flex flex-col justify-center">
+          <div className="align-center flex flex-col justify-center items-center">
             <img
               src={item.imageUrl == "" ? image : item.imageUrl}
-              className="max-h-[50vh]"
+              className="max-h-[50vh] max-w-[50vw]"
             />
           </div>
           <h2 className="text-lg">
