@@ -1,8 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { Modal, Button } from "@mui/material";
 import createNewItem from "../../utils/createNewItem";
+import useOutsideClick from "../../utils/useOutsideClose";
+
 
 const AddItemModal = ({ item, onClose }) => {
+  const modalRef = useRef(null);
+  useOutsideClick(modalRef, onClose);
+
   const toTitleCase = (str) => {
     return str.replace(/\w\S*/g, (txt) => {
       return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
@@ -51,7 +56,7 @@ const AddItemModal = ({ item, onClose }) => {
   return (
     <Modal open={true} onClose={onClose}>
       <div className="fixed inset-0 flex items-center justify-center">
-        <div className="bg-white rounded-lg p-6 w-1/2 relative">
+        <div className="bg-white rounded-lg p-6 w-1/2 relative" ref={modalRef}>
           <Button onClick={onClose} className="absolute top-2 right-2">
             X
           </Button>
