@@ -3,7 +3,7 @@ import React, { useState, useRef, useContext } from "react";
 import useOutsideClick from "../../../utils/useOutsideClose";
 import { CartContext } from "../../../App";
 import CartItemDisplay from "./CartItemDisplay";
-import CheckoutModal from "../checkout/CheckoutModal";
+import Checkout from "../checkout/Checkout";
 
 const CartModal = ({ open, close, total }) => {
   const { cart, setCart } = useContext(CartContext);
@@ -25,7 +25,7 @@ const CartModal = ({ open, close, total }) => {
           ref={modalRef}
         >
           {showCheckout ? (
-            <CheckoutModal setShowCheckout={setShowCheckout} />
+            <Checkout setShowCheckout={setShowCheckout} />
           ) : (
             <div>
               <button onClick={() => setCart([])}>Clear Cart?</button>

@@ -1,7 +1,6 @@
-import React, { useRef, useState } from "react";
-import useOutsideClick from "../../../utils/useOutsideClose";
+import React, { useState } from "react";
 
-const CheckoutModal = ({ setShowCheckout }) => {
+const Checkout = ({ setShowCheckout }) => {
   const [cardNumber, setCardNumber] = useState("");
   const [name, setName] = useState("");
   const [expirationDate, setExpirationDate] = useState("");
@@ -22,10 +21,6 @@ const CheckoutModal = ({ setShowCheckout }) => {
   const handleSecurityCode = (e) => {
     setSecurityCode(e.target.value);
   };
-
-  const modalRef = useRef(null);
-
-  useOutsideClick(modalRef, close);
 
   return (
     <div className="flex align-center items-center justify-center">
@@ -79,4 +74,4 @@ const CheckoutModal = ({ setShowCheckout }) => {
   );
 };
 
-export default CheckoutModal;
+export default Checkout;
