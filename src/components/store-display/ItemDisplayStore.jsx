@@ -36,15 +36,15 @@ const ItemDisplayStore = ({ item }) => {
           className="max-w-[90%] border-[1px] border-blue-600"
         />
       </div>
-      <div>
-        <p>{item.name}</p>
-        <br />
+      <div className="flex gap-2 align-center flex-wrap justify-center items-center">
+        <h2>{item.name}</h2>
         {item.onSale ? (
           <p>
-            <span className="font-bold">${realPrice}</span> <s>${item.price}</s>
+            <span className="font-bold price">${realPrice}</span>{" "}
+            <s>${item.price}</s>
           </p>
         ) : (
-          <p>${item.price}</p>
+          <p className="price">${item.price}</p>
         )}
 
         <br />
