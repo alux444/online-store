@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import LoginModal from "./LoginModal";
 import AboutModal from "./AboutModal";
 import { UserContext } from "../../App";
+import logo from "../../images/kiwimartlogo.png"
 
 const Header = () => {
   const [openAbout, setOpenAbout] = useState(false);
@@ -19,8 +20,9 @@ const Header = () => {
   return (
     <div className="block">
       <div className="flex sm:flex-col align-center items-center justify-between text-center m-5 p-5 w-[80vw]">
-        <div className="flex items-center">
+        <div className="flex">
           <h1 className="md:text-2xl lg:text-4xl">KiwiMart</h1>
+          <img src={logo} className="w-28 ml-5"></img>
         </div>
         <div className="flex items-center justify-end gap-1">
           <button onClick={() => setOpenAbout(true)}>About</button>
