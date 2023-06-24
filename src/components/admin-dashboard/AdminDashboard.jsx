@@ -3,12 +3,15 @@ import ItemSearch from "./ItemSearch";
 import ItemDisplayList from "./ItemDisplayList";
 import getAllItems from "../../utils/getAllItems";
 import ItemModal from "./ItemModal";
+import AddItemModal from "./AddItemModal";
 
 const AdminDashboard = () => {
   const [items, setItems] = useState([]);
+  const [search, setSearch] = useState("");
   const [filteredItems, setFilteredItems] = useState([]);
   const [modalItem, setModalItem] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
+  const [addModalOpen, setAddModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -69,7 +72,12 @@ const AdminDashboard = () => {
     <div className="flex align-center justify-center flex-col">
       <h1>Admin Dashboard</h1>
 
-      <ItemSearch items={items} updateItems={updateItems} />
+      <ItemSearch 
+        items={items} 
+        updateItems={updateItems} 
+        setAddModalOpen={setAddModalOpen} 
+        setItem={setSearch} 
+      />
 
       <div className="mt-5 w-[70vw] md:w-[90vw]">
         {filteredItems.length === 0 && (
@@ -86,6 +94,9 @@ const AdminDashboard = () => {
           onClose={handleModalClose}
           itemUpdate={itemUpdate}
         />
+      )}
+      {addModalOpen && (
+        <AddItemModal item={search} onClose={handleModalClose} />
       )}
     </div>
   );
