@@ -57,6 +57,7 @@ const AdminDashboard = () => {
   const handleModalClose = () => {
     setModalItem(null);
     setModalOpen(false);
+    setAddModalOpen(false);
     console.log("Modal closed.");
   };
 
