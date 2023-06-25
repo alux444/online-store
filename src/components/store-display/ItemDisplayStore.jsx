@@ -18,7 +18,7 @@ const ItemDisplayStore = ({ item }) => {
   };
 
   return (
-    <div className="block w-[20vw] lg:w-[28vw] md:[44vw] sm:w-[70vw] border-[1px] border-blue-500 justify-center align-center p-3 bg-blue-100">
+    <div className="block w-[20vw] lg:w-[28vw] md:[44vw] sm:w-[70vw] border-[1px] border-blue-500 justify-center align-center p-3 bg-blue-100 shadow-xl">
       {item.clearance ? (
         <h3 className="font-bold headerbutton">
           <span>Clearance Item!</span>
@@ -49,7 +49,7 @@ const ItemDisplayStore = ({ item }) => {
 
         <br />
       </div>
-      <button className="mx-2 altbutton text-sm" onClick={() => addOneToCart()}>
+      <button className="mx-2 altbutton " onClick={() => addOneToCart()}>
         Add to Cart
       </button>
       <button className="mx-2 altbutton" onClick={() => setOpen(true)}>

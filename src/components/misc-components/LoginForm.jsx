@@ -63,7 +63,9 @@ const LoginForm = ({ userLogin, close }) => {
           value={password}
           onChange={handlePasswodChange}
         />
-        <button type="submit">Submit</button>
+        <button className="altbutton" type="submit">
+          Submit
+        </button>
         <small>{message}</small>
       </form>
     </div>

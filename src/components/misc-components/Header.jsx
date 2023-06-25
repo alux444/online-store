@@ -26,18 +26,18 @@ const Header = () => {
           <img src={logo} className="w-[10vw] ml-5"></img>
         </div>
         <div className="flex items-center justify-end gap-1">
-          <button className="altbutton" onClick={() => setOpenAbout(true)}>
+          <button className="lgbutton" onClick={() => setOpenAbout(true)}>
             About
           </button>
           {user.loggedIn ? (
             <button
-              className="altbutton"
+              className="lgbutton"
               onClick={() => setUser({ loggedIn: false, email: "" })}
             >
               Sign Out
             </button>
           ) : (
-            <button className="altbutton" onClick={() => setOpenLogin(true)}>
+            <button className="lgbutton" onClick={() => setOpenLogin(true)}>
               Login
             </button>
           )}

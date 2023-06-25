@@ -26,7 +26,10 @@ const LoginModal = ({ open, close }) => {
                 <div>
                   <p className="text-blue">Sign Up</p>
                   <SignUpForm close={close} />
-                  <button onClick={() => setOpenSignUp(false)}>
+                  <button
+                    className="altbutton"
+                    onClick={() => setOpenSignUp(false)}
+                  >
                     Return to Login
                   </button>
                 </div>
@@ -35,9 +38,14 @@ const LoginModal = ({ open, close }) => {
                   <p>User Login</p>
                   <LoginForm userLogin={loginForUser} close={close} />
                   <div className="flex flex-col gap-1 align-center items-center justify-center">
-                    <button onClick={() => setOpenSignUp(true)}>Sign Up</button>
                     <button
-                      className="text-xs"
+                      className="altbutton"
+                      onClick={() => setOpenSignUp(true)}
+                    >
+                      Sign Up
+                    </button>
+                    <button
+                      className="text-xs altbutton"
                       onClick={() => setLoginForUser(false)}
                     >
                       Admin Login
@@ -51,7 +59,7 @@ const LoginModal = ({ open, close }) => {
                 <LoginForm userLogin={loginForUser} close={close} />
                 <button
                   onClick={() => setLoginForUser(true)}
-                  className="text-xs"
+                  className="text-xs altbutton"
                 >
                   User Login
                 </button>

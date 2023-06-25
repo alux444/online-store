@@ -77,7 +77,9 @@ const SignUpForm = ({ close }) => {
           onChange={handleConfirmChange}
           placeholder="Confirm Password"
         />
-        <button type="submit">Submit</button>
+        <button className="altbutton" type="submit">
+          Submit
+        </button>
         {message}
       </form>
     </div>
