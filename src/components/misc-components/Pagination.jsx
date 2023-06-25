@@ -12,13 +12,14 @@ const Pagination = ({
 
   return (
     <div className="mt-3">
-      <ul className="flex align-center justify-center items-center flex-wrap">
+      <ul className="flex align-center justify-center items-center flex-wrap gap-1 ">
         {pageNumbers.map((number) => (
           <li key={number}>
             <button
+              className="altbutton"
               onClick={() => paginate(number)}
               style={{
-                borderColor: currentPage === number ? "blue" : "",
+                borderWidth: currentPage === number ? "3px" : "",
                 width: "60px",
               }}
             >

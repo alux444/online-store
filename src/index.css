@@ -82,9 +82,9 @@ input {
   border: 0;
   box-shadow: hsl(210deg 87% 36%) 0px 7px 0px 0px;
   background-color: hsl(210deg 100% 44%);
-  border-radius: 12px;
+  border-radius: 5px;
   overflow: hidden;
-  transition: 31ms cubic-bezier(0.5, 0.7, 0.4, 1);
+  transition: transform 0.5s ease-in-out;
 }
 
 .salebutton {
@@ -100,9 +100,9 @@ input {
   border: 0;
   box-shadow: hsl(257, 39%, 37%) 0px 7px 0px 0px;
   background-color: hsl(264, 100%, 44%);
-  border-radius: 12px;
+  border-radius: 5px;
   overflow: hidden;
-  transition: 31ms cubic-bezier(0.5, 0.7, 0.4, 1);
+  transition: transform 0.5s ease-in-out;
 }
 
 .dealbutton {
@@ -118,33 +118,66 @@ input {
   border: 0;
   box-shadow: hsl(210, 77%, 59%) 0px 7px 0px 0px;
   background-color: hsl(208, 73%, 72%);
-  border-radius: 12px;
+  border-radius: 5px;
   overflow: hidden;
-  transition: 31ms cubic-bezier(0.5, 0.7, 0.4, 1);
+  transition: transform 0.5s ease-in-out;
 }
 
 .altbutton {
   border: 1px solid #315cfd;
   border-radius: 10px;
   transition: all 0.3s;
+  box-shadow: #315cfd 0px 2px 0px 0px;
   cursor: pointer;
   background: white;
   font-size: 0.8rem;
   font-family: "Montserrat", sans-serif;
 }
 
-.altbutton:hover {
+.salebutton:hover,
+.dealbutton:hover,
+.headerbutton:hover {
+  transform: scale(1.05);
+}
+
+.lgbutton {
+  border: 1px solid #315cfd;
+  border-radius: 15px;
+  transition: all 0.3s;
+  box-shadow: #315cfd 1px 3px 1px 1px;
+  cursor: pointer;
+  background: white;
+  font-size: 1.1rem;
+  font-family: "Montserrat", sans-serif;
+}
+
+.altbutton:hover,
+.lgbutton:hover {
   background: #315cfd;
+  border-color: white;
   color: white;
 }
 
 .title {
   font-size: 3rem;
   font-weight: 600;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
   background-image: linear-gradient(to left, #4816d2, #5382e1);
   color: transparent;
   background-clip: text;
   -webkit-background-clip: text;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease-in-out;
+}
+
+.logoicon {
+  transition: transform 0.3s ease-in-out;
+}
+
+.logoicon:hover {
+  transform: scale(1.05);
 }
 
 .price {
@@ -204,4 +237,13 @@ input {
 .paybutton:active {
   transform: translate(5px, 5px);
   transition-duration: 0.3s;
+}
+
+.dispdiv {
+  transition: background-color 0.3s ease-in-out;
+  background-color: #bae6fd;
+}
+
+.dispdiv:hover {
+  background-color: #f0f9ff;
 }
