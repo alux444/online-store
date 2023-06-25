@@ -30,7 +30,7 @@
   opacity: 0;
   transition: 0.5s ease;
   border-radius: 5px;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(161, 160, 160, 0.8);
 }
 
 .overlay:hover {

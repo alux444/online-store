@@ -145,7 +145,7 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
                             onChange={onChangeImage}
                             accept=".jpg,.jpeg,.png"
                           />
-                          <p className="overlay border-2 flex justify-center items-center text-center align-center">
+                          <p className="overlay border-2 flex justify-center items-center text-center align-center text-xl text-white font-bold cursor-pointer">
                             Upload New Image?
                           </p>
                           <div className="relative">
