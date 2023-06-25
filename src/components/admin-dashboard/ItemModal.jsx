@@ -117,37 +117,6 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
     onClose();
   };
 
-  const handleMouseEnter = () => {
-    setIsImageFocused(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsImageFocused(false);
-  };
-
-  const getImage = () => {
-    let image = item.imageUrl === "" ? noImage : item.imageUrl;
-    return (
-      <div
-        className="relative"
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
-        <img
-          src={image}
-          className={`max-w-[50vw] max-h-[40vh] border rounded-lg ${
-            isImageFocused ? "opacity-75 shadow-lg" : ""
-          }`}
-        />
-        {isImageFocused && (
-          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white text-sm font-bold opacity-0 transition-opacity duration-300 pointer-events-none">
-            Edit image
-          </div>
-        )}
-      </div>
-    );
-  };
-
   return (
     <Modal open={true} onClose={onClose}>
       {!checkDelete ? (
@@ -168,7 +137,7 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
                   <div className="flex align-center">
                     <label htmlFor="image-upload" className="relative">
                       <div className="file-input-mask">
-                        <div className="flex align-center items-center justify-center">
+                        <div className="flex align-center items-center justify-center text-center">
                           <input
                             id="image-upload"
                             type="file"
@@ -176,7 +145,17 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
                             onChange={onChangeImage}
                             accept=".jpg,.jpeg,.png"
                           />
-                          {getImage()}
+                          <p className="overlay border-2 flex justify-center items-center text-center align-center">
+                            Upload New Image?
+                          </p>
+                          <div className="relative">
+                            <img
+                              src={
+                                item.imageUrl === "" ? noImage : item.imageUrl
+                              }
+                              className="max-w-[50vw] h-[40vh] md:max-w-[80vw] border rounded-lg"
+                            />
+                          </div>
                         </div>
                       </div>
                     </label>
