@@ -10,6 +10,7 @@ const StoreDisplay = () => {
   const [category, setCategory] = useState("");
   const [allItems, setAllItems] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [displayNumber, setDisplayNumber] = useState("12");
 
   const getItems = async () => {
     const results = await getAllItems();
@@ -43,6 +44,11 @@ const StoreDisplay = () => {
     setCategory(option);
   };
 
+  const handleDisplay = (option) => {
+    resetPage();
+    setDisplayNumber(option);
+  }
+
   return (
     <div className="w-[90vw]">
       <Cart />
@@ -54,6 +60,8 @@ const StoreDisplay = () => {
         category={category}
         handleCategory={handleCategory}
         resetPage={resetPage}
+        displayNumber={displayNumber}
+        handleDisplay={handleDisplay}
       />
       <Items
         sortingOption={sortingOption}
@@ -62,6 +70,7 @@ const StoreDisplay = () => {
         allItems={allItems}
         currentPage={currentPage}
         changePage={changePage}
+        displayNumber={displayNumber}
       />
     </div>
   );

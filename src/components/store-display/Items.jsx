@@ -10,6 +10,7 @@ const Items = ({
   allItems,
   currentPage,
   changePage,
+  displayNumber,
 }) => {
   let sortedItems = allItems;
 
@@ -51,7 +52,7 @@ const Items = ({
 
   const clearanceItems = sortedItems.filter((item) => item.clearance);
 
-  const displaysPerPage = 12;
+  const displaysPerPage = displayNumber;
   const indexOfLastItem = currentPage * displaysPerPage;
   const indexOfFirstItem = indexOfLastItem - displaysPerPage;
   const currentItems = sortedItems.slice(indexOfFirstItem, indexOfLastItem);
