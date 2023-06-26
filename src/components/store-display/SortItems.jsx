@@ -20,7 +20,7 @@ const SortItems = ({
           placeholder="Search for an item..."
           value={search}
           onChange={handleSearch}
-          className="w-96 py-2 rounded-lg text-xl border-black border-2"
+          className="w-96 py-2 rounded-lg text-xl border-black border-2 sm:w-72"
         />
       </div>
       <br />
