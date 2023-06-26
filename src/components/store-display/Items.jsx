@@ -10,9 +10,14 @@ const Items = ({
   currentPage,
   changePage,
   displayNumber,
-  setWobble
+  setWobble,
+  search
 }) => {
   let sortedItems = allItems;
+
+  if (search.length > 0) {
+    sortedItems = sortedItems.filter((item) => item.name.toLowerCase().includes(search.toLowerCase()));
+  }
 
   if (category != "") {
     sortedItems = sortedItems.filter((item) => item.category === category);
@@ -72,7 +77,7 @@ const Items = ({
   return (
     <div>
       <div className="flex flex-wrap justify-center align-center items-center gap-2">
-        {checked ? clearanceMap : itemMap}
+        {checked ? (clearanceMap.length ? clearanceMap : <h1>No results found</h1>) : (itemMap.length ? itemMap : <h1>No results found</h1>)}
       </div>
       <Pagination
         totalDisplay={checked ? clearanceItems.length : sortedItems.length}

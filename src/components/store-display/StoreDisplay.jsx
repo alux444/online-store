@@ -10,6 +10,7 @@ const StoreDisplay = ({setWobble}) => {
   const [allItems, setAllItems] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [displayNumber, setDisplayNumber] = useState("12");
+  const [search, setSearch] = useState("");
 
   const getItems = async () => {
     const results = await getAllItems();
@@ -48,6 +49,12 @@ const StoreDisplay = ({setWobble}) => {
     setDisplayNumber(option);
   }
 
+  const handleSearch = (e) => {
+    resetPage();
+    setSearch(e.target.value);
+
+  }
+
   return (
     <div className="w-[90vw]">
       <SortItems
@@ -60,6 +67,8 @@ const StoreDisplay = ({setWobble}) => {
         resetPage={resetPage}
         displayNumber={displayNumber}
         handleDisplay={handleDisplay}
+        search={search}
+        handleSearch={handleSearch}
       />
       <Items
         sortingOption={sortingOption}
@@ -70,6 +79,7 @@ const StoreDisplay = ({setWobble}) => {
         changePage={changePage}
         displayNumber={displayNumber}
         setWobble={setWobble}
+        search={search}
       />
     </div>
   );
