@@ -23,7 +23,7 @@ const Cart = ({wobble}) => {
   return (
     <div className="flex justify-center items-center mb-2">
       <button
-        className="flex items-center font-bold text-lg wobble"
+        className="flex items-center font-bold text-lg wobble lgbutton"
         onClick={() => setShowCart(true)}
         wobble={wobble}
       >
