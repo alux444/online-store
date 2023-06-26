@@ -3,7 +3,7 @@ import CartModal from "./CartModal";
 import { CartContext } from "../../../App";
 import image from "../../../images/shopping-cart.png";
 
-const Cart = ({wobble, setWobble}) => {
+const Cart = ({wobble}) => {
   const [showCart, setShowCart] = useState(false);
 
   const { cart, setCart } = useContext(CartContext);

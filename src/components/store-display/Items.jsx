@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import getAllItems from "../../utils/getAllItems";
+import React from "react";
 import ItemDisplayStore from "./ItemDisplayStore";
 import Pagination from "../misc-components/Pagination";
 
