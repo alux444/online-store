@@ -3,7 +3,7 @@ import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { v4 as uuid } from "uuid";
 import addImage from "./addImage";
 
-const createNewItem = async (formInfo, imageFile, itemUpdate) => {
+const createNewItem = async (formInfo, imageFile, itemAdd) => {
   const itemRef = collection(db, "item");
   const id = uuid();
   const time = serverTimestamp();
@@ -40,7 +40,7 @@ const createNewItem = async (formInfo, imageFile, itemUpdate) => {
       id: id,
       timeCreated: time,
     };
-    itemUpdate(newItem);
+    itemAdd(newItem);
 
     return true;
   } catch (error) {

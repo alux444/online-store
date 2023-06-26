@@ -122,14 +122,14 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
       {!checkDelete ? (
         <div className="fixed inset-0 flex items-center justify-center">
           <div
-            className="bg-white rounded-lg p-6 lg:w-[80w] md:w-[80vw] sm:w-[90vw] max-h-[90vh] relative overflow-auto"
+            className="bg-blue-50 rounded-lg p-6 lg:w-[80w] md:w-[80vw] sm:w-[90vw] max-h-[90vh] relative overflow-auto"
             ref={modalRef}
           >
-            <button onClick={onClose} className="absolute top-1 right-2 p-2 border-none bg-white hover:text-[#315cfd]">
+            <button onClick={onClose} className="absolute top-1 right-2 p-2 border-none bg-blue-50 hover:text-[#315cfd]">
               X
             </button>
             <div className="flex align-center justify-center items-center flex-col">
-              <h2 className="text-xl font-bold mb-2">{item && item.name}</h2>
+              <h2 className="title">{item && item.name}</h2>
               <p>Date created: {date}</p>
               <br />
               <form onSubmit={onSubmit}>
@@ -275,7 +275,7 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
         </div>
       ) : (
         <div className="fixed inset-0 flex items-center align-center justify-center">
-          <div className="bg-white rounded-lg p-6 w-min-content relative">
+          <div className="bg-blue-50 rounded-lg p-6 w-min-content relative">
             <button
               onClick={() => setCheckDelete(false)}
               className="absolute top-1 right-2 p-2 border-none bg-white hover:text-[#315cfd]"
