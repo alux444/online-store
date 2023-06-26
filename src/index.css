@@ -134,6 +134,17 @@ input {
   font-family: "Montserrat", sans-serif;
 }
 
+.deletebutton {
+  border: 1px solid #ec2917;
+  border-radius: 10px;
+  transition: all 0.3s;
+  box-shadow: #ec2917 0px 2px 0px 0px;
+  cursor: pointer;
+  background: white;
+  font-size: 0.8rem;
+  font-family: "Montserrat", sans-serif;
+}
+
 .salebutton:hover,
 .dealbutton:hover,
 .headerbutton:hover {
