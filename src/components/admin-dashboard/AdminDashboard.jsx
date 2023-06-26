@@ -5,6 +5,7 @@ import getAllItems from "../../utils/getAllItems";
 import ItemModal from "./ItemModal";
 import AddItemModal from "./AddItemModal";
 import Pagination from "../misc-components/Pagination"
+import { set } from "firebase/database";
 
 const AdminDashboard = () => {
   const [items, setItems] = useState([]);
@@ -14,7 +15,7 @@ const AdminDashboard = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [addModalOpen, setAddModalOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-
+  const [displayNumber, setDisplayNumber] = useState("12");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -78,7 +79,7 @@ const AdminDashboard = () => {
     setCurrentPage(pageNumber);
   };
 
-  const displaysPerPage = 12;
+  const displaysPerPage = displayNumber;
   const indexOfLastItem = currentPage * displaysPerPage;
   const indexOfFirstItem = indexOfLastItem - displaysPerPage;
   const currentItems = filteredItems.slice(indexOfFirstItem, indexOfLastItem);
@@ -101,6 +102,8 @@ const AdminDashboard = () => {
         setAddModalOpen={setAddModalOpen}
         setItem={setSearch}
         setCurrentPage={setCurrentPage}
+        displayNumber={displayNumber}
+        setDisplayNumber={setDisplayNumber}
       />
 
       <div className="mt-5 w-[70vw] md:w-[90vw]">

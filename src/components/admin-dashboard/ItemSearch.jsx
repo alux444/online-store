@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const ItemSearch = ({ items, updateItems, setAddModalOpen, setItem, setCurrentPage }) => {
+const ItemSearch = ({ items, updateItems, setAddModalOpen, setItem, setCurrentPage, displayNumber, setDisplayNumber }) => {
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [noResults, setNoResults] = useState(false);
@@ -56,6 +56,11 @@ const ItemSearch = ({ items, updateItems, setAddModalOpen, setItem, setCurrentPa
     resetPage();
     setClearanceFilter((prevValue) => !prevValue);
   };
+
+  const handleDisplay = (option) => {
+    resetPage();
+    setDisplayNumber(option);
+  }
 
   const searchButtonText = noResults ? "Add" : "Search";
 
@@ -119,6 +124,17 @@ const ItemSearch = ({ items, updateItems, setAddModalOpen, setItem, setCurrentPa
               <option value="liquor">Liquor</option>
               <option value="produce">Produce</option>
               <option value="seafood">Seafood</option>
+            </select>
+          </div>
+          <div className="flex flex-row ml-3 items-center">
+            <p>Items per page: </p>
+            <select
+              value={displayNumber}
+              className="bg-white border w-41 border-gray-300 rounded px-3 py-1 mx-1"
+              onChange={(e) => handleDisplay(e.target.value)}
+            >
+              <option value="12">12</option>
+              <option value="24">24</option>
             </select>
           </div>
           <span className="ml-2 lg:ml-0">Results: {searchResults.length}</span>
