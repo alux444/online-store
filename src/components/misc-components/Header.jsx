@@ -5,7 +5,7 @@ import { UserContext, AdminContext } from "../../App";
 import logo from "../../images/kiwimartlogo.png";
 import Cart from "../store-display/cart/Cart";
 
-const Header = () => {
+const Header = ({wobble, setWobble}) => {
   const [openAbout, setOpenAbout] = useState(false);
   const [openLogin, setOpenLogin] = useState(false);
   const [goHome, setGoHome] = useState(false);
@@ -48,7 +48,7 @@ const Header = () => {
           <LoginModal open={openLogin} close={closeLogin} />
           <AboutModal open={openAbout} close={closeAbout} />
         </div>
-        <Cart />
+        <Cart wobble={wobble} setWobble={setWobble} />
       </div>
     </div>
   );

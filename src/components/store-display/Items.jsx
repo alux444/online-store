@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import getAllItems from "../../utils/getAllItems";
+import React from "react";
 import ItemDisplayStore from "./ItemDisplayStore";
 import Pagination from "../misc-components/Pagination";
 
@@ -10,6 +9,8 @@ const Items = ({
   allItems,
   currentPage,
   changePage,
+  displayNumber,
+  setWobble
 }) => {
   let sortedItems = allItems;
 
@@ -51,7 +52,7 @@ const Items = ({
 
   const clearanceItems = sortedItems.filter((item) => item.clearance);
 
-  const displaysPerPage = 12;
+  const displaysPerPage = displayNumber;
   const indexOfLastItem = currentPage * displaysPerPage;
   const indexOfFirstItem = indexOfLastItem - displaysPerPage;
   const currentItems = sortedItems.slice(indexOfFirstItem, indexOfLastItem);
@@ -61,11 +62,11 @@ const Items = ({
   );
 
   const itemMap = currentItems.map((item) => (
-    <ItemDisplayStore item={item} key={item.id} />
+    <ItemDisplayStore item={item} key={item.id} setWobble={setWobble} />
   ));
 
   const clearanceMap = currentClearance.map((item) => (
-    <ItemDisplayStore item={item} key={item.id} />
+    <ItemDisplayStore item={item} key={item.id} setWobble={setWobble} />
   ));
 
   return (

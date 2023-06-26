@@ -4,6 +4,8 @@ import ItemDisplayList from "./ItemDisplayList";
 import getAllItems from "../../utils/getAllItems";
 import ItemModal from "./ItemModal";
 import AddItemModal from "./AddItemModal";
+import Pagination from "../misc-components/Pagination"
+import { set } from "firebase/database";
 
 const AdminDashboard = () => {
   const [items, setItems] = useState([]);
@@ -12,6 +14,8 @@ const AdminDashboard = () => {
   const [modalItem, setModalItem] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [addModalOpen, setAddModalOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [displayNumber, setDisplayNumber] = useState("12");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -48,6 +52,16 @@ const AdminDashboard = () => {
     setModalOpen(false);
   };
 
+  const itemAdd = (newItem) => {
+    setItems((prevItems) => {
+      const updatedItems = [...prevItems, newItem];
+      setFilteredItems(updatedItems);
+      console.log("Total items: " + updatedItems.length)
+      return updatedItems;
+    });
+    setAddModalOpen(false);
+  };
+
   const handleOpenModal = (item) => {
     setModalItem(item);
     setModalOpen(true);
@@ -61,7 +75,16 @@ const AdminDashboard = () => {
     console.log("Modal closed.");
   };
 
-  const mappedItems = filteredItems.map((item) => (
+  const changePage = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const displaysPerPage = displayNumber;
+  const indexOfLastItem = currentPage * displaysPerPage;
+  const indexOfFirstItem = indexOfLastItem - displaysPerPage;
+  const currentItems = filteredItems.slice(indexOfFirstItem, indexOfLastItem);
+
+  const mappedItems = currentItems.map((item) => (
     <ItemDisplayList
       item={item}
       key={`${item.id}-${Date.now()}`} // Generate a unique key using item ID and timestamp
@@ -78,6 +101,9 @@ const AdminDashboard = () => {
         updateItems={updateItems}
         setAddModalOpen={setAddModalOpen}
         setItem={setSearch}
+        setCurrentPage={setCurrentPage}
+        displayNumber={displayNumber}
+        setDisplayNumber={setDisplayNumber}
       />
 
       <div className="mt-5 w-[70vw] md:w-[90vw]">
@@ -88,6 +114,12 @@ const AdminDashboard = () => {
         )}
         {mappedItems}
       </div>
+      <Pagination 
+        totalDisplay={filteredItems.length}
+        displaysPerPage={displaysPerPage}
+        paginate={changePage}
+        currentPage={currentPage}
+      />
 
       {modalItem && modalOpen && (
         <ItemModal
@@ -97,7 +129,7 @@ const AdminDashboard = () => {
         />
       )}
       {addModalOpen && (
-        <AddItemModal item={search} onClose={handleModalClose} />
+        <AddItemModal item={search} onClose={handleModalClose} itemAdd={itemAdd} />
       )}
     </div>
   );

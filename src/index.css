@@ -252,3 +252,23 @@ input {
 .dispdiv:hover {
   background-color: #f0f9ff;
 }
+
+.wobble[wobble='1'] {
+  animation: wobble 1s 1;
+
+}
+
+@keyframes wobble {
+  25% {
+    transform: rotate(7deg);
+  }
+  50% {
+    transform: rotate(-10deg);
+  }
+  75% {
+    transform: rotate(4deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}

@@ -37,7 +37,7 @@ const CartModal = ({ open, close, total }) => {
               <br />
               {items}
               <br />
-              <p className="price">Total: ${total}</p>
+              <p className="price mb-3">Total: ${total}</p>
               <div className="flex justify-center">
                 <button
                   className="paybutton"

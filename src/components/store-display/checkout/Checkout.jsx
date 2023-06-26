@@ -66,9 +66,9 @@ const Checkout = ({ setShowCheckout }) => {
               />
             </label>
           </div>
-          <button>Submit</button>
+          <button className="lgbutton">Submit</button>
         </form>
-        <button className="mt-2" onClick={() => setShowCheckout(false)}>Return to cart</button>
+        <button className="mt-2 lgbutton" onClick={() => setShowCheckout(false)}>Return to cart</button>
       </div>
     </div>
   );

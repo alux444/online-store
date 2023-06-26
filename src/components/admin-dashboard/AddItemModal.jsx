@@ -4,7 +4,7 @@ import createNewItem from "../../utils/createNewItem";
 import useOutsideClick from "../../utils/useOutsideClose";
 
 
-const AddItemModal = ({ item, onClose, itemUpdate }) => {
+const AddItemModal = ({ item, onClose, itemAdd }) => {
   const modalRef = useRef(null);
   useOutsideClick(modalRef, onClose);
 
@@ -59,17 +59,17 @@ const AddItemModal = ({ item, onClose, itemUpdate }) => {
   const onSubmit = async (e) => {
     e.preventDefault();
     console.log(form, file);
-    const newItem = await createNewItem(form, file, itemUpdate);
-    console.log(newItem);
+    const newItem = await createNewItem(form, file, itemAdd);
+    console.log(item.name + " added successfully");
     onClose();
   };
 
   return (
     <Modal open={true} onClose={onClose}>
      <div className="fixed inset-0 flex items-center justify-center">
-          <div className="bg-white rounded-lg p-6 lg:w-[80w] md:w-[80vw] sm:w-[90vw] max-h-[90vh] relative overflow-auto"
+          <div className="bg-blue-50 rounded-lg p-6 lg:w-[80w] md:w-[80vw] sm:w-[90vw] max-h-[90vh] relative overflow-auto"
             ref={modalRef}>
-            <button onClick={onClose} className="absolute top-1 right-2 p-2 border-none bg-white hover:text-[#315cfd]">
+            <button onClick={onClose} className="absolute top-1 right-2 p-2 border-none bg-blue-50 hover:text-[#315cfd]">
               X
             </button>
             <div className="flex align-center justify-center items-center flex-col">
@@ -79,7 +79,7 @@ const AddItemModal = ({ item, onClose, itemUpdate }) => {
                     type="text"
                     placeholder={item}
                     onChange = {handleNameChange}
-                    className="text-center text-xl font-bold text-black bg-white hover:border hover:border-gray-300 rounded px-3 py-1"
+                    className="text-center text-xl font-bold text-black bg-blue-50 hover:border hover:border-gray-300 rounded px-3 py-1"
                   />
                   <br />
                   <div className="flex align-center">
