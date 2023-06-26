@@ -14,15 +14,16 @@ function App() {
   const [admin, setAdmin] = useState(false);
   const [cart, setCart] = useState([]);
   const [user, setUser] = useState({ loggedIn: false, email: "" });
+  const [wobble, setWobble] = useState(0)
 
   return (
     <div className="flex flex-col items-center justify-center">
       <AdminContext.Provider value={{ admin, setAdmin }}>
         <CartContext.Provider value={{ cart, setCart }}>
           <UserContext.Provider value={{ user, setUser }}>
-            <Header />
+            <Header wobble={wobble} setWobble={setWobble} />
             <br />
-            {admin ? <AdminDashboard /> : <StoreDisplay />}
+            {admin ? <AdminDashboard /> : <StoreDisplay wobble={wobble} setWobble={setWobble} />}
             <Footer />
           </UserContext.Provider>
         </CartContext.Provider>
