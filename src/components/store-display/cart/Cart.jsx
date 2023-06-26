@@ -5,7 +5,6 @@ import image from "../../../images/shopping-cart.png";
 
 const Cart = () => {
   const [showCart, setShowCart] = useState(false);
-
   const { cart, setCart } = useContext(CartContext);
 
   const closeCart = () => {
