@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import getAllItems from "../../utils/getAllItems";
 import Items from "./Items";
-import Cart from "./cart/Cart";
 import SortItems from "./SortItems";
 
-const StoreDisplay = () => {
+const StoreDisplay = ({setWobble}) => {
   const [sortingOption, setSortingOption] = useState("");
   const [checked, setChecked] = useState(false);
   const [category, setCategory] = useState("");
@@ -70,6 +69,7 @@ const StoreDisplay = () => {
         currentPage={currentPage}
         changePage={changePage}
         displayNumber={displayNumber}
+        setWobble={setWobble}
       />
     </div>
   );

@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import getAllItems from "../../utils/getAllItems";
+import React from "react";
 import ItemDisplayStore from "./ItemDisplayStore";
 import Pagination from "../misc-components/Pagination";
 
@@ -11,6 +10,7 @@ const Items = ({
   currentPage,
   changePage,
   displayNumber,
+  setWobble
 }) => {
   let sortedItems = allItems;
 
@@ -62,11 +62,11 @@ const Items = ({
   );
 
   const itemMap = currentItems.map((item) => (
-    <ItemDisplayStore item={item} key={item.id} />
+    <ItemDisplayStore item={item} key={item.id} setWobble={setWobble} />
   ));
 
   const clearanceMap = currentClearance.map((item) => (
-    <ItemDisplayStore item={item} key={item.id} />
+    <ItemDisplayStore item={item} key={item.id} setWobble={setWobble} />
   ));
 
   return (

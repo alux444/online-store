@@ -3,7 +3,7 @@ import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { v4 as uuid } from "uuid";
 import addImage from "./addImage";
 
-const createNewItem = async (formInfo, imageFile, itemUpdate) => {
+const createNewItem = async (formInfo, imageFile, itemAdd) => {
   const itemRef = collection(db, "item");
   const id = uuid();
   const time = serverTimestamp();
@@ -14,20 +14,7 @@ const createNewItem = async (formInfo, imageFile, itemUpdate) => {
   }
 
   try {
-    await addDoc(itemRef, {
-      name: formInfo.name,
-      description: formInfo.description,
-      price: formInfo.price,
-      discount: formInfo.discount,
-      imageUrl: url,
-      onSale: formInfo.onSale,
-      clearance: formInfo.clearance,
-      stock: formInfo.stock,
-      category: formInfo.category,
-      id: id,
-      timeCreated: time,
-    });
-    const newItem = {
+    const form = {
       name: formInfo.name,
       description: formInfo.description,
       price: formInfo.price,
@@ -40,7 +27,9 @@ const createNewItem = async (formInfo, imageFile, itemUpdate) => {
       id: id,
       timeCreated: time,
     };
-    itemUpdate(newItem);
+
+    await addDoc(itemRef, form);
+    itemAdd(form);
 
     return true;
   } catch (error) {

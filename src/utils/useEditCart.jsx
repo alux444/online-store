@@ -1,15 +1,19 @@
 import { useContext } from "react";
 import { CartContext } from "../App";
+import { searchForItem } from "./searchForItem";
 
 const useEditCart = () => {
   const { cart, setCart } = useContext(CartContext);
 
-  const addToCart = (item, amountToAdd) => {
+  const addToCart = async (item, amountToAdd) => {
     const existingItem = cart.find(
       (currentItem) => currentItem.name === item.name
     );
 
-    const realPrice = item.onSale ? item.price - item.discount : item.price;
+    const fetchedItem = await searchForItem(item.name);
+    const realPrice = fetchedItem.onSale
+      ? fetchedItem.price - fetchedItem.discount
+      : fetchedItem.price;
 
     if (existingItem) {
       setCart((prevCart) =>
@@ -26,12 +30,17 @@ const useEditCart = () => {
     } else {
       setCart((prevCart) => [
         ...prevCart,
-        { name: item.name, amount: amountToAdd, price: realPrice },
+        {
+          name: item.name,
+          amount: amountToAdd,
+          price: realPrice,
+          imageUrl: fetchedItem.imageUrl,
+        },
       ]);
     }
   };
 
-  const removeFromCart = (item, amountToRemove) => {
+  const removeFromCart = async (item, amountToRemove) => {
     const existingItem = cart.find(
       (currentItem) => currentItem.name === item.name
     );

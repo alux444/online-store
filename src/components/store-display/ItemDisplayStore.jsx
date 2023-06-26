@@ -3,14 +3,18 @@ import ItemDisplayModal from "./ItemDisplayModal";
 import useEditCart from "../../utils/useEditCart";
 import image from "../../utils/noImage.svg";
 
-const ItemDisplayStore = ({ item }) => {
+const ItemDisplayStore = ({ item, setWobble }) => {
   const [open, setOpen] = useState(false);
 
   const realPrice = item.onSale ? item.price - item.discount : item.price;
   const { addToCart } = useEditCart();
 
-  const addOneToCart = () => {
+  const addOneToCart = async () => {
     addToCart(item, 1);
+    setWobble(1);
+    setTimeout(() => {
+      setWobble(0);
+    }, 1000);
   };
 
   const closeModal = () => {
@@ -49,7 +53,7 @@ const ItemDisplayStore = ({ item }) => {
 
         <br />
       </div>
-      <button className="mx-2 altbutton " onClick={() => addOneToCart()}>
+      <button className="mx-2 altbutton" onClick={() => addOneToCart()}>
         Add to Cart
       </button>
       <button className="mx-2 altbutton" onClick={() => setOpen(true)}>
