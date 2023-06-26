@@ -1,14 +1,16 @@
 import React, { useContext, useState } from "react";
 import LoginModal from "./LoginModal";
 import AboutModal from "./AboutModal";
-import { UserContext } from "../../App";
+import { UserContext, AdminContext } from "../../App";
 import logo from "../../images/kiwimartlogo.png";
 import Cart from "../store-display/cart/Cart";
 
 const Header = () => {
   const [openAbout, setOpenAbout] = useState(false);
   const [openLogin, setOpenLogin] = useState(false);
+  const [goHome, setGoHome] = useState(false);
   const { user, setUser } = useContext(UserContext);
+  const { setAdmin } = useContext(AdminContext);
 
   const closeAbout = () => {
     setOpenAbout(false);
@@ -23,7 +25,9 @@ const Header = () => {
       <div className="flex sm:flex-col align-center items-center justify-between lg:justify-center lg:gap-2 text-center m-2 p-5 w-[80vw] border-2 flex-wrap">
         <div className="flex align-center justify-center items-center">
           <h1 className="title">KiwiMart</h1>
-          <img src={logo} className="w-[10vw] ml-5 logoicon"></img>
+          <button className="w-[10vw] border-none p-1 bg-white" onClick={() => setAdmin(false)}>
+            <img src={logo} className="w-full m-0 logoicon"></img>
+          </button>
         </div>
         <div className="flex items-center justify-end gap-1">
           <button className="lgbutton" onClick={() => setOpenAbout(true)}>

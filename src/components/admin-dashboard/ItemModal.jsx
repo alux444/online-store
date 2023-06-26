@@ -122,12 +122,12 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
       {!checkDelete ? (
         <div className="fixed inset-0 flex items-center justify-center">
           <div
-            className="bg-white rounded-lg p-6 w-[40vw] xl:w-[60vw] md:w-[80vw] sm:w-[95vw] max-h-[90vh] relative overflow-auto"
+            className="bg-white rounded-lg p-6 lg:w-[80w] md:w-[80vw] sm:w-[90vw] max-h-[90vh] relative overflow-auto"
             ref={modalRef}
           >
-            <Button onClick={onClose} className="absolute top-2 right-2">
+            <button onClick={onClose} className="absolute top-1 right-2 p-2 border-none bg-white hover:text-[#315cfd]">
               X
-            </Button>
+            </button>
             <div className="flex align-center justify-center items-center flex-col">
               <h2 className="text-xl font-bold mb-2">{item && item.name}</h2>
               <p>Date created: {date}</p>
@@ -153,7 +153,7 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
                               src={
                                 item.imageUrl === "" ? noImage : item.imageUrl
                               }
-                              className="max-w-[50vw] h-[40vh] md:max-w-[80vw] border rounded-lg"
+                              className="w-96 md:max-w-[80vw] border rounded-lg"
                             />
                           </div>
                         </div>
@@ -164,11 +164,11 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
                   <br />
                   <div className="flex mt-3 align-center justify-center items-center gap-4 flex-wrap">
                     <div className="">
-                      <span className="mr-1">Category:</span>
+                      <span className="mr-2">Category:</span>
                       <select
                         value={form.category}
                         onChange={handleCategoryChange}
-                        className="px-4 py-2 border md:w-[30vw] bg-white border-gray-300 rounded"
+                        className="px-4 py-2 border w-40 md:w-[20vw] bg-white border-gray-300 rounded"
                       >
                         <option value="produce">Produce</option>
                         <option value="seafood">Seafood</option>
@@ -186,7 +186,7 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
                         type="number"
                         placeholder="0"
                         value={form.stock}
-                        className=""
+                        className="px-4 py-2 border w-40 md:w-[20vw] bg-white border-gray-300 rounded"
                         onChange={handleStockChange}
                       />
                     </div>
@@ -203,24 +203,24 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
                   />
                 </div>
                 <br />
-                <div className="lg:flex flex-wrap justify-center gap-4 align-center items-center">
-                  <div className="flex justify-center items-center align-center">
-                    <span>Normal Price ($) </span>
+                <div className="flex flex-wrap justify-center gap-4 align-center items-center">
+                  <div className="flex justify-center items-center align-center mr-6">
+                    <span className="mr-1">Normal Price ($): </span>
                     <input
                       type="number"
                       placeholder="Price"
                       value={form.price}
-                      className="md:w-[17vw] lg:w-[10vw] w-[20%] ml-2"
+                      className="px-4 py-2 border w-32 md:w-[15vw] bg-white border-gray-300 rounded"
                       onChange={handlePriceChange}
                     />
                   </div>
                   <div className="mt-1 lg:mt-0 flex justify-center items-center align-center">
-                    <span>Discount (-$)</span>
+                    <span className="mr-1">Discount (-$):</span>
                     <input
                       type="number"
                       placeholder="Discount"
                       value={form.discount}
-                      className="md:w-[15vw] lg:w-[10vw] w-[20%] ml-2"
+                      className="px-4 py-2 border w-32 md:w-[15vw] bg-white border-gray-300 rounded"
                       onChange={handleDiscountChange}
                     />
                   </div>
@@ -258,30 +258,36 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
                   </div>
                 </div>
                 <div className="flex align-center justify-center">
-                  <button type="submit">Confirm changes</button>
+                  <button className="altbutton " type="submit">
+                    Confirm changes
+                  </button>
                 </div>
               </form>
-              <Button
+              <br/>
+              <button
                 onClick={() => setCheckDelete(true)}
-                className="bg-red-500 text-white px-4 py-2 rounded-r"
+                className="deletebutton hover:bg-[#ec2917] hover:text-white hover:border-white"
               >
                 Delete {item && item.name}
-              </Button>
+              </button>
             </div>
           </div>
         </div>
       ) : (
         <div className="fixed inset-0 flex items-center align-center justify-center">
           <div className="bg-white rounded-lg p-6 w-min-content relative">
-            <Button
+            <button
               onClick={() => setCheckDelete(false)}
-              className="absolute top-2 right-2"
+              className="absolute top-1 right-2 p-2 border-none bg-white hover:text-[#315cfd]"
             >
               X
-            </Button>
+            </button>
             <div className="flex align-center justify-center items-center flex-col">
               <h2 className="text-xl font-bold mb-2">{item && item.name}</h2>
-              <p>Are you sure you want to delete {item && item.name}?</p>
+              <br/>
+              <p>Are you sure you want to delete</p>
+              <p className="font-bold">{item && item.name}?</p>
+              <br/>
               <Button
                 onClick={handleDelete}
                 className="bg-red-500 text-white px-4 py-2 rounded-r"
