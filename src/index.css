@@ -45,13 +45,7 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
+
 
 input {
   border: 1px solid #d9d9d9;
@@ -128,6 +122,17 @@ input {
   border-radius: 10px;
   transition: all 0.3s;
   box-shadow: #315cfd 0px 2px 0px 0px;
+  cursor: pointer;
+  background: white;
+  font-size: 0.8rem;
+  font-family: "Montserrat", sans-serif;
+}
+
+.deletebutton {
+  border: 1px solid #ec2917;
+  border-radius: 10px;
+  transition: all 0.3s;
+  box-shadow: #ec2917 0px 2px 0px 0px;
   cursor: pointer;
   background: white;
   font-size: 0.8rem;

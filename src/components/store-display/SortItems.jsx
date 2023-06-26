@@ -7,6 +7,8 @@ const SortItems = ({
   checked,
   category,
   handleCategory,
+  displayNumber,
+  handleDisplay
 }) => {
   return (
     <div className="flex md:flex-col justify-center align-center items-center mb-3 gap-1 flex-wrap">
@@ -50,6 +52,17 @@ const SortItems = ({
           />
           Show clearance
         </label>
+      </div>
+      <div className="flex flex-row ml-3 items-center">
+        <p>Items per page: </p>
+        <select
+          value={displayNumber}
+          className="bg-white border w-41 border-gray-300 rounded px-3 py-1 mx-1"
+          onChange={(e) => handleDisplay(e.target.value)}
+        >
+          <option value="12">12</option>
+          <option value="24">24</option>
+        </select>
       </div>
     </div>
   );
