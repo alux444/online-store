@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const ItemSearch = ({ items, updateItems, setAddModalOpen, setItem }) => {
+const ItemSearch = ({ items, updateItems, setAddModalOpen, setItem, setCurrentPage }) => {
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [noResults, setNoResults] = useState(false);
@@ -33,15 +33,22 @@ const ItemSearch = ({ items, updateItems, setAddModalOpen, setItem }) => {
     }
   };
 
+  const resetPage = () => {
+    setCurrentPage(1);
+  };
+
   const handleCategoryFilter = (category) => {
+    resetPage();
     setCategoryFilter(category);
   };
 
   const handleSaleFilter = () => {
+    resetPage();
     setSaleFilter((prevValue) => !prevValue);
   };
 
   const handleClearanceFilter = () => {
+    resetPage();
     setClearanceFilter((prevValue) => !prevValue);
   };
 

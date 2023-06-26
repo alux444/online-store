@@ -4,6 +4,7 @@ import ItemDisplayList from "./ItemDisplayList";
 import getAllItems from "../../utils/getAllItems";
 import ItemModal from "./ItemModal";
 import AddItemModal from "./AddItemModal";
+import Pagination from "../misc-components/Pagination"
 
 const AdminDashboard = () => {
   const [items, setItems] = useState([]);
@@ -12,6 +13,8 @@ const AdminDashboard = () => {
   const [modalItem, setModalItem] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [addModalOpen, setAddModalOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -71,7 +74,16 @@ const AdminDashboard = () => {
     console.log("Modal closed.");
   };
 
-  const mappedItems = filteredItems.map((item) => (
+  const changePage = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const displaysPerPage = 12;
+  const indexOfLastItem = currentPage * displaysPerPage;
+  const indexOfFirstItem = indexOfLastItem - displaysPerPage;
+  const currentItems = filteredItems.slice(indexOfFirstItem, indexOfLastItem);
+
+  const mappedItems = currentItems.map((item) => (
     <ItemDisplayList
       item={item}
       key={`${item.id}-${Date.now()}`} // Generate a unique key using item ID and timestamp
@@ -88,6 +100,7 @@ const AdminDashboard = () => {
         updateItems={updateItems}
         setAddModalOpen={setAddModalOpen}
         setItem={setSearch}
+        setCurrentPage={setCurrentPage}
       />
 
       <div className="mt-5 w-[70vw] md:w-[90vw]">
@@ -98,6 +111,12 @@ const AdminDashboard = () => {
         )}
         {mappedItems}
       </div>
+      <Pagination 
+        totalDisplay={filteredItems.length}
+        displaysPerPage={displaysPerPage}
+        paginate={changePage}
+        currentPage={currentPage}
+      />
 
       {modalItem && modalOpen && (
         <ItemModal
