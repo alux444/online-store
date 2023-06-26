@@ -24,6 +24,15 @@ const ItemSearch = ({ items, updateItems, setAddModalOpen, setItem, setCurrentPa
     updateItems(filteredItems);
   }, [items, search, categoryFilter, saleFilter, clearanceFilter]);
 
+  const resetPage = () => {
+    setCurrentPage(1);
+  };
+
+  const handleSearch = (event) => {
+    setSearch(event.target.value)
+    resetPage();
+  }
+
   const handleChange = (event) => {
     event.preventDefault();
     console.log("Search query:", search);
@@ -31,10 +40,6 @@ const ItemSearch = ({ items, updateItems, setAddModalOpen, setItem, setCurrentPa
       setAddModalOpen(true);
       setItem(search);
     }
-  };
-
-  const resetPage = () => {
-    setCurrentPage(1);
   };
 
   const handleCategoryFilter = (category) => {
@@ -63,7 +68,7 @@ const ItemSearch = ({ items, updateItems, setAddModalOpen, setItem, setCurrentPa
               type="text"
               placeholder="Search for an item..."
               value={search}
-              onChange={(event) => setSearch(event.target.value)}
+              onChange={handleSearch}
               className="px-4 py-2 rounded-l"
             />
             <button
