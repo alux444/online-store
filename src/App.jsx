@@ -4,7 +4,6 @@ import AdminDashboard from "./components/admin-dashboard/AdminDashboard";
 import StoreDisplay from "./components/store-display/StoreDisplay";
 import Header from "./components/misc-components/Header";
 import Footer from "./components/misc-components/Footer";
-import { validateName } from "./utils/validateName";
 
 export const AdminContext = createContext();
 export const UserContext = createContext();
@@ -14,7 +13,7 @@ function App() {
   const [admin, setAdmin] = useState(false);
   const [cart, setCart] = useState([]);
   const [user, setUser] = useState({ loggedIn: false, email: "" });
-  const [wobble, setWobble] = useState(0)
+  const [wobble, setWobble] = useState(0);
 
   return (
     <div className="flex flex-col items-center justify-center">
@@ -23,7 +22,11 @@ function App() {
           <UserContext.Provider value={{ user, setUser }}>
             <Header wobble={wobble} setWobble={setWobble} />
             <br />
-            {admin ? <AdminDashboard /> : <StoreDisplay wobble={wobble} setWobble={setWobble} />}
+            {admin ? (
+              <AdminDashboard />
+            ) : (
+              <StoreDisplay wobble={wobble} setWobble={setWobble} />
+            )}
             <Footer />
           </UserContext.Provider>
         </CartContext.Provider>

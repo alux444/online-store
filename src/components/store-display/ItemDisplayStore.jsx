@@ -9,7 +9,7 @@ const ItemDisplayStore = ({ item, setWobble }) => {
   const realPrice = item.onSale ? item.price - item.discount : item.price;
   const { addToCart } = useEditCart();
 
-  const addOneToCart = () => {
+  const addOneToCart = async () => {
     addToCart(item, 1);
     setWobble(1);
     setTimeout(() => {
@@ -53,7 +53,7 @@ const ItemDisplayStore = ({ item, setWobble }) => {
 
         <br />
       </div>
-      <button className="mx-2 altbutton" onClick={() => addOneToCart()} >
+      <button className="mx-2 altbutton" onClick={() => addOneToCart()}>
         Add to Cart
       </button>
       <button className="mx-2 altbutton" onClick={() => setOpen(true)}>

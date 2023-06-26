@@ -24,7 +24,7 @@ const CartModal = ({ open, close, total }) => {
     >
       <div className="h-screen w-screen flex align-center items-center justify-center">
         <div
-          className="border-2 border-white bg-white p-5 flex align-center justify-center items-center text-center flex-col gap-1 rounded-lg "
+          className="border-2 border-white bg-white p-5 flex align-center justify-center items-center text-center flex-col gap-1 rounded-lg bg-blue-50 overflow-auto max-w-[90vw]"
           ref={modalRef}
         >
           {showCheckout ? (

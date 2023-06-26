@@ -14,20 +14,7 @@ const createNewItem = async (formInfo, imageFile, itemAdd) => {
   }
 
   try {
-    await addDoc(itemRef, {
-      name: formInfo.name,
-      description: formInfo.description,
-      price: formInfo.price,
-      discount: formInfo.discount,
-      imageUrl: url,
-      onSale: formInfo.onSale,
-      clearance: formInfo.clearance,
-      stock: formInfo.stock,
-      category: formInfo.category,
-      id: id,
-      timeCreated: time,
-    });
-    const newItem = {
+    const form = {
       name: formInfo.name,
       description: formInfo.description,
       price: formInfo.price,
@@ -40,7 +27,9 @@ const createNewItem = async (formInfo, imageFile, itemAdd) => {
       id: id,
       timeCreated: time,
     };
-    itemAdd(newItem);
+
+    await addDoc(itemRef, form);
+    itemAdd(form);
 
     return true;
   } catch (error) {
