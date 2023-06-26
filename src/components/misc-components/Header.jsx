@@ -3,7 +3,7 @@ import LoginModal from "./LoginModal";
 import AboutModal from "./AboutModal";
 import { UserContext } from "../../App";
 import logo from "../../images/kiwimartlogo.png";
-import banner from "../../images/banner.png";
+import Cart from "../store-display/cart/Cart";
 
 const Header = () => {
   const [openAbout, setOpenAbout] = useState(false);
@@ -19,8 +19,8 @@ const Header = () => {
   };
 
   return (
-    <div className="block">
-      <div className="flex sm:flex-col align-center items-center justify-between text-center m-5 p-5 w-[80vw]">
+    <div className="block sm:relative bg-white">
+      <div className="flex sm:flex-col align-center items-center justify-between lg:justify-center lg:gap-2 text-center m-2 p-5 w-[80vw] border-2 flex-wrap">
         <div className="flex align-center justify-center items-center">
           <h1 className="title">KiwiMart</h1>
           <img src={logo} className="w-[10vw] ml-5 logoicon"></img>
@@ -44,6 +44,7 @@ const Header = () => {
           <LoginModal open={openLogin} close={closeLogin} />
           <AboutModal open={openAbout} close={closeAbout} />
         </div>
+        <Cart />
       </div>
     </div>
   );
