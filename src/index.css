@@ -253,7 +253,7 @@ input {
   background-color: #f0f9ff;
 }
 
-.wobbleting[wobble='1'] {
+.wobble[wobble='1'] {
   animation: wobble 1s 1;
 
 }
