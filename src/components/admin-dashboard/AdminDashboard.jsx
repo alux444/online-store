@@ -48,6 +48,16 @@ const AdminDashboard = () => {
     setModalOpen(false);
   };
 
+  const itemAdd = (newItem) => {
+    setItems((prevItems) => {
+      const updatedItems = [...prevItems, newItem];
+      setFilteredItems(updatedItems);
+      console.log("Total items: " + updatedItems.length)
+      return updatedItems;
+    });
+    setAddModalOpen(false);
+  };
+
   const handleOpenModal = (item) => {
     setModalItem(item);
     setModalOpen(true);
@@ -97,7 +107,7 @@ const AdminDashboard = () => {
         />
       )}
       {addModalOpen && (
-        <AddItemModal item={search} onClose={handleModalClose} />
+        <AddItemModal item={search} onClose={handleModalClose} itemAdd={itemAdd} />
       )}
     </div>
   );

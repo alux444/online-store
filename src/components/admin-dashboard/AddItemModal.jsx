@@ -4,7 +4,7 @@ import createNewItem from "../../utils/createNewItem";
 import useOutsideClick from "../../utils/useOutsideClose";
 
 
-const AddItemModal = ({ item, onClose, itemUpdate }) => {
+const AddItemModal = ({ item, onClose, itemAdd }) => {
   const modalRef = useRef(null);
   useOutsideClick(modalRef, onClose);
 
@@ -59,8 +59,8 @@ const AddItemModal = ({ item, onClose, itemUpdate }) => {
   const onSubmit = async (e) => {
     e.preventDefault();
     console.log(form, file);
-    const newItem = await createNewItem(form, file, itemUpdate);
-    console.log(newItem);
+    const newItem = await createNewItem(form, file, itemAdd);
+    console.log(item.name + " added successfully");
     onClose();
   };
 
