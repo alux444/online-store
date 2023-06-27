@@ -84,8 +84,15 @@ const ItemSearch = ({
             </button>
           </div>
         </div>
-        <br />
       </div>
+      <br/>
+      {noResults && (
+        <div className="flex items-center justify-center">
+          <button>
+            dog
+          </button>
+        </div>
+      )}
       <div className="mt-5 items-center">
         <p>Filter:</p>
         <div className="flex justify-center items-center align-center mt-2 md:flex-col">
