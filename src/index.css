@@ -163,6 +163,10 @@ input {
   color: white;
 }
 
+.relative:hover .absolute {
+  opacity: 1;
+}
+
 .title {
   font-size: 3rem;
   font-weight: 600;
