@@ -101,7 +101,7 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
       };
       const nameIsValid = await validateName(form.name);
 
-      if (nameIsValid) {
+      if (nameIsValid || form.name === item.name) {
         const isUpdated = await updateItem(item.id, updatedImage);
         if (isUpdated) {
           const updatedItem = { ...item, ...updatedImage };
