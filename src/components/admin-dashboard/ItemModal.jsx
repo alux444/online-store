@@ -12,6 +12,7 @@ import "./util.css";
 const ItemModal = ({ item, onClose, itemUpdate }) => {
   const [checkDelete, setCheckDelete] = useState(false);
   const [message, setMessage] = useState("");
+  const [previewImage, setPreviewImage] = useState(item.imageUrl);
   const modalRef = useRef(null);
   useOutsideClick(modalRef, onClose);
 
@@ -37,6 +38,9 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
       stock: item.stock,
       category: item.category,
     });
+    if (item.imageUrl === "") {
+      setPreviewImage(noImage);
+    }
   }, [item]);
 
   const [file, setFile] = useState(null);
@@ -69,6 +73,17 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
   const onChangeImage = (e) => {
     const image = e.target.files[0];
     setFile(image);
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      const imageDataURL = reader.result;
+      setForm((prevForm) => ({
+        ...prevForm,
+        imageUrl: imageDataURL,
+      }));
+      setPreviewImage(imageDataURL);
+    };
+    reader.readAsDataURL(image);
   };
 
   const onSubmit = async (e) => {
@@ -166,9 +181,7 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
                           </p>
                           <div className="relative">
                             <img
-                              src={
-                                item.imageUrl === "" ? noImage : item.imageUrl
-                              }
+                              src={previewImage}
                               className="w-96 md:max-w-[80vw] border rounded-lg"
                             />
                           </div>
