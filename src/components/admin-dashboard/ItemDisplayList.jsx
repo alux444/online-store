@@ -21,8 +21,8 @@ const ItemDisplayList = ({ item, onOpenModal }) => {
       className="flex border-[1px] bg-white items-center px-4 py-2 hover:bg-gray-100 cursor-pointer"
       onClick={() => handleItemClick(item)}
     >
-      <div className="mr-4 text-left w-1/2">
-        <p>{item.name}</p>
+      <div className="mr-4 text-left w-1/2 flex flex-wrap">
+        <p className="break-words overflow-hidden">{item.name}</p>
       </div>
       <div className="mr-4 text-left w-1/4">
         <p>

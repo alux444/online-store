@@ -46,7 +46,11 @@ const ItemDisplayStore = ({ item, setWobble }) => {
         />
       </div>
       <div className="flex gap-2 flex-wrap justify-center items-center">
-        <h2 className="max-w-[100%] flex-shrink-0 break-words">{item.name}</h2>
+        <div className="overflow-hidden max-w-[100%]">
+          <h2 className="max-w-[100%] flex-shrink-0 break-words text-ellipsis overflow-hidden max-h-12">
+            {item.name}
+          </h2>
+        </div>
         {item.onSale ? (
           <p>
             <span className="font-bold price">
