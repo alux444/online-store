@@ -6,10 +6,12 @@ import useOutsideClick from "../../utils/useOutsideClose";
 import convertDate from "../../utils/convertDate";
 import noImage from "../../utils/noImage.svg";
 import addImage from "../../utils/addImage";
+import { validateName } from "../../utils/validateName";
 import "./util.css";
 
 const ItemModal = ({ item, onClose, itemUpdate }) => {
   const [checkDelete, setCheckDelete] = useState(false);
+  const [message, setMessage] = useState("");
   const modalRef = useRef(null);
   useOutsideClick(modalRef, onClose);
 
@@ -71,7 +73,6 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    console.log(form, file);
     try {
       let imageUrl = item.imageUrl;
 
@@ -83,18 +84,24 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
         ...form,
         imageUrl: imageUrl,
       };
-      const isUpdated = await updateItem(item.id, updatedImage);
-      if (isUpdated) {
-        const updatedItem = { ...item, ...updatedImage };
-        itemUpdate(updatedItem);
-        console.log(`${item.name} updated successfully`);
+      const nameIsValid = await validateName(form.name);
+
+      if (nameIsValid) {
+        const isUpdated = await updateItem(item.id, updatedImage);
+        if (isUpdated) {
+          const updatedItem = { ...item, ...updatedImage };
+          itemUpdate(updatedItem);
+          console.log(`${item.name} updated successfully`);
+        } else {
+          console.log("Item not found or could not be updated");
+        }
+        onClose();
       } else {
-        console.log("Item not found or could not be updated");
+        setMessage("Name is already taken.");
       }
     } catch (error) {
       console.log("Error updating item:", error);
     }
-    onClose();
   };
 
   const handleDelete = async (event) => {
@@ -262,6 +269,9 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
                       }
                     />
                   </div>
+                </div>
+                <div className="flex align-center justify-center">
+                  <p>{message}</p>
                 </div>
                 <div className="flex align-center justify-center">
                   <button className="altbutton " type="submit">
