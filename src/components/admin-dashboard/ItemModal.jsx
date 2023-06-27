@@ -38,12 +38,11 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
   }, [item]);
 
   const [file, setFile] = useState(null);
-  const [isImageFocused, setIsImageFocused] = useState(false);
   const date = convertDate(item.timeCreated);
 
-  /* const handleNameChange = (e) => {
+  const handleNameChange = (e) => {
     setForm((prevForm) => ({ ...prevForm, name: e.target.value }));
-  }; */
+  };
 
   const handleDescriptionChange = (e) => {
     setForm((prevForm) => ({ ...prevForm, description: e.target.value }));
@@ -129,11 +128,18 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
               X
             </button>
             <div className="flex align-center justify-center items-center flex-col">
-              <h2 className="title">{item && item.name}</h2>
-              <p>Date created: {date}</p>
-              <br />
               <form onSubmit={onSubmit}>
                 <div className="flex align-center items-center justify-center flex-col">
+                  <div className="w-4/5">
+                    <input
+                      type="text"
+                      placeholder={item.name}
+                      onChange = {handleNameChange}
+                      className="w-full text-center text-3xl border-none font-bold text-blue-800 placeholder-blue-800 bg-blue-50 hover:border hover:border-gray-300 rounded px-3 py-1"
+                    />
+                  </div>
+                  <p>Date created: {date}</p>
+                  <br/>
                   <div className="flex align-center">
                     <label htmlFor="image-upload" className="relative">
                       <div className="file-input-mask">

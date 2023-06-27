@@ -1,12 +1,13 @@
 import { Modal } from "@mui/material";
 import React, { useState, useRef, useContext } from "react";
 import useOutsideClick from "../../../utils/useOutsideClose";
-import { CartContext } from "../../../App";
+import { CartContext, UserContext } from "../../../App";
 import CartItemDisplay from "./CartItemDisplay";
 import Checkout from "../checkout/Checkout";
 
 const CartModal = ({ open, close, total }) => {
   const { cart, setCart } = useContext(CartContext);
+  const { user } = useContext(UserContext);
   const [showCheckout, setShowCheckout] = useState(false);
 
   const modalRef = useRef(null);
@@ -37,7 +38,13 @@ const CartModal = ({ open, close, total }) => {
               <br />
               {items}
               <br />
-              <p className="price mb-3">Total: ${total}</p>
+              <p className="price mb-3">
+                Total:{" "}
+                {user.loggedIn
+                  ? parseFloat(total * 0.95).toFixed(2)
+                  : parseFloat(total).toFixed(2)}
+              </p>
+              {user.loggedIn && <small>5% discount applied!</small>}
               <div className="flex justify-center">
                 <button
                   className="paybutton"

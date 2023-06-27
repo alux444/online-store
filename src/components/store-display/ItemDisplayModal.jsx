@@ -25,7 +25,6 @@ const ItemDisplayModal = ({ open, close, item }) => {
 
   const addCountToCart = () => {
     addToCart(item, count);
-    console.log(item.category);
   };
 
   const salePrice = item.price - item.discount;

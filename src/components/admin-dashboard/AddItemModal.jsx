@@ -59,7 +59,7 @@ const AddItemModal = ({ item, onClose, itemAdd }) => {
     e.preventDefault();
     console.log(form, file);
     const newItem = await createNewItem(form, file, itemAdd);
-    console.log(item.name + " added successfully");
+    console.log(form.name + " added successfully");
     onClose();
   };
 

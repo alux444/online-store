@@ -4,8 +4,7 @@ import ItemDisplayList from "./ItemDisplayList";
 import getAllItems from "../../utils/getAllItems";
 import ItemModal from "./ItemModal";
 import AddItemModal from "./AddItemModal";
-import Pagination from "../misc-components/Pagination"
-import { set } from "firebase/database";
+import Pagination from "../misc-components/Pagination";
 
 const AdminDashboard = () => {
   const [items, setItems] = useState([]);
@@ -56,7 +55,7 @@ const AdminDashboard = () => {
     setItems((prevItems) => {
       const updatedItems = [...prevItems, newItem];
       setFilteredItems(updatedItems);
-      console.log("Total items: " + updatedItems.length)
+      console.log("Total items: " + updatedItems.length);
       return updatedItems;
     });
     setAddModalOpen(false);
@@ -94,7 +93,7 @@ const AdminDashboard = () => {
 
   return (
     <div className="flex align-center justify-center flex-col">
-      <h1>Admin Dashboard</h1>
+      <h1 className="title">Admin Dashboard</h1>
 
       <ItemSearch
         items={items}
@@ -114,7 +113,7 @@ const AdminDashboard = () => {
         )}
         {mappedItems}
       </div>
-      <Pagination 
+      <Pagination
         totalDisplay={filteredItems.length}
         displaysPerPage={displaysPerPage}
         paginate={changePage}
@@ -129,7 +128,11 @@ const AdminDashboard = () => {
         />
       )}
       {addModalOpen && (
-        <AddItemModal item={search} onClose={handleModalClose} itemAdd={itemAdd} />
+        <AddItemModal
+          item={search}
+          onClose={handleModalClose}
+          itemAdd={itemAdd}
+        />
       )}
     </div>
   );

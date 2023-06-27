@@ -44,11 +44,13 @@ const ItemDisplayStore = ({ item, setWobble }) => {
         <h2>{item.name}</h2>
         {item.onSale ? (
           <p>
-            <span className="font-bold price">${realPrice}</span>{" "}
+            <span className="font-bold price">
+              ${parseFloat(realPrice).toFixed(2)}
+            </span>{" "}
             <s>${item.price}</s>
           </p>
         ) : (
-          <p className="price">${item.price}</p>
+          <p className="price">${parseFloat(item.price).toFixed(2)}</p>
         )}
 
         <br />
