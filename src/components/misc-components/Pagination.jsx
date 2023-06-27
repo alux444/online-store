@@ -11,8 +11,8 @@ const Pagination = ({
   }
 
   return (
-    <div className="mt-3 flex">
-      <ul className="flex align-center justify-center items-center flex-wrap gap-1 w-screen ">
+    <div className="mt-3 flex align-center justify-center w-[90vw]">
+      <ul className="flex align-center justify-center items-center flex-wrap gap-1 w-[80vw] ">
         {pageNumbers.map((number) => (
           <li key={number}>
             <button

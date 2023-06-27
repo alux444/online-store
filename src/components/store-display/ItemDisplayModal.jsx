@@ -37,7 +37,9 @@ const ItemDisplayModal = ({ open, close, item }) => {
           className="border-2 border-blue border-solid h-[min-content] bg-blue-50 p-5 rounded-[40px] max-w-[75vw] flex align-center justify-center text-center items-center flex-col"
           ref={modalRef}
         >
-          <h2 className="title">{item.name}</h2>
+          <div className="flex flex-wrap border-2">
+            <h2 className="title">{item.name}</h2>
+          </div>
           <div className="align-center flex flex-col justify-center items-center">
             <img
               src={item.imageUrl == "" ? image : item.imageUrl}

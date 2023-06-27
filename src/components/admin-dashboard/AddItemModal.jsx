@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { Modal, Button } from "@mui/material";
+import { Modal } from "@mui/material";
 import createNewItem from "../../utils/createNewItem";
 import useOutsideClick from "../../utils/useOutsideClose";
 import { validateName } from "../../utils/validateName";
@@ -64,6 +64,9 @@ const AddItemModal = ({ item, onClose, itemAdd }) => {
       return false;
     } else if (form.price < 0 || form.discount < 0) {
       setMessage("The price and discount must be positive.");
+      return false;
+    } else if (form.name.length <= 0 || form.name.length > 50) {
+      setMessage("The item name should be between 1-50 characters");
       return false;
     }
     return true;
