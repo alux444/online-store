@@ -27,7 +27,7 @@ const ItemDisplayStore = ({ item, setWobble }) => {
   };
 
   return (
-    <div className="block w-[20vw] lg:w-[28vw] md:[44vw] sm:w-[70vw] border-[1px] border-blue-500 justify-center align-center p-3 bg-blue-100 shadow-xl dispdiv">
+    <div className="flex flex-col w-[20vw] lg:w-[28vw] md:w-[44vw] sm:w-[70vw] border-[1px] h-[65vh] border-blue-500 justify-between align-center p-3 bg-blue-100 shadow-xl dispdiv">
       {item.clearance ? (
         <h3 className="font-bold headerbutton">
           <span>Clearance Item!</span>
@@ -61,25 +61,27 @@ const ItemDisplayStore = ({ item, setWobble }) => {
         <br />
       </div>
 
-      {item.stock > 0 ? (
-        <button
-          className="mx-2 altbutton"
-          disabled={isAddingToCart}
-          onClick={() => addOneToCart()}
-        >
-          {isAddingToCart ? "Loading..." : "Add to Cart"}
+      <div className="flex align-center justify-center items-center">
+        {item.stock > 0 ? (
+          <button
+            className="mx-2 altbutton"
+            disabled={isAddingToCart}
+            onClick={() => addOneToCart()}
+          >
+            {isAddingToCart ? "Loading..." : "Add to Cart"}
+          </button>
+        ) : (
+          <button
+            className="deletebutton hover:bg-[#ec2917] hover:text-white hover:border-white"
+            disabled="true"
+          >
+            Out of Stock
+          </button>
+        )}
+        <button className="mx-2 altbutton" onClick={() => setOpen(true)}>
+          Show More
         </button>
-      ) : (
-        <button
-          className="deletebutton hover:bg-[#ec2917] hover:text-white hover:border-white"
-          disabled="true"
-        >
-          Out of Stock
-        </button>
-      )}
-      <button className="mx-2 altbutton" onClick={() => setOpen(true)}>
-        Show More
-      </button>
+      </div>
       <ItemDisplayModal open={open} close={closeModal} item={item} />
     </div>
   );
