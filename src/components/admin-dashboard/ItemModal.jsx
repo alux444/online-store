@@ -137,12 +137,15 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
             <div className="flex align-center justify-center items-center flex-col">
               <form onSubmit={onSubmit}>
                 <div className="flex align-center items-center justify-center flex-col">
-                  <div className="w-4/5">
+                  <div className="w-5/6">
                     <input
                       type="text"
-                      placeholder={item.name}
+                      value={form.name}
                       onChange = {handleNameChange}
-                      className="w-full text-center text-3xl overflow-auto border-none font-bold text-blue-800 placeholder-blue-800 bg-blue-50 hover:border hover:border-gray-300 rounded px-3 py-1"
+                      className={`w-full text-center ${
+                        form.name.length > 30 ? 'text-lg' : 'text-2xl'
+                      } overflow-auto border-none font-bold text-blue-800 placeholder-blue-800
+                       bg-blue-50 hover:border hover:border-gray-300 rounded px-3 py-1`}
                     />
                   </div>
                   <p>Date created: {date}</p>
