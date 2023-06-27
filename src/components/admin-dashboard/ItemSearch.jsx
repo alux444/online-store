@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from "react";
 
-const ItemSearch = ({ items, updateItems, setAddModalOpen, setItem, setCurrentPage, displayNumber, setDisplayNumber }) => {
+const ItemSearch = ({
+  items,
+  updateItems,
+  setAddModalOpen,
+  setItem,
+  setCurrentPage,
+  displayNumber,
+  setDisplayNumber,
+}) => {
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [noResults, setNoResults] = useState(false);
@@ -29,17 +37,14 @@ const ItemSearch = ({ items, updateItems, setAddModalOpen, setItem, setCurrentPa
   };
 
   const handleSearch = (event) => {
-    setSearch(event.target.value)
+    setSearch(event.target.value);
     resetPage();
-  }
+  };
 
-  const handleChange = (event) => {
+  const handleCreateItem = (event) => {
     event.preventDefault();
-    console.log("Search query:", search);
-    if (noResults) {
-      setAddModalOpen(true);
-      setItem(search);
-    }
+    setAddModalOpen(true);
+    setItem(search);
   };
 
   const handleCategoryFilter = (category) => {
@@ -60,15 +65,13 @@ const ItemSearch = ({ items, updateItems, setAddModalOpen, setItem, setCurrentPa
   const handleDisplay = (option) => {
     resetPage();
     setDisplayNumber(option);
-  }
-
-  const searchButtonText = noResults ? "Add" : "Search";
+  };
 
   return (
     <div>
       <div className="flex justify-center flex-wrap">
         <div className="relative">
-          <form onSubmit={handleChange} className="flex items-center">
+          <div className="flex items-center gap-1 flex-col">
             <input
               type="text"
               placeholder="Search for an item..."
@@ -76,13 +79,10 @@ const ItemSearch = ({ items, updateItems, setAddModalOpen, setItem, setCurrentPa
               onChange={handleSearch}
               className="px-4 py-2 rounded-l"
             />
-            <button
-              type="submit"
-              className="bg-blue-500 text-white px-4 py-2 rounded-r"
-            >
-              {searchButtonText}
+            <button onClick={handleCreateItem} className="altbutton">
+              Create New Item
             </button>
-          </form>
+          </div>
         </div>
         <br />
       </div>

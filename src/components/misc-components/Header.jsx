@@ -9,7 +9,7 @@ const Header = ({ wobble, setWobble }) => {
   const [openAbout, setOpenAbout] = useState(false);
   const [openLogin, setOpenLogin] = useState(false);
   const { user, setUser } = useContext(UserContext);
-  const { setAdmin } = useContext(AdminContext);
+  const { admin, setAdmin } = useContext(AdminContext);
 
   const closeAbout = () => {
     setOpenAbout(false);
@@ -52,16 +52,18 @@ const Header = ({ wobble, setWobble }) => {
         </div>
         <Cart wobble={wobble} setWobble={setWobble} />
       </div>
-      {user.loggedIn ? (
+      {!admin && user.loggedIn ? (
         <div>
           <p>Welcome to KiwiMart, {user.email.split("@")[0]}!</p>
           <small>Enjoy an automatic 5% discount!</small>
         </div>
       ) : (
-        <div>
-          <p>Welcome to KiwiMart!</p>
-          <small>Sign up for a 5% discount on all purchases!</small>
-        </div>
+        !admin && (
+          <div>
+            <p>Welcome to KiwiMart!</p>
+            <small>Sign up for a 5% discount on all purchases!</small>
+          </div>
+        )
       )}
     </div>
   );
