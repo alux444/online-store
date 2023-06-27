@@ -71,6 +71,7 @@ const ItemSearch = ({
   return (
     <div>
       <div className="flex justify-center align-middle">
+        <div className="relative mt-1.5 mb-2.5">
           <input
             type="text"
             placeholder="Search for an item..."
@@ -78,19 +79,28 @@ const ItemSearch = ({
             onChange={handleSearch}
             className="mt-1.5 mb-2.5 px-4 py-2 rounded-lg w-96 h-12 border border-black"
           />
-          <div className="relative">
-            <button 
-              onClick={handleCreateItem} 
-              className="w-14 hover:w-16 my-1 hover:my-0 mx-5 hover:mx-4 bg-white py-0.5 px-1 border-black 
-                rounded-lg transition-all duration-300"
-              >
-              <img src={notepad} className=""/>
+          {search && (
+            <button
+              onClick={() => setSearch('')}
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 border-none hover:text-blue-400 font-bold p-2 mr-1 bg-white"
+            >
+            X
             </button>
-            <span className="absolute bg-white text-gray-700 border border-gray-700 rounded-md text-sm py-1 px-2 
-              -bottom-1 md:-bottom-8 ml-2 left-20 md:-left-7 opacity-0 transition-opacity duration-300 pointer-events-none w-32">
-              Create new item
-            </span>
-          </div>
+          )}
+        </div>
+        <div className="relative">
+          <button 
+            onClick={handleCreateItem} 
+            className="w-14 hover:w-16 my-2.5 hover:my-1 mx-5 hover:mx-4 bg-white py-0.5 px-1 border-black 
+              rounded-lg transition-all duration-300"
+            >
+            <img src={notepad} className=""/>
+          </button>
+          <span className="absolute bg-white text-gray-700 border border-gray-700 rounded-md text-sm py-1 px-2 
+            -bottom-1 md:-bottom-8 ml-2 left-20 md:-left-7 opacity-0 transition-opacity duration-300 pointer-events-none w-32">
+            Create new item
+          </span>
+        </div>
       </div>
       <div className="flex items-center justify-center">
           

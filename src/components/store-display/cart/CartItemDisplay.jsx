@@ -4,21 +4,17 @@ import { useAccessCart } from "../../../utils/useAccessCart";
 
 const CartItemDisplay = ({ item }) => {
   const { addToCart, removeFromCart } = useEditCart();
-  const { saveCart } = useAccessCart();
 
   const addOneExtra = async () => {
     addToCart(item, 1);
-    saveCart();
   };
 
   const removeOne = async () => {
     removeFromCart(item, 1);
-    saveCart();
   };
 
   const removeAll = async () => {
     removeFromCart(item, 999);
-    saveCart();
   };
 
   return (
