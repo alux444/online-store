@@ -34,16 +34,16 @@ const ItemDisplayModal = ({ open, close, item }) => {
     <Modal open={open}>
       <div className="w-screen h-screen flex align-center justify-center text-center items-center">
         <div
-          className="border-2 border-blue border-solid h-[min-content] bg-blue-50 p-5 rounded-[40px] max-w-[75vw] flex align-center justify-center text-center items-center flex-col"
+          className="border-2 border-blue border-solid h-[min-content] bg-blue-50 p-5 rounded-[40px] max-w-[75vw] flex align-center justify-center text-center items-center flex-col overflow-scroll"
           ref={modalRef}
         >
-          <div className="flex flex-wrap border-2">
-            <h2 className="title">{item.name}</h2>
+          <div className="flex flex-wrap max-w-[100%]">
+            <h2 className="title max-w-[100%] break-words">{item.name}</h2>
           </div>
           <div className="align-center flex flex-col justify-center items-center">
             <img
               src={item.imageUrl == "" ? image : item.imageUrl}
-              className="max-h-[50vh] max-w-[50vw]"
+              className="max-h-[50vh] max-w-[50vw] min-h-[20vh]"
             />
           </div>
           <h2 className="text-lg price mt-3">

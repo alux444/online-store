@@ -65,8 +65,8 @@ const AddItemModal = ({ item, onClose, itemAdd }) => {
     } else if (form.price < 0 || form.discount < 0) {
       setMessage("The price and discount must be positive.");
       return false;
-    } else if (form.name.length <= 0 || form.name.length > 50) {
-      setMessage("The item name should be between 1-50 characters");
+    } else if (form.name.length <= 0 || form.name.length > 32) {
+      setMessage("The item name should be between 1-32 characters");
       return false;
     }
     return true;
