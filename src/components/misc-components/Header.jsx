@@ -55,10 +55,12 @@ const Header = ({ wobble, setWobble }) => {
       {user.loggedIn ? (
         <div>
           <p>Welcome to KiwiMart, {user.email.split("@")[0]}!</p>
+          <small>Enjoy an automatic 5% discount!</small>
         </div>
       ) : (
         <div>
           <p>Welcome to KiwiMart!</p>
+          <small>Sign up for a 5% discount on all purchases!</small>
         </div>
       )}
     </div>

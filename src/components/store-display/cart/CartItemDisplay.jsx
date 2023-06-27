@@ -32,7 +32,8 @@ const CartItemDisplay = ({ item }) => {
           <div className="flex flex-col justify-start flex-wrap align-center sm:justify-center">
             <p className="text-sm">{item.name}</p>
             <small className="self-start">
-              ${item.price}/each = ${item.price * item.amount}
+              ${parseFloat(item.price).toFixed(2)}/each = $
+              {parseFloat(item.price * item.amount).toFixed(2)}
             </small>
           </div>
         </div>
