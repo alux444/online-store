@@ -86,6 +86,20 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
     reader.readAsDataURL(image);
   };
 
+  const validateForm = () => {
+    if (form.price == "" || form.discount == "") {
+      setMessage("A price and discount value is required.");
+      return false;
+    } else if (form.price < 0 || form.discount < 0) {
+      setMessage("The price and discount must be positive.");
+      return false;
+    } else if (form.name.length <= 0 || form.name.length > 32) {
+      setMessage("The item name should be between 1-32 characters");
+      return false;
+    }
+    return true;
+  };
+
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -99,6 +113,12 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
         ...form,
         imageUrl: imageUrl,
       };
+
+      const formIsValid = validateForm();
+      if (!formIsValid) {
+        return false;
+      }
+
       const nameIsValid = await validateName(form.name);
 
       if (nameIsValid || form.name === item.name) {
@@ -286,7 +306,7 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
                     />
                   </div>
                 </div>
-                <div className="flex align-center justify-center">
+                <div className="flex align-center justify-center mb-5">
                   <p>{message}</p>
                 </div>
                 <div className="flex align-center justify-center">
