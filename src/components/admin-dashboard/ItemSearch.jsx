@@ -81,12 +81,13 @@ const ItemSearch = ({
           <div className="relative">
             <button 
               onClick={handleCreateItem} 
-              className="w-14 hover:w-16 my-1 hover:my-0 ml-5 hover:ml-3 bg-white py-0.5 px-1 border-black rounded-lg"
+              className="w-14 hover:w-16 my-1 hover:my-0 mx-5 hover:mx-4 bg-white py-0.5 px-1 border-black 
+                rounded-lg transition-all duration-300"
               >
               <img src={notepad} className=""/>
             </button>
-            <span className="absolute bg-white text-gray-700 border border-gray-700 rounded-md text-sm py-1 px-2 -bottom-1 left-20 
-              opacity-0 transition-opacity duration-300 pointer-events-none w-32">
+            <span className="absolute bg-white text-gray-700 border border-gray-700 rounded-md text-sm py-1 px-2 
+              -bottom-1 md:-bottom-8 ml-2 left-20 md:-left-7 opacity-0 transition-opacity duration-300 pointer-events-none w-32">
               Create new item
             </span>
           </div>
