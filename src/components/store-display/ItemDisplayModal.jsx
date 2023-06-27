@@ -34,11 +34,11 @@ const ItemDisplayModal = ({ open, close, item }) => {
     <Modal open={open}>
       <div className="w-screen h-screen flex align-center justify-center text-center items-center">
         <div
-          className="border-2 border-blue border-solid h-[min-content] bg-blue-50 p-5 rounded-[40px] max-w-[75vw] flex align-center justify-center text-center items-center flex-col overflow-scroll"
+          className="border-2 border-blue border-solid h-[min-content] bg-blue-50 p-3 rounded-[40px] max-w-[75vw] max-h-[90vh]  flex align-center justify-center text-center items-center flex-col"
           ref={modalRef}
         >
           <div className="flex flex-wrap max-w-[100%]">
-            <h2 className="title max-w-[100%] break-words">{item.name}</h2>
+            <h2 className="price max-w-[100%] break-words">{item.name}</h2>
           </div>
           <div className="align-center flex flex-col justify-center items-center">
             <img
