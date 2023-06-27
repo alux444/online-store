@@ -135,7 +135,7 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
                       type="text"
                       placeholder={item.name}
                       onChange = {handleNameChange}
-                      className="w-full text-center text-3xl border-none font-bold text-blue-800 placeholder-blue-800 bg-blue-50 hover:border hover:border-gray-300 rounded px-3 py-1"
+                      className="w-full text-center text-3xl overflow-auto border-none font-bold text-blue-800 placeholder-blue-800 bg-blue-50 hover:border hover:border-gray-300 rounded px-3 py-1"
                     />
                   </div>
                   <p>Date created: {date}</p>

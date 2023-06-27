@@ -16,7 +16,7 @@ function App() {
   const [wobble, setWobble] = useState(0);
 
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="flex flex-col items-center justify-center align-center">
       <AdminContext.Provider value={{ admin, setAdmin }}>
         <CartContext.Provider value={{ cart, setCart }}>
           <UserContext.Provider value={{ user, setUser }}>

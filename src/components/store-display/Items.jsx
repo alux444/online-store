@@ -11,12 +11,14 @@ const Items = ({
   changePage,
   displayNumber,
   setWobble,
-  search
+  search,
 }) => {
   let sortedItems = allItems;
 
   if (search.length > 0) {
-    sortedItems = sortedItems.filter((item) => item.name.toLowerCase().includes(search.toLowerCase()));
+    sortedItems = sortedItems.filter((item) =>
+      item.name.toLowerCase().includes(search.toLowerCase())
+    );
   }
 
   if (category != "") {
@@ -33,26 +35,24 @@ const Items = ({
       let bTotal = b.price;
       if (a.onSale) {
         aTotal -= a.discount;
-      } 
+      }
       if (b.onSale) {
         bTotal -= b.discount;
       }
       return aTotal - bTotal;
-    }
-    );
+    });
   } else if (sortingOption === "price-high") {
     sortedItems = sortedItems.sort((a, b) => {
       let aTotal = a.price;
       let bTotal = b.price;
       if (a.onSale) {
         aTotal -= a.discount;
-      } 
+      }
       if (b.onSale) {
         bTotal -= b.discount;
       }
       return bTotal - aTotal;
-    }
-    );
+    });
   }
 
   const clearanceItems = sortedItems.filter((item) => item.clearance);
@@ -77,7 +77,17 @@ const Items = ({
   return (
     <div>
       <div className="flex flex-wrap justify-center align-center items-center gap-2">
-        {checked ? (clearanceMap.length ? clearanceMap : <h1>No results found</h1>) : (itemMap.length ? itemMap : <h1>No results found</h1>)}
+        {checked ? (
+          clearanceMap.length ? (
+            clearanceMap
+          ) : (
+            <h1>No results found</h1>
+          )
+        ) : itemMap.length ? (
+          itemMap
+        ) : (
+          <h1>No results found</h1>
+        )}
       </div>
       <Pagination
         totalDisplay={checked ? clearanceItems.length : sortedItems.length}
