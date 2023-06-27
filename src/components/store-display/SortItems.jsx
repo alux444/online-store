@@ -10,18 +10,29 @@ const SortItems = ({
   displayNumber,
   handleDisplay,
   search,
+  setSearch,
   handleSearch
 }) => {
   return (
     <div>
       <div className="flex items-center align-center justify-center">
-        <input
-          type="text"
-          placeholder="Search for an item..."
-          value={search}
-          onChange={handleSearch}
-          className="w-96 py-2 rounded-lg text-xl border-black border-2 sm:w-72"
-        />
+        <div className="relative">
+          <input
+            type="text"
+            placeholder="Search for an item..."
+            value={search}
+            onChange={handleSearch}
+            className="w-96 py-2 rounded-lg text-xl border-black border-2 sm:w-72 pr-12"
+          />
+          {search && (
+            <button
+              onClick={() => setSearch('')}
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-blue-400 font-bold p-2 bg-white border-none"
+            >
+            X
+            </button>
+          )}
+        </div>
       </div>
       <br />
       <div className="flex md:flex-col justify-center align-center items-center mb-3 gap-1 flex-wrap">
