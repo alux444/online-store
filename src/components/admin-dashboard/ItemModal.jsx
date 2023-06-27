@@ -7,11 +7,13 @@ import convertDate from "../../utils/convertDate";
 import noImage from "../../utils/noImage.svg";
 import addImage from "../../utils/addImage";
 import { validateName } from "../../utils/validateName";
-import "./util.css";
 
 const ItemModal = ({ item, onClose, itemUpdate }) => {
   const [checkDelete, setCheckDelete] = useState(false);
   const [message, setMessage] = useState("");
+  const [previewImage, setPreviewImage] = useState(item.imageUrl);
+  const [file, setFile] = useState(null);
+  const date = convertDate(item.timeCreated);
   const modalRef = useRef(null);
   useOutsideClick(modalRef, onClose);
 
@@ -37,10 +39,10 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
       stock: item.stock,
       category: item.category,
     });
+    if (item.imageUrl === "") {
+      setPreviewImage(noImage);
+    }
   }, [item]);
-
-  const [file, setFile] = useState(null);
-  const date = convertDate(item.timeCreated);
 
   const handleNameChange = (e) => {
     setForm((prevForm) => ({ ...prevForm, name: e.target.value }));
@@ -69,6 +71,31 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
   const onChangeImage = (e) => {
     const image = e.target.files[0];
     setFile(image);
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      const imageDataURL = reader.result;
+      setForm((prevForm) => ({
+        ...prevForm,
+        imageUrl: imageDataURL,
+      }));
+      setPreviewImage(imageDataURL);
+    };
+    reader.readAsDataURL(image);
+  };
+
+  const validateForm = () => {
+    if (form.price == "" || form.discount == "") {
+      setMessage("A price and discount value is required.");
+      return false;
+    } else if (form.price < 0 || form.discount < 0) {
+      setMessage("The price and discount must be positive.");
+      return false;
+    } else if (form.name.length <= 0 || form.name.length > 32) {
+      setMessage("The item name should be between 1-32 characters");
+      return false;
+    }
+    return true;
   };
 
   const onSubmit = async (e) => {
@@ -84,9 +111,15 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
         ...form,
         imageUrl: imageUrl,
       };
+
+      const formIsValid = validateForm();
+      if (!formIsValid) {
+        return false;
+      }
+
       const nameIsValid = await validateName(form.name);
 
-      if (nameIsValid) {
+      if (nameIsValid || form.name === item.name) {
         const isUpdated = await updateItem(item.id, updatedImage);
         if (isUpdated) {
           const updatedItem = { ...item, ...updatedImage };
@@ -166,9 +199,7 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
                           </p>
                           <div className="relative">
                             <img
-                              src={
-                                item.imageUrl === "" ? noImage : item.imageUrl
-                              }
+                              src={previewImage}
                               className="w-96 md:max-w-[80vw] border rounded-lg"
                             />
                           </div>
@@ -273,7 +304,7 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
                     />
                   </div>
                 </div>
-                <div className="flex align-center justify-center">
+                <div className="flex align-center justify-center mb-5">
                   <p>{message}</p>
                 </div>
                 <div className="flex align-center justify-center">

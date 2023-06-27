@@ -12,7 +12,6 @@ const ItemSearch = ({
 }) => {
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  const [noResults, setNoResults] = useState(false);
   const [categoryFilter, setCategoryFilter] = useState("");
   const [saleFilter, setSaleFilter] = useState(false);
   const [clearanceFilter, setClearanceFilter] = useState(false);
@@ -29,7 +28,6 @@ const ItemSearch = ({
     });
 
     setSearchResults(filteredItems);
-    setNoResults(filteredItems.length === 0);
     updateItems(filteredItems);
   }, [items, search, categoryFilter, saleFilter, clearanceFilter]);
 

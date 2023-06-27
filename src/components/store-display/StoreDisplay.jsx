@@ -78,6 +78,7 @@ const StoreDisplay = ({ setWobble }) => {
         displayNumber={displayNumber}
         handleDisplay={handleDisplay}
         search={search}
+        setSearch={setSearch}
         handleSearch={handleSearch}
       />
       <Items

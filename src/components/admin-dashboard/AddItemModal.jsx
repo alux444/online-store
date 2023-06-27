@@ -6,7 +6,7 @@ import { validateName } from "../../utils/validateName";
 
 const AddItemModal = ({ item, onClose, itemAdd }) => {
   const [message, setMessage] = useState("");
-
+  const [previewImage, setPreviewImage] = useState(item.imageUrl);
   const modalRef = useRef(null);
   useOutsideClick(modalRef, onClose);
 
@@ -56,6 +56,17 @@ const AddItemModal = ({ item, onClose, itemAdd }) => {
   const onChangeImage = (e) => {
     const image = e.target.files[0];
     setFile(image);
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      const imageDataURL = reader.result;
+      setForm((prevForm) => ({
+        ...prevForm,
+        imageUrl: imageDataURL,
+      }));
+      setPreviewImage(imageDataURL);
+    };
+    reader.readAsDataURL(image);
   };
 
   const validateForm = () => {
@@ -116,7 +127,7 @@ const AddItemModal = ({ item, onClose, itemAdd }) => {
                   onChange={handleNameChange}
                   className="text-center text-xl font-bold text-black bg-blue-50 hover:border hover:border-gray-300 rounded px-3 py-1"
                 />
-                <br />
+                {previewImage && (<img src={previewImage} className="w-96 h-96 md:max-w-[80vw] my-5" />)}
                 <div className="flex align-center">
                   <p>Select image:</p>
                   <input
@@ -126,8 +137,6 @@ const AddItemModal = ({ item, onClose, itemAdd }) => {
                     accept=".jpg,.jpeg,.png"
                   />
                 </div>
-
-                <br />
                 <div className="flex mt-3 align-center justify-center items-center gap-4 flex-wrap">
                   <div className="">
                     <span className="mr-2">Category:</span>
