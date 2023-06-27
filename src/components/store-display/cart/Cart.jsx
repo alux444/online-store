@@ -1,11 +1,12 @@
 import React, { useState, useContext } from "react";
 import CartModal from "./CartModal";
-import { CartContext } from "../../../App";
+import { CartContext, UserContext } from "../../../App";
 import image from "../../../images/shopping-cart.png";
 
 const Cart = ({ wobble }) => {
   const [showCart, setShowCart] = useState(false);
   const { cart } = useContext(CartContext);
+  const { user } = useContext(UserContext);
 
   const closeCart = () => {
     setShowCart(false);
@@ -16,6 +17,8 @@ const Cart = ({ wobble }) => {
       return total + item.amount * item.price;
     }, 0)
     .toFixed(2);
+
+  const reducedTotal = (total*0.95).toFixed(2)
 
   const totalItems = cart.reduce((total, item) => {
     return total + item.amount;
@@ -34,7 +37,7 @@ const Cart = ({ wobble }) => {
             {totalItems}
           </span>
         </div>
-        ${total}
+        ${user.loggedIn ? reducedTotal : total}
       </button>
       <CartModal open={showCart} close={closeCart} total={total} />
     </div>
