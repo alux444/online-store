@@ -1,10 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { CartContext } from "../../../App";
+import { useAccessCart } from "../../../utils/useAccessCart";
 
 const Checkout = ({ setShowCheckout }) => {
   const [cardNumber, setCardNumber] = useState("");
   const [name, setName] = useState("");
   const [expirationDate, setExpirationDate] = useState("");
   const [securityCode, setSecurityCode] = useState("");
+  const [message, setMessage] = useState("");
+  const [shouldSaveCart, setShouldSaveCart] = useState(false);
+  const { setCart } = useContext(CartContext);
+  const { saveCart } = useAccessCart();
 
   const handleCardNumber = (e) => {
     setCardNumber(e.target.value);
@@ -21,6 +27,21 @@ const Checkout = ({ setShowCheckout }) => {
   const handleSecurityCode = (e) => {
     setSecurityCode(e.target.value);
   };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    setMessage("Loading...");
+    setCart([]);
+    setShouldSaveCart(true);
+    setMessage("Thanks!");
+  };
+
+  useEffect(() => {
+    if (shouldSaveCart) {
+      saveCart();
+      setShouldSaveCart(false);
+    }
+  }, [shouldSaveCart]);
 
   return (
     <div className="flex align-center items-center justify-center">
@@ -66,9 +87,17 @@ const Checkout = ({ setShowCheckout }) => {
               />
             </label>
           </div>
-          <button className="lgbutton">Submit</button>
+          <button className="lgbutton" onClick={onSubmit}>
+            Submit
+          </button>
+          <p>{message}</p>
         </form>
-        <button className="mt-2 lgbutton" onClick={() => setShowCheckout(false)}>Return to cart</button>
+        <button
+          className="mt-2 lgbutton"
+          onClick={() => setShowCheckout(false)}
+        >
+          Return to cart
+        </button>
       </div>
     </div>
   );

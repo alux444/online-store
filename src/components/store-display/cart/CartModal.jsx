@@ -1,22 +1,36 @@
 import { Modal } from "@mui/material";
-import React, { useState, useRef, useContext } from "react";
+import React, { useState, useRef, useContext, useEffect } from "react";
 import useOutsideClick from "../../../utils/useOutsideClose";
 import { CartContext, UserContext } from "../../../App";
 import CartItemDisplay from "./CartItemDisplay";
 import Checkout from "../checkout/Checkout";
+import { useAccessCart } from "../../../utils/useAccessCart";
 
 const CartModal = ({ open, close, total }) => {
   const { cart, setCart } = useContext(CartContext);
   const { user } = useContext(UserContext);
   const [showCheckout, setShowCheckout] = useState(false);
-
+  const [shouldSaveCart, setShouldSaveCart] = useState(false);
   const modalRef = useRef(null);
 
+  const { saveCart } = useAccessCart();
   useOutsideClick(modalRef, close);
 
   const items = cart.map((item) => {
     return <CartItemDisplay key={item.name} item={item} />;
   });
+
+  useEffect(() => {
+    if (shouldSaveCart) {
+      saveCart();
+      setShouldSaveCart(false);
+    }
+  }, [shouldSaveCart]);
+
+  const clearCart = () => {
+    setCart([]);
+    setShouldSaveCart(true);
+  };
 
   return (
     <Modal
@@ -33,7 +47,7 @@ const CartModal = ({ open, close, total }) => {
               <Checkout setShowCheckout={setShowCheckout} />
             ) : (
               <div>
-                <button className="altbutton" onClick={() => setCart([])}>
+                <button className="altbutton" onClick={clearCart}>
                   Clear Cart?
                 </button>
                 <br />

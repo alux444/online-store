@@ -1,10 +1,10 @@
 import React from "react";
 
 const ItemDisplayList = ({ item, onOpenModal }) => {
-  const handleItemClick = (item) => {
+  const handleItemClick = () => {
     onOpenModal();
-    console.log("Search query:", item.name);
   };
+
   const toTitleCase = (str) => {
     if (!str) return "";
     return str.replace(/\w\S*/g, (txt) => {
@@ -19,7 +19,7 @@ const ItemDisplayList = ({ item, onOpenModal }) => {
   return (
     <div
       className="flex border-[1px] bg-white items-center px-4 py-2 hover:bg-gray-100 cursor-pointer"
-      onClick={() => handleItemClick(item)}
+      onClick={() => handleItemClick()}
     >
       <div className="mr-4 text-left w-1/2 flex flex-wrap">
         <p className="break-words overflow-hidden">{item.name}</p>

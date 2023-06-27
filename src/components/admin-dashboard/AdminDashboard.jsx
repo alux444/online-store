@@ -55,7 +55,6 @@ const AdminDashboard = () => {
     setItems((prevItems) => {
       const updatedItems = [...prevItems, newItem];
       setFilteredItems(updatedItems);
-      console.log("Total items: " + updatedItems.length);
       return updatedItems;
     });
     setAddModalOpen(false);
@@ -64,14 +63,12 @@ const AdminDashboard = () => {
   const handleOpenModal = (item) => {
     setModalItem(item);
     setModalOpen(true);
-    console.log("Modal opened.");
   };
 
   const handleModalClose = () => {
     setModalItem(null);
     setModalOpen(false);
     setAddModalOpen(false);
-    console.log("Modal closed.");
   };
 
   const changePage = (pageNumber) => {

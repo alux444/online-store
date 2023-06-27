@@ -75,7 +75,7 @@ const ItemDisplayStore = ({ item, setWobble }) => {
         ) : (
           <button
             className="deletebutton hover:bg-[#ec2917] hover:text-white hover:border-white"
-            disabled="true"
+            disabled={true}
           >
             Out of Stock
           </button>

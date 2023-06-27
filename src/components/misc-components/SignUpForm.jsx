@@ -26,19 +26,29 @@ const SignUpForm = ({ close }) => {
     }
   };
 
+  const validatePassword = () => {
+    if (password.length < 5) {
+      setMessage("Password must be min. 6 characters");
+      return false;
+    } else if (password !== confirm) {
+      setMessage("Passwords don't match.");
+      return false;
+    }
+    return true;
+  };
+
   const onSubmit = async (e) => {
     e.preventDefault();
     setMessage("");
 
-    if (password !== confirm) {
-      setMessage("Passwords don't match.");
+    const validPassword = validatePassword();
+    if (!validPassword) {
+      return;
     }
 
     const form = { email: email, password: password };
 
     const userAlreadyExists = await checkExisting(form.email);
-
-    console.log(userAlreadyExists);
 
     if (userAlreadyExists) {
       setMessage("Email is already in use.");
