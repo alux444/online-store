@@ -27,7 +27,7 @@ const ItemDisplayStore = ({ item, setWobble }) => {
   };
 
   return (
-    <div className="flex flex-col w-[20vw] lg:w-[28vw] md:w-[44vw] sm:w-[70vw] border-[1px] sm:h-min border-blue-500 justify-between align-center p-3 bg-blue-100 shadow-xl dispdiv">
+    <div className="flex flex-col w-[20vw] xl:w-[24vw] lg:w-[28vw] md:w-[44vw] sm:w-[70vw] border-[1px] sm:h-min border-blue-500 justify-between align-center p-3 bg-blue-100 shadow-xl dispdiv">
       {item.clearance ? (
         <h3 className="font-bold headerbutton">
           <span>Clearance Item!</span>
@@ -46,10 +46,8 @@ const ItemDisplayStore = ({ item, setWobble }) => {
         />
       </div>
       <div className="flex gap-2 flex-wrap justify-center items-center flex-col">
-        <div className="overflow-hidden max-w-[100%]">
-          <h2 className="max-w-[100%] flex-shrink-0 break-words text-ellipsis overflow-hidden max-h-12">
-            {item.name}
-          </h2>
+        <div className="overflow-hidden max-w-[100%] h-12 flex justify-center items-center">
+          <h2>{item.name}</h2>
         </div>
         {item.onSale ? (
           <p>
