@@ -6,19 +6,20 @@ const useEditCart = () => {
   const { cart, setCart } = useContext(CartContext);
 
   const addToCart = async (item, amountToAdd) => {
-    const existingItem = cart.find(
+    const existingItemIndex = cart.findIndex(
       (currentItem) => currentItem.name === item.name
     );
 
     const fetchedItem = await searchForItem(item.name);
+
     const realPrice = fetchedItem.onSale
       ? fetchedItem.price - fetchedItem.discount
       : fetchedItem.price;
 
-    if (existingItem) {
+    if (existingItemIndex !== -1) {
       setCart((prevCart) =>
-        prevCart.map((cartItem) => {
-          if (cartItem.name === item.name) {
+        prevCart.map((cartItem, index) => {
+          if (index === existingItemIndex) {
             return {
               ...cartItem,
               amount: cartItem.amount + amountToAdd,

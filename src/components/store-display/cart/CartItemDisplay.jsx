@@ -29,7 +29,7 @@ const CartItemDisplay = ({ item }) => {
             src={item.imageUrl == "" ? image : item.imageUrl}
             className="sm:max-h-[10vh] max-h-[8vh] lg"
           />
-          <div className="flex flex-col justify-start flex-wrap align-center sm:justify-center">
+          <div className="flex flex-col justify-start flex-wrap align-center sm:justify-center ">
             <p className="text-sm">{item.name}</p>
             <small className="self-start">
               ${parseFloat(item.price).toFixed(2)}/each = $

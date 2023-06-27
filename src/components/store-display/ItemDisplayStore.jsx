@@ -5,15 +5,20 @@ import image from "../../utils/noImage.svg";
 
 const ItemDisplayStore = ({ item, setWobble }) => {
   const [open, setOpen] = useState(false);
+  const [isAddingToCart, setIsAddingToCart] = useState(false);
 
   const realPrice = item.onSale ? item.price - item.discount : item.price;
   const { addToCart } = useEditCart();
 
   const addOneToCart = async () => {
+    if (isAddingToCart) return;
+    setIsAddingToCart(true);
+
     addToCart(item, 1);
     setWobble(1);
     setTimeout(() => {
       setWobble(0);
+      setIsAddingToCart(false);
     }, 1000);
   };
 
@@ -55,9 +60,23 @@ const ItemDisplayStore = ({ item, setWobble }) => {
 
         <br />
       </div>
-      <button className="mx-2 altbutton" onClick={() => addOneToCart()}>
-        Add to Cart
-      </button>
+
+      {item.stock > 0 ? (
+        <button
+          className="mx-2 altbutton"
+          disabled={isAddingToCart}
+          onClick={() => addOneToCart()}
+        >
+          {isAddingToCart ? "Loading..." : "Add to Cart"}
+        </button>
+      ) : (
+        <button
+          className="deletebutton hover:bg-[#ec2917] hover:text-white hover:border-white"
+          disabled="true"
+        >
+          Out of Stock
+        </button>
+      )}
       <button className="mx-2 altbutton" onClick={() => setOpen(true)}>
         Show More
       </button>
