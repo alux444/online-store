@@ -78,10 +78,17 @@ const ItemSearch = ({
             onChange={handleSearch}
             className="mt-1.5 mb-2.5 px-4 py-2 rounded-lg w-96 h-12 border border-black"
           />
-          <div>
-            <button onClick={handleCreateItem} className="w-14 hover:w-16 my-1 hover:my-0 ml-5 hover:ml-3 bg-white py-0.5 px-1 border-black rounded-lg">
+          <div className="relative">
+            <button 
+              onClick={handleCreateItem} 
+              className="w-14 hover:w-16 my-1 hover:my-0 ml-5 hover:ml-3 bg-white py-0.5 px-1 border-black rounded-lg"
+              >
               <img src={notepad} className=""/>
             </button>
+            <span className="absolute bg-white text-gray-700 border border-gray-700 rounded-md text-sm py-1 px-2 -bottom-1 left-20 
+              opacity-0 transition-opacity duration-300 pointer-events-none w-32">
+              Create new item
+            </span>
           </div>
       </div>
       <div className="flex items-center justify-center">
