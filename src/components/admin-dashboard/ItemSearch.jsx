@@ -70,27 +70,20 @@ const ItemSearch = ({
   return (
     <div>
       <div className="flex justify-center flex-wrap">
-        <div className="relative">
-          <div className="flex items-center gap-1 flex-col">
             <input
               type="text"
               placeholder="Search for an item..."
               value={search}
               onChange={handleSearch}
-              className="px-4 py-2 rounded-l"
+              className="px-4 py-2 rounded-lg w-96 border border-black"
             />
-            <button onClick={handleCreateItem} className="altbutton">
-              Create New Item
-            </button>
-          </div>
-        </div>
       </div>
       <br/>
       {noResults && (
         <div className="flex items-center justify-center">
-          <button>
-            dog
-          </button>
+          <button onClick={handleCreateItem} className="altbutton">
+              Create New Item
+            </button>
         </div>
       )}
       <div className="mt-5 items-center">
