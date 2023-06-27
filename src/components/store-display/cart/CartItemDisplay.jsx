@@ -23,15 +23,15 @@ const CartItemDisplay = ({ item }) => {
 
   return (
     <div>
-      <div className="flex justify-center align-center gap-1">
-        <div className="flex justify-start w-[100%] flex-wrap">
+      <div className="flex justify-center align-center items-center gap-1">
+        <div className="flex justify-start w-[100%] flex-wrap align-center items-center">
           <img
             src={item.imageUrl == "" ? image : item.imageUrl}
             className="sm:max-h-[10vh] max-h-[8vh] lg"
           />
-          <div className="flex flex-col justify-start flex-wrap align-center sm:justify-center ">
-            <p className="text-sm">{item.name}</p>
-            <small className="self-start">
+          <div className="flex flex-col justify-start flex-wrap align-center  whitespace-normal w-[20vw]">
+            <p className="text-sm text-blue-600 justify-start">{item.name}</p>
+            <small className="float-left">
               ${parseFloat(item.price).toFixed(2)}/each = $
               {parseFloat(item.price * item.amount).toFixed(2)}
             </small>
