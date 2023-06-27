@@ -2,8 +2,11 @@ import React, { useState, useRef } from "react";
 import { Modal, Button } from "@mui/material";
 import createNewItem from "../../utils/createNewItem";
 import useOutsideClick from "../../utils/useOutsideClose";
+import { validateName } from "../../utils/validateName";
 
 const AddItemModal = ({ item, onClose, itemAdd }) => {
+  const [message, setMessage] = useState("");
+
   const modalRef = useRef(null);
   useOutsideClick(modalRef, onClose);
 
@@ -55,12 +58,36 @@ const AddItemModal = ({ item, onClose, itemAdd }) => {
     setFile(image);
   };
 
+  const validateForm = () => {
+    if (form.price == "" || form.discount == "") {
+      setMessage("A price and discount value is required.");
+      return false;
+    } else if (form.price < 0 || form.discount < 0) {
+      setMessage("The price and discount must be positive.");
+      return false;
+    }
+    return true;
+  };
+
   const onSubmit = async (e) => {
     e.preventDefault();
-    console.log(form, file);
-    const newItem = await createNewItem(form, file, itemAdd);
-    console.log(form.name + " added successfully");
-    onClose();
+
+    setMessage("");
+
+    const formIsValid = validateForm();
+    if (!formIsValid) {
+      return false;
+    }
+
+    const nameIsValid = await validateName(form.name);
+
+    if (nameIsValid) {
+      createNewItem(form, file, itemAdd);
+      console.log(form.name + " added successfully");
+      onClose();
+    } else {
+      setMessage("Name is already taken.");
+    }
   };
 
   return (
@@ -194,6 +221,9 @@ const AddItemModal = ({ item, onClose, itemAdd }) => {
                 </div>
               </div>
               <div className="flex align-center justify-center">
+                <p>{message}</p>
+              </div>
+              <div className="flex align-center justify-center mb-2">
                 <button className="altbutton" type="submit">
                   Add item
                 </button>
