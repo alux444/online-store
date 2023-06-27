@@ -4,16 +4,12 @@ import AboutModal from "./AboutModal";
 import { UserContext, AdminContext } from "../../App";
 import logo from "../../images/kiwimartlogo.png";
 import Cart from "../store-display/cart/Cart";
-import { useAccessCart } from "../../utils/useAccessCart";
 
 const Header = ({ wobble, setWobble }) => {
   const [openAbout, setOpenAbout] = useState(false);
   const [openLogin, setOpenLogin] = useState(false);
-  const [goHome, setGoHome] = useState(false);
   const { user, setUser } = useContext(UserContext);
   const { setAdmin } = useContext(AdminContext);
-
-  const { loadCart } = useAccessCart();
 
   const closeAbout = () => {
     setOpenAbout(false);
@@ -65,9 +61,6 @@ const Header = ({ wobble, setWobble }) => {
           <p>Welcome to KiwiMart!</p>
         </div>
       )}
-      <button className="lgbutton mb-5" onClick={() => loadCart()}>
-        Load Previous Cart
-      </button>
     </div>
   );
 };

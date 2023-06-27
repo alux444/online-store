@@ -5,13 +5,11 @@ import useEditCart from "../../utils/useEditCart";
 import image from "../../utils/noImage.svg";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
-import { useAccessCart } from "../../utils/useAccessCart";
 
 const ItemDisplayModal = ({ open, close, item }) => {
   const modalRef = useRef(null);
   useOutsideClick(modalRef, close);
   const { addToCart } = useEditCart();
-  const { saveCart } = useAccessCart;
 
   const [count, setCount] = useState(1);
 
@@ -27,7 +25,6 @@ const ItemDisplayModal = ({ open, close, item }) => {
 
   const addCountToCart = () => {
     addToCart(item, count);
-    saveCart();
   };
 
   const salePrice = item.price - item.discount;

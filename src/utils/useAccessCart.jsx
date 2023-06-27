@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { CartContext } from "../App";
 
 export const useAccessCart = () => {
@@ -6,7 +6,6 @@ export const useAccessCart = () => {
 
   const saveCart = () => {
     const currentCart = JSON.stringify(cart);
-    console.log(currentCart);
     localStorage.setItem("savedCart", currentCart);
   };
 
