@@ -93,8 +93,8 @@ const AdminDashboard = () => {
 
   return (
     <div className="flex align-center justify-center flex-col">
-      <h1 className="price">Admin Dashboard</h1>
-
+      <h1 className="title">Admin Dashboard</h1>
+      <br />
       <ItemSearch
         items={items}
         updateItems={updateItems}
