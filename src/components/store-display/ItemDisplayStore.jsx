@@ -2,12 +2,14 @@ import { useState } from "react";
 import ItemDisplayModal from "./ItemDisplayModal";
 import useEditCart from "../../utils/useEditCart";
 import image from "../../utils/noImage.svg";
+import { useAccessCart } from "../../utils/useAccessCart";
 
 const ItemDisplayStore = ({ item, setWobble }) => {
   const [open, setOpen] = useState(false);
 
   const realPrice = item.onSale ? item.price - item.discount : item.price;
   const { addToCart } = useEditCart();
+  const { saveCart } = useAccessCart();
 
   const addOneToCart = async () => {
     addToCart(item, 1);
@@ -15,6 +17,7 @@ const ItemDisplayStore = ({ item, setWobble }) => {
     setTimeout(() => {
       setWobble(0);
     }, 1000);
+    saveCart();
   };
 
   const closeModal = () => {
