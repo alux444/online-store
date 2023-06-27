@@ -7,12 +7,13 @@ import convertDate from "../../utils/convertDate";
 import noImage from "../../utils/noImage.svg";
 import addImage from "../../utils/addImage";
 import { validateName } from "../../utils/validateName";
-import "./util.css";
 
 const ItemModal = ({ item, onClose, itemUpdate }) => {
   const [checkDelete, setCheckDelete] = useState(false);
   const [message, setMessage] = useState("");
   const [previewImage, setPreviewImage] = useState(item.imageUrl);
+  const [file, setFile] = useState(null);
+  const date = convertDate(item.timeCreated);
   const modalRef = useRef(null);
   useOutsideClick(modalRef, onClose);
 
@@ -42,9 +43,6 @@ const ItemModal = ({ item, onClose, itemUpdate }) => {
       setPreviewImage(noImage);
     }
   }, [item]);
-
-  const [file, setFile] = useState(null);
-  const date = convertDate(item.timeCreated);
 
   const handleNameChange = (e) => {
     setForm((prevForm) => ({ ...prevForm, name: e.target.value }));
