@@ -55,27 +55,33 @@ const ItemDisplayModal = ({ open, close, item }) => {
             <p>{item.description}</p>
           </div>
           <br />
-          <div className="flex gap-3 items-center justify-center">
-            <button
-              className="altbutton rounded-[50%]"
-              onClick={decrementCount}
-            >
-              <RemoveIcon />
-            </button>
-            <p className="price">{count}</p>
-            <button className="altbutton" onClick={incrementCount}>
-              <AddIcon />
-            </button>
-          </div>
-          <br />
-          <h4>
-            {count} {item.name} : ${overallCost}
-          </h4>
-          <br />
-          <button className="altbutton" onClick={addCountToCart}>
-            Add to Cart!
-          </button>
-        </div>
+          {item.stock == 0 ? (
+            <p className="price">No Stock Avaliable.</p>
+          ) : (
+            <>
+              <div className="flex gap-3 items-center justify-center">
+                <button
+                  className="altbutton rounded-[50%]"
+                  onClick={decrementCount}
+                >
+                  <RemoveIcon />
+                </button>
+                <p className="price">{count}</p>
+                <button className="altbutton" onClick={incrementCount}>
+                  <AddIcon />
+                </button>
+              </div>
+              <br />
+              <h4>
+                {count} {item.name} : ${overallCost}
+              </h4>
+              <br />
+              <button className="altbutton" onClick={addCountToCart}>
+                Add to Cart!
+              </button>
+            </>
+          )}
+        </div>{" "}
       </div>
     </Modal>
   );
